@@ -23,6 +23,9 @@ class VideoAnalizer:
         while(video.isOpened()):
             frame = cap.read()
             cv2.imshow("frame", frame)
-            
+            #Se pulsa la q para salir
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+            print("Video ended")
         cap.release()
         cv2.destroyAllWindows()
