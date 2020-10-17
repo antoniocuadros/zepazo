@@ -8,3 +8,4 @@ This project originally arises for the completion of a Final Degree Project prop
 
 ## Tools
 - **Programming language:** Python 3.8.2
+- **Video library:** OpenCV
