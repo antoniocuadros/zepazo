@@ -9,3 +9,6 @@ This project originally arises for the completion of a Final Degree Project prop
 ## Tools
 - **Programming language:** Python 3.8.2
 - **Video library:** OpenCV
+
+# Additional documentation
+- [OpenCV instalation](https://github.com/antoniocuadros/zepazo/blob/main/docs/Tools/opencv.md)
