@@ -19,13 +19,27 @@ class VideoAnalizer:
 
     #Analize the video frame per frame
     def analyze(self):
-        cap=cv2.VideoCapture(self.videoPath)
-        while(cap.isOpened()):
-            ret, frame=cap.read() #read a single frame, ret will be true if frame captured
-            cv2.imshow('output', frame)
-            
-            if(cv2.waitKey(1) & 0xFF == ord('q')):
-                play = False
+        try:
+            #Check if file exists
+            f = open(self.videoPath)
+            f.close()
 
-        cap.release()
-        cv2.destroyAllWindows()
+            #Play the video
+            cap = cv2.VideoCapture(self.videoPath)
+            play = True
+
+            while(cap.isOpened() and play):
+                ret, frame=cap.read() #read a single frame, ret will be true if frame captured
+                cv2.imshow('output', frame)
+                
+                if(cv2.waitKey(1) & 0xFF == ord('q')):
+                    play = False
+
+            cap.release()
+            cv2.destroyAllWindows()
+        except:
+            print("Video could not be found on this path")
+            
+
+
+        
