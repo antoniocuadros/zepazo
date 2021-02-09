@@ -15,3 +15,4 @@ args = parser.parse_args()
 print(args.video)
 
 video_analizer = VideoAnalizer(args.video)
+video_analizer.analyze()
