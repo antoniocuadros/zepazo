@@ -15,7 +15,7 @@ class VideoAnalizer:
     #Gets the video path
     def __init__(self, videoPath):
         self.videoPath = videoPath
-        print(self.videoPath)
+
 
     #Analize the video frame per frame
     def analyze(self):

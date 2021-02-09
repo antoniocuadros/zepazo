@@ -8,11 +8,20 @@
 import  argparse
 from video_utilities import *
 
+
+#################
+#
+#   Arguments
+#
+#################
 parser = argparse.ArgumentParser(description="Zepazo: Get moon impacts frames")
 parser.add_argument( "-v", "--video", type=str, help="Video file path to analize")
 args = parser.parse_args()
 
-print(args.video)
-
+#################
+#
+#  Program
+#
+#################
 video_analizer = VideoAnalizer(args.video)
 video_analizer.analyze()
