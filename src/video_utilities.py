@@ -42,6 +42,7 @@ class VideoAnalizer:
                 #If there are frames left
                 if ret == True:
                     cv2.imshow(ntpath.basename(self.videoPath),frame)
+                    
                     if(cv2.waitKey(1) & 0xFF == ord('q')):
                         play = False
                 #No more frames, exit loop
@@ -50,6 +51,16 @@ class VideoAnalizer:
             
             cap.release()
             cv2.destroyAllWindows()
+
+    def __getGeneralVideoStats(self, cap):
+            self.frames = cap.get(cv2.CAP_PROP_FRAME_COUNT) 
+            self.fps = int(cap.get(cv2.CAP_PROP_FPS)) 
+            self.seconds = int(self.frames / self.fps)
+    
+    def __getCurrentTime(self, cap):
+        self.__getGeneralVideoStats(cap)
+        current_frame = cap.get(cv2.CAP_PROP_POS_FRAMES)
+        return str(datetime.timedelta(seconds = current_frame / self.fps))
 
 
         
