@@ -11,14 +11,19 @@ import datetime
 import ntpath
 
 class VideoAnalizer:
-    videoPath = None
-    fps = None
-    frames = None
-    seconds = None
+    """
+    This class will represent a Video Analizer with multiple tools for working with video.
+    """
 
     #Constructor
     #Gets the video path
     def __init__(self, args):
+        """
+        Inits VideoAnalizer with the data of the selected video.
+
+        :param args: arguments given by user.
+        """
+
         # -> VideoPath: video to analize
         # -> VideoCaputre: cv2 object to analize the video
         self.videoPath = args.video
@@ -39,6 +44,9 @@ class VideoAnalizer:
 
     #Analize the video frame per frame
     def analyze(self):
+        """
+        Analyzes the video to detect lunar impacts.
+        """
         cap = self.videoCapture
         play = True
 
@@ -60,19 +68,40 @@ class VideoAnalizer:
         cv2.destroyAllWindows()
 
     def __getGeneralVideoStats(self, cap):
-            self.frames = cap.get(cv2.CAP_PROP_FRAME_COUNT) 
-            self.fps = int(cap.get(cv2.CAP_PROP_FPS)) 
-            self.seconds = int(self.frames / self.fps)
+        """
+        Gets the values for 'frames', 'fps', 'seconds' and saves them as attributes.
+
+        :param cap: videoCapture cv2 object.
+        """
+        self.frames = cap.get(cv2.CAP_PROP_FRAME_COUNT) 
+        self.fps = int(cap.get(cv2.CAP_PROP_FPS)) 
+        self.seconds = int(self.frames / self.fps)
     
     def __getCurrentTime(self, cap):
+        """
+        Gets the current time of a of a video playing when is called.
+
+        :param cap: videoCapture cv2 object.
+        """
+        
         self.__getGeneralVideoStats(cap)
         current_frame = cap.get(cv2.CAP_PROP_POS_FRAMES)
         return str(datetime.timedelta(seconds = current_frame / self.fps))
 
     def showFrame(self, frame):
+        """
+        Displays a frame on screen.
+
+        :param frame: video frame.
+        """
+        
         cv2.imshow(ntpath.basename(self.videoPath),frame)
         
     def showVideoInfo(self):
+        """
+        Displays a general information about the video.
+        """
+
         print("Video Path:         ", self.videoPath)
         print("FPS:                ", self.fps)
         print("Total Frames:       ", self.frames)
