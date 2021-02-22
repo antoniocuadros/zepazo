@@ -9,7 +9,8 @@ This project originally arises for the completion of a Final Degree Project prop
 ## Tools
 - **Programming language:** Python 3.8.2
 - **Video library:** OpenCV
-- **dependency manager:** Poetry
+- **Dependency manager:** Poetry
+- **Documentation Generator:** Sphinx
 
 ## Install dependencies
 `poetry install`
