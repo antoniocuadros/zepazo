@@ -18,8 +18,8 @@ class VideoAnalizer:
 
     #Constructor
     #Gets the video path
-    def __init__(self, videoPath):
-        self.videoPath = videoPath
+    def __init__(self, args):
+        self.videoPath = args.video
         self.videoCapture = cv2.VideoCapture(self.videoPath)
 
         #Gets: 

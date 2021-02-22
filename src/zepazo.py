@@ -23,5 +23,5 @@ args = parser.parse_args()
 #  Program
 #
 #################
-video_analizer = VideoAnalizer(args.video)
+video_analizer = VideoAnalizer(args)
 video_analizer.analyze()
