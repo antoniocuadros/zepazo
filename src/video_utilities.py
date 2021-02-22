@@ -43,9 +43,9 @@ class VideoAnalizer:
             ret, frame=cap.read() #read a single frame, ret will be true if frame captured
             
             #If there are frames left
-            if ret == True:
-                cv2.imshow(ntpath.basename(self.videoPath),frame)
-                
+            if ret == True:       
+                self.showFrame(frame)
+
                 if(cv2.waitKey(1) & 0xFF == ord('q')):
                     play = False
             #No more frames, exit loop
@@ -65,7 +65,8 @@ class VideoAnalizer:
         current_frame = cap.get(cv2.CAP_PROP_POS_FRAMES)
         return str(datetime.timedelta(seconds = current_frame / self.fps))
 
-
+    def showFrame(self, frame):
+        cv2.imshow(ntpath.basename(self.videoPath),frame)
         
 
 
