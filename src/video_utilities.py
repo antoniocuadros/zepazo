@@ -34,6 +34,8 @@ class VideoAnalizer:
         # -> seconds
         self.__getGeneralVideoStats(self.videoCapture)
 
+        #Show info about the video
+        self.showVideoInfo()
 
     #Analize the video frame per frame
     def analyze(self):
@@ -70,6 +72,9 @@ class VideoAnalizer:
     def showFrame(self, frame):
         cv2.imshow(ntpath.basename(self.videoPath),frame)
         
-
-
+    def showVideoInfo(self):
+        print("Video Path:         ", self.videoPath)
+        print("FPS:                ", self.fps)
+        print("Total Frames:       ", self.frames)
+        print("Duration: ", str(datetime.timedelta(seconds=self.seconds)))
         
