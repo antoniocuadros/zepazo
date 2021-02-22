@@ -37,7 +37,6 @@ class VideoAnalizer:
     #Analize the video frame per frame
     def analyze(self):
         cap = self.videoCapture
-        
         play = True
 
         while(cap.isOpened() and play):
