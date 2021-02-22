@@ -23,6 +23,7 @@ class VideoAnalizer:
         # -> VideoCaputre: cv2 object to analize the video
         self.videoPath = args.video
         self.videoCapture = cv2.VideoCapture(self.videoPath)
+        self.showVideo = args.show
 
         if not (self.videoCapture).isOpened():
             raise Exception("Video could not be found on this path")
@@ -43,8 +44,9 @@ class VideoAnalizer:
             ret, frame=cap.read() #read a single frame, ret will be true if frame captured
             
             #If there are frames left
-            if ret == True:       
-                self.showFrame(frame)
+            if ret == True:    
+                if self.showVideo: 
+                    self.showFrame(frame)
 
                 if(cv2.waitKey(1) & 0xFF == ord('q')):
                     play = False
