@@ -24,6 +24,9 @@ class VideoAnalizer:
         self.videoPath = args.video
         self.videoCapture = cv2.VideoCapture(self.videoPath)
 
+        if not (self.videoCapture).isOpened():
+            raise Exception("Video could not be found on this path")
+
         #Gets: 
         # -> frames
         # -> fps
