@@ -20,6 +20,13 @@ class VideoAnalizer:
     #Gets the video path
     def __init__(self, videoPath):
         self.videoPath = videoPath
+        self.videoCapture = cv2.VideoCapture(self.videoPath)
+
+        #Gets: 
+        # -> frames
+        # -> fps
+        # -> seconds
+        self.__getGeneralVideoStats(self.videoCapture)
 
 
     #Analize the video frame per frame
