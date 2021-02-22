@@ -33,8 +33,7 @@ class VideoAnalizer:
 
     #Analize the video frame per frame
     def analyze(self):
-        #Play the video
-        cap = cv2.VideoCapture(self.videoPath)
+        cap = self.videoCapture
         
         #If we dont find the file, error
         if (cap.isOpened()== False): 
