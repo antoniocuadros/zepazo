@@ -19,6 +19,8 @@ class VideoAnalizer:
     #Constructor
     #Gets the video path
     def __init__(self, args):
+        # -> VideoPath: video to analize
+        # -> VideoCaputre: cv2 object to analize the video
         self.videoPath = args.video
         self.videoCapture = cv2.VideoCapture(self.videoPath)
 
