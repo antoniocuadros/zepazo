@@ -16,7 +16,6 @@ from pathlib import Path
 #   Arguments
 #
 #################
-print(argv)
 #Needed to Sphinx
 ARGS_DOCS = ['-v', '../videos/test.mp4']
 
@@ -27,7 +26,6 @@ parser.add_argument( "-s", "--show", type=bool, help="Show video during analysis
 
 if ( Path(argv[0]).name != 'sphinx-build' ):
     args = parser.parse_args()
-    print (args)
 else:
     args = parser.parse_args(ARGS_DOCS)
 #################

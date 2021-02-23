@@ -52,13 +52,14 @@ class VideoAnalizer:
 
         while(cap.isOpened() and play):
             ret, frame=cap.read() #read a single frame, ret will be true if frame captured
-            
+            ret, frame2=cap.read()
             #If there are frames left
             if ret == True:    
                 if self.showVideo: 
-                    self.showFrame(frame)
+                    #self.showFrame(frame)
+                    self.getDifferences(frame, frame2)
 
-                if(cv2.waitKey(1) & 0xFF == ord('q')):
+                if(cv2.waitKey(100) & 0xFF == ord('q')):
                     play = False
             #No more frames, exit loop
             else:
@@ -107,3 +108,26 @@ class VideoAnalizer:
         print("Total Frames:       ", self.frames)
         print("Duration: ", str(datetime.timedelta(seconds=self.seconds)))
         
+
+    def getDifferences(self, frame1, frame2):
+        """
+        Subtract the two frames to get the differences.
+        :param: frame1: video frame 1.
+        :type: frame1: numpy.ndarray.
+
+        :param: frame2: video frame 2.
+        :type: frame1: numpy.ndarray.
+
+        :return: Returns a new frame resulting from subtracting frame2 from frame1
+        :rtype: numpy.ndarray.
+        """
+        
+        #reserve memory for the resulting image
+        difference = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
+
+        #from RGB space to GrayScale space for simplicity
+        grayFrame1 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
+        grayFrame2 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
+
+        #get the difference between frame1 and frame2
+        difference = cv2.subtract(grayFrame1, grayFrame2, difference)
