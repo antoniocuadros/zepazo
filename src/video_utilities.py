@@ -137,7 +137,7 @@ class VideoAnalizer:
         ret, threshed_img = cv2.threshold(np.array(difference, dtype=np.uint8), 50, 255, cv2.THRESH_BINARY)
 
         #We obtain the contours of the image
-        contours, hier = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         
         impact_count = 0
         #for each contour finded we draw a rectangle and we save the image
