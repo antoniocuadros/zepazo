@@ -145,9 +145,7 @@ class VideoAnalizer:
             x, y, w, h = cv2.boundingRect(c)
             cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
 
-            cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
+            #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
             impact_count = impact_count + 1
 
-        
-        
         self.showFrame(frame1)
