@@ -13,10 +13,10 @@ class ImageAnalizer:
     """
     This class will represent an Image Analizer with multiple tools for working with images.
     """
-    def __init__:
+    def __init__(self):
         pass
     
-    def saveImage(image, name):
+    def saveImage(self, image, name):
         """
         Save an image in the current working directory.
         :param: image: the image to save.
