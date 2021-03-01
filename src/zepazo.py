@@ -6,7 +6,7 @@
 ##############################
 
 import  argparse
-from video_utilities import *
+from Analyzers.video_utilities import *
 from sys import argv
 from pathlib import Path
 
@@ -33,5 +33,6 @@ else:
 #  Program
 #
 #################
-video_analizer = VideoAnalizer(args)
+print(args)
+video_analizer = VideoAnalyzer(args)
 video_analizer.analyze()
