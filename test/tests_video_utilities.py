@@ -42,6 +42,7 @@ def test_if_object_is_created_with_error():
 
     arguments = Argument('videos/testttt.mp4', 'False')
 
-    video_analizer = VideoAnalyzer(arguments)
+    with pytest.raises(Exception) as e:
+        video_analizer = VideoAnalyzer(arguments)
 
-    with pytest.raises(Exception):
+    assert str(e.value) == "Video could not be found on this path"
