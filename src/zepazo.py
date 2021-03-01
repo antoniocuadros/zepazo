@@ -33,6 +33,5 @@ else:
 #  Program
 #
 #################
-print(args)
 video_analizer = VideoAnalyzer(args)
 video_analizer.analyze()

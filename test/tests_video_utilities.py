@@ -6,14 +6,20 @@
 ##############################
 import pytest
 import sys
-sys.path.append("..")
+import  argparse
+
 from src.Analyzers.image_utilities import ImageAnalyzer
 from src.Analyzers.video_utilities import VideoAnalyzer
 
-
+class Argument:
+    def __init__(self, videopath, show):
+        self.video = videopath
+        self.show = show
 
 def test_if_object_is_created_ok():
-    args['video'] =  '../videos/test.mp4'
-    video_analizer = VideoAnalizer(args)
 
-    assert video_analizer.videoPath == '../videos/test.mp4'  
+    arguments = Argument('videos/test.mp4', 'False')
+
+    video_analizer = VideoAnalyzer(arguments)
+
+    assert video_analizer.videoPath == 'videos/test.mp4'  
