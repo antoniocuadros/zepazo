@@ -16,6 +16,13 @@ class Argument:
         self.video = videopath
         self.show = show
 
+################################################
+#
+# US: 1
+#
+# Checks if the videopath is correctly obtained
+#
+################################################
 def test_if_object_is_created_ok():
 
     arguments = Argument('videos/test.mp4', 'False')
@@ -23,3 +30,18 @@ def test_if_object_is_created_ok():
     video_analizer = VideoAnalyzer(arguments)
 
     assert video_analizer.videoPath == 'videos/test.mp4'  
+
+################################################
+#
+# US: 1
+#
+# Checks if the path does not exist fails
+#
+################################################
+def test_if_object_is_created_with_error():
+
+    arguments = Argument('videos/testttt.mp4', 'False')
+
+    video_analizer = VideoAnalyzer(arguments)
+
+    with pytest.raises(Exception):
