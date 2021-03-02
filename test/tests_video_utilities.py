@@ -43,6 +43,22 @@ def test_if_object_is_created_with_error():
     arguments = Argument('videos/testttt.mp4', 'False')
 
     with pytest.raises(Exception) as e:
-        video_analizer = VideoAnalyzer(arguments)
+        video_analiyzer = VideoAnalyzer(arguments)
 
     assert str(e.value) == "Video could not be found on this path"
+
+################################################
+#
+# US: 6
+#
+# Checks if the stats are ok
+#
+################################################
+def test_if_stats_are_ok():
+    arguments = Argument('videos/test.mp4', 'False')
+    video_analyzer = VideoAnalyzer(arguments)
+
+    assert video_analyzer.frames == 29.0
+    assert video_analyzer.fps == 23
+    assert video_analyzer.seconds == 1
+
