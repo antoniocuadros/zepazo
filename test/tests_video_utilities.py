@@ -10,11 +10,8 @@ import  argparse
 import numpy as np
 from src.Analyzers.image_utilities import ImageAnalyzer
 from src.Analyzers.video_utilities import VideoAnalyzer
+from .argument import Argument
 
-class Argument:
-    def __init__(self, videopath, show):
-        self.video = videopath
-        self.show = show
 
 ################################################
 #
