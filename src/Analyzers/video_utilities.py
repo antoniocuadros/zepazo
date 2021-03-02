@@ -105,6 +105,7 @@ class VideoAnalyzer:
         """
         
         cv2.imshow(ntpath.basename(self.videoPath),frame)
+        return frame
         
     def showVideoInfo(self):
         """
