@@ -86,7 +86,7 @@ class VideoAnalyzer:
         #video duration in seconds 
         self.seconds = int(self.frames / self.fps)
     
-    def __getCurrentTime(self, cap):
+    def getCurrentTime(self, cap):
         """
         Gets the current time of a of a video playing when is called.
 

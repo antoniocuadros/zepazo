@@ -49,6 +49,20 @@ def test_if_object_is_created_with_error():
 
 ################################################
 #
+# US: 2
+#
+# Checks if the current time method works
+#
+################################################
+def test_if_current_time_ok():
+    arguments = Argument('videos/test.mp4', 'False')
+    video_analyzer = VideoAnalyzer(arguments)
+    cap = video_analyzer.videoCapture
+
+    assert video_analyzer.getCurrentTime(cap) == '0:00:00'
+
+################################################
+#
 # US: 6
 #
 # Checks if the stats are ok
