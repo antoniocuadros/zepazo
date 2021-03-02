@@ -1,7 +1,7 @@
 #Python 3.8.2
 ##############################
 #
-#   tests_image_utilities.py
+#   tests_video_utilities.py
 #
 ##############################
 import pytest
