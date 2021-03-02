@@ -79,8 +79,11 @@ class VideoAnalyzer:
 
         :param cap: videoCapture cv2 object.
         """
-        self.frames = cap.get(cv2.CAP_PROP_FRAME_COUNT) 
-        self.fps = int(cap.get(cv2.CAP_PROP_FPS)) 
+        #video total frames
+        self.frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        #frames per second 
+        self.fps = int(cap.get(cv2.CAP_PROP_FPS))
+        #video duration in seconds 
         self.seconds = int(self.frames / self.fps)
     
     def __getCurrentTime(self, cap):
