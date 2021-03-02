@@ -16,7 +16,7 @@ This project originally arises for the completion of a Final Degree Project prop
 ## Install dependencies
 `poetry install`
 
-## Ejecutar los tests unitarios
+## Execute unit tests
 `pytest test/tests_image_utilities.py`
 
 # Additional documentation
