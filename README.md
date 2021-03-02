@@ -15,5 +15,8 @@ This project originally arises for the completion of a Final Degree Project prop
 ## Install dependencies
 `poetry install`
 
+## Ejecutar los tests unitarios
+`pytest test/tests_image_utilities.py`
+
 # Additional documentation
 - [OpenCV instalation](https://github.com/antoniocuadros/zepazo/blob/main/docs/Tools/opencv.md)
