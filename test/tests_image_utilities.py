@@ -33,5 +33,6 @@ def test_if_image_is_saved():
     cap = video_analyzer.videoCapture
 
     ret, frame = cap.read()
-
     image_analyzer.saveImage(frame, 'test_image')  
+    assert os.path.isfile('test_image.png') == True
+    os.remove("test_image.png")
