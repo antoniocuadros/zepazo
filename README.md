@@ -17,7 +17,7 @@ This project originally arises for the completion of a Final Degree Project prop
 `poetry install`
 
 ## Execute unit tests
-`pytest test/tests_image_utilities.py`
+`poetry run task test`
 
 # Additional documentation
 - [OpenCV instalation](https://github.com/antoniocuadros/zepazo/blob/main/docs/Tools/opencv.md)
