@@ -7,7 +7,7 @@
 import pytest
 import sys
 import  argparse
-
+import numpy as np
 from src.Analyzers.image_utilities import ImageAnalyzer
 from src.Analyzers.video_utilities import VideoAnalyzer
 
@@ -60,6 +60,24 @@ def test_if_current_time_ok():
     cap = video_analyzer.videoCapture
 
     assert video_analyzer.getCurrentTime(cap) == '0:00:00'
+
+
+################################################
+#
+# US: 3
+#
+# Checks if the video is displaying
+#
+################################################
+def test_if_video_shows():
+    arguments = Argument('videos/test.mp4', 'True')
+    video_analyzer = VideoAnalyzer(arguments)
+    cap = video_analyzer.videoCapture
+
+    ret, frame = cap.read()
+
+    assert ret == True
+    assert type(video_analyzer.showFrame(frame)) is np.ndarray
 
 ################################################
 #
