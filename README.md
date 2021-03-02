@@ -11,6 +11,7 @@ This project originally arises for the completion of a Final Degree Project prop
 - **Video library:** OpenCV
 - **Dependency manager:** Poetry
 - **Documentation Generator:** Sphinx
+- **Task runner:** Taskipy 
 
 ## Install dependencies
 `poetry install`
