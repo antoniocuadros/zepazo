@@ -19,5 +19,8 @@ This project originally arises for the completion of a Final Degree Project prop
 ## Execute unit tests
 `poetry run task test`
 
+### Execute unit tests with Dockerfile
+`docker build . -t zepazo`
+`docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo`
 # Additional documentation
 - [OpenCV instalation](https://github.com/antoniocuadros/zepazo/blob/main/docs/Tools/opencv.md)
