@@ -16,7 +16,7 @@ class ImageAnalyzer:
     def __init__(self):
         pass
     
-    def saveImage(self, image, name):
+    def saveImage(image, name):
         """
         Save an image in the current working directory.
         :param: image: the image to save.
