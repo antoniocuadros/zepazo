@@ -13,6 +13,7 @@ RUN apt install libgl1-mesa-glx -y && \
 
 ENV LANG=C.UTF-8
 
+RUN pip install --upgrade pip
 RUN pip install poetry
 
 COPY poetry.lock pyproject.toml /home/test_user/
