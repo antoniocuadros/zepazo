@@ -1,0 +1,12 @@
+name: 'Unit tests'
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latests
+    steps:
+    - uses: actions/checkout@v2
+    - name: build docker container
+      run: docker build . -t zepazo
+    -name: execute unit tests
+      run: docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo
