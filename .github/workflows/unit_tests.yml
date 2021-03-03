@@ -8,5 +8,3 @@ jobs:
     - uses: actions/checkout@v2
     - name: build docker container
       run: docker build . -t zepazo
-    -name: execute unit tests
-      run: docker run zepazo
