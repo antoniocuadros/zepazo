@@ -7,4 +7,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: build docker container
-      run: docker build . -t zepazo && docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo
+      run: xhost + && docker build . -t zepazo && docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo
