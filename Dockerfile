@@ -40,6 +40,9 @@ COPY . .
 #Dependency files no longer needed
 RUN rm -r /home/test_user/poetry.lock
 
+#Allow clients to connect
+RUN xhost +
+
 #Execute tests
 CMD ["poetry", "run", "task", "test"]
 
