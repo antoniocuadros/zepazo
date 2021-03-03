@@ -1,3 +1,4 @@
+#GitHub action to build container and run unit tests
 name: 'Unit tests'
 on: [push]
 
