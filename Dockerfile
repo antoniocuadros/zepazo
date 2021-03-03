@@ -26,6 +26,10 @@ COPY poetry.lock pyproject.toml /home/test_user/
 #We are in a container, it is isolated, virtualenv is not needed
 RUN poetry config virtualenvs.create false
 
+RUN useradd test_user
+RUN su test_user
+
+#Change directory
 WORKDIR /home/test_user/
 
 #Install dependencies
@@ -36,6 +40,6 @@ COPY . .
 #Dependency files no longer needed
 RUN rm -r /home/test_user/poetry.lock
 
-
+#Execute tests
 CMD ["poetry", "run", "task", "test"]
 
