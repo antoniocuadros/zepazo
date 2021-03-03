@@ -9,4 +9,4 @@ jobs:
     - name: build docker container
       run: docker build . -t zepazo
     -name: execute unit tests
-      run: docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo
+      run: docker run zepazo
