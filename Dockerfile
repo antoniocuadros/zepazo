@@ -10,7 +10,8 @@ RUN apt install libgl1-mesa-glx -y && \
     apt install libglib2.0-0 -y && \
     apt install libgtk2.0-dev -y && \
     apt install libqt5x11extras5 -y && \
-    apt install x11-xserver-utils -y
+    apt install x11-xserver-utils -y && \
+    apt install xvfb -y
 
 #Needed to avoid errors in opencv
 ENV LANG=C.UTF-8
