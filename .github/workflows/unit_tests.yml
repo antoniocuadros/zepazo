@@ -13,4 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: run unit tests
-    - run:  docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo
+      run:  docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo
