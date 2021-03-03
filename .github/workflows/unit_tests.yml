@@ -8,3 +8,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: build docker container
       run: docker build . -t zepazo
+  run:
+    steps:
+    - name: run unit tests
+      run: docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix zepazo
