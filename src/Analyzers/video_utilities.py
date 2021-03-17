@@ -58,9 +58,12 @@ class VideoAnalyzer:
         while(cap.isOpened() and play):
             ret, frame=cap.read() #read a single frame, ret will be true if frame captured
             ret, frame2=cap.read()
+
             #If there are frames left
             if ret == True:    
                 frame = (self.imageAnalizer).getDifferences(frame, frame2)
+                moon_center_x, moon_center_y = self.imageAnalizer.moonEnclosingCircle(frame)
+                
                 if self.showVideo: 
                     self.showFrame(frame)
 

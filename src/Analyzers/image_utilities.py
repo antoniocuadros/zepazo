@@ -75,22 +75,21 @@ class ImageAnalyzer:
             #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
             impact_count = impact_count + 1
 
-        frame1 = self.moonEnclosingCircle(grayFrame1, frame1)
-
         return frame1
 
 
-    def moonEnclosingCircle(self, grayFrame):
+    def moonEnclosingCircle(self, frame):
         """
         Gets moon center as X,Y coordinates
-        :param: grayFrame: video frame in gray colorspace.
+        :param: frame: video frame.
         :type: frame1: numpy.ndarray.
 
 
         :return: Returns moon center as X,Y coordinates
         :rtype: Integer
         """
-        
+        grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
         #We get the moon thresed with the moon in white and the rest in black
         #variate 25 
         ret, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), 35, 255, cv2.THRESH_BINARY)
@@ -108,10 +107,10 @@ class ImageAnalyzer:
         
 
         #Uncomment to see the centter
-        cv2.circle(grayFrame, (int(ellipse[0][0]), int(ellipse[0][1])), 6, (0, 0, 255), -1)
+        #cv2.circle(grayFrame, (int(ellipse[0][0]), int(ellipse[0][1])), 6, (0, 0, 255), -1)
 
         #Uncomment to see the ellipse around the moon
-        cv2.ellipse(grayFrame, ellipse,(0, 255, 255), 2)
+        #cv2.ellipse(grayFrame, ellipse,(0, 255, 255), 2)
 
         centerX = ellipse[0][0]
         centerY = ellipse[0][1]
