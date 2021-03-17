@@ -75,4 +75,46 @@ class ImageAnalyzer:
             #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
             impact_count = impact_count + 1
 
+        frame1 = self.moonEnclosingCircle(grayFrame1, frame1)
+
         return frame1
+
+
+    def moonEnclosingCircle(self, grayFrame):
+        """
+        Gets moon center as X,Y coordinates
+        :param: grayFrame: video frame in gray colorspace.
+        :type: frame1: numpy.ndarray.
+
+
+        :return: Returns moon center as X,Y coordinates
+        :rtype: Integer
+        """
+        
+        #We get the moon thresed with the moon in white and the rest in black
+        #variate 25 
+        ret, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), 35, 255, cv2.THRESH_BINARY)
+
+        kernel = np.ones((5, 5),np.uint8)
+
+        #With the threshed image of the moon we can obtain the moon contour
+        moon_contour, hier = cv2.findContours(threshed_moon, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+        
+        #With the previous contour now we try to get the circle containing the moon 
+        c = max(moon_contour, key=cv2.contourArea)
+        
+        ellipse = cv2.fitEllipse(c)
+        
+
+        #Uncomment to see the centter
+        cv2.circle(grayFrame, (int(ellipse[0][0]), int(ellipse[0][1])), 6, (0, 0, 255), -1)
+
+        #Uncomment to see the ellipse around the moon
+        cv2.ellipse(grayFrame, ellipse,(0, 255, 255), 2)
+
+        centerX = ellipse[0][0]
+        centerY = ellipse[0][1]
+        
+        
+        return centerX, centerY
