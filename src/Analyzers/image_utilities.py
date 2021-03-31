@@ -132,6 +132,8 @@ class ImageAnalyzer:
         #Closes the window
         cv2.destroyAllWindows()
 
+        return self.x_1, self.y_1, self.x_2, self.y_2 
+
 
     def get_mouse_click_coordinates(self, event, x, y, flags, params):
         x_1,x_2,y_1,y_2 = 0,0,0,0
@@ -142,7 +144,7 @@ class ImageAnalyzer:
             
             if(self.mouse_click_count == 1):
                 #Places a circular indicator in clicked point
-                cv2.circle(params, (x,y),10,(0,0,255),10)
+                cv2.circle(params, (x,y),3,(0,0,255),-1)
                 #Shows the image with that point
                 cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
                 
@@ -151,7 +153,7 @@ class ImageAnalyzer:
             else:
                 if(self.mouse_click_count == 2):
                     #Places a circular indicator in clicked point
-                    cv2.circle(params, (x,y),10,(0,0,255),10)
+                    cv2.circle(params, (x,y),3,(0,0,255),-1)
                     #Shows the image with that point
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
                     
@@ -159,5 +161,3 @@ class ImageAnalyzer:
                     self.x_2,self.y_2 = x,y
                     cv2.rectangle(params, (self.x_1,self.y_1), (self.x_2,self.y_2), (0,0,255), -1)    
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
-                    cv2.waitKey(0)
-                    cv2.destroyAllWindows()
