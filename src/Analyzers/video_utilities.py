@@ -138,7 +138,14 @@ class VideoAnalyzer:
         if( ret ):
             return frame
         else:
-            return false
+            return False
 
-    def selectAndApplyMask(self, num_masks):
-        self.mask_points = self.imageAnalizer.selectMaskLocation(self.getInitialFrame(), num_masks)
+    def selectAndApplyMask(self, num_masks, points=None):
+        print(points)
+        if(points == None): #Came from mousemask
+            self.mask_points = self.imageAnalizer.selectMaskLocation(self.getInitialFrame(), num_masks)
+            
+        else:
+            #We have a list of points
+            for i in range(len(points)//2):
+                self.mask_points.append( [ points[2*i], points[2*i+1] ] )
