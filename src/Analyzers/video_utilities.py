@@ -63,9 +63,11 @@ class VideoAnalyzer:
             ret, frame2=cap.read()
 
             #Apply the mask for each frame
-            if(len(self.mask_points) > 0):
-                cv2.rectangle(frame, (self.mask_points[0],self.mask_points[1]), (self.mask_points[2],self.mask_points[3]), (0,0,255), -1)
-                cv2.rectangle(frame2, (self.mask_points[0],self.mask_points[1]), (self.mask_points[2],self.mask_points[3]), (0,0,255), -1)
+            if(len(self.mask_points) > 0 and len(self.mask_points) % 2 == 0):
+                for i in range(len(self.mask_points)//2):
+                    cv2.rectangle(frame, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
+                    cv2.rectangle(frame2, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
+
 
             #If there are frames left
             if ret == True:    
@@ -140,4 +142,3 @@ class VideoAnalyzer:
 
     def selectAndApplyMask(self, num_masks):
         self.mask_points = self.imageAnalizer.selectMaskLocation(self.getInitialFrame(), num_masks)
-        print(self.mask_points)

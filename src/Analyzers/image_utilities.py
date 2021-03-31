@@ -154,7 +154,6 @@ class ImageAnalyzer:
                 self.masks.append([x,y])
 
                 if(self.mouse_click_count % 2 == 0 and self.mouse_click_count != 0) :
-                    print(self.mouse_click_count)
                     cv2.rectangle(frame, 
                     (self.masks[self.mouse_click_count-2][0], self.masks[self.mouse_click_count-2][1]),
                      (self.masks[self.mouse_click_count-1][0], self.masks[self.mouse_click_count-1][1]),
