@@ -62,12 +62,12 @@ class VideoAnalyzer:
             #If there are frames left
             if ret == True:    
                 frame = (self.imageAnalizer).getDifferences(frame, frame2)
-                moon_center_x, moon_center_y = self.imageAnalizer.moonEnclosingCircle(frame)
+                #moon_center_x, moon_center_y = self.imageAnalizer.moonEnclosingCircle(frame)
 
                 if self.showVideo: 
                     self.showFrame(frame)
 
-                if(cv2.waitKey(10) & 0xFF == ord('q')):
+                if(cv2.waitKey(100) & 0xFF == ord('q')):
                     play = False
             
             #No more frames, exit loop
