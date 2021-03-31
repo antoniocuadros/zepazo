@@ -39,7 +39,7 @@ video_analizer = VideoAnalyzer(args)
 #Pre Processing
 # -> Apply a mask
 if(args.mousemask != None):
-    video_analizer.selectAndApplyMask(args.mask)
+    video_analizer.selectAndApplyMask(args.mousemask)
 
 #Proccessing
 video_analizer.analyze()
