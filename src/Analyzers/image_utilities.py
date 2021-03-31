@@ -120,7 +120,18 @@ class ImageAnalyzer:
         return centerX, centerY
 
     def selectMaskLocation(self, first_frame, num_masks):
-       
+        """
+        Gets masks points and show masks util a key is pressed
+        :param: first_frame: video frame.
+        :type: first_frame: numpy.ndarray.
+
+        :param: num_masks: number of masks to apply.
+        :type: num_masks: int.
+
+
+        :return: Returns masks as coordinates
+        :rtype: list
+        """
         #We show the first frame in order to let the user decide where to place the mask
         cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",first_frame)
 
@@ -136,6 +147,25 @@ class ImageAnalyzer:
 
 
     def get_mouse_click_coordinates(self, event, x, y, flags, params):
+        """
+        Tracks mouse click event to get x,y coordinates in order to create masks
+        :param: event: event object to track mouse click.
+        :type: event: event object.
+
+        :param: x: x coordinate of mouse click.
+        :type: x: int.
+
+
+        :param: y: y coordinate of mouse click.
+        :type: y: int.
+
+        :param: flags: flags to control envents.
+        :type: flags: flag.
+
+
+        :param: params: list of params like frame or num_masks
+        :type: params: list.
+        """
         frame = params[0]
         num_masks = params[1]
 

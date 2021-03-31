@@ -133,6 +133,12 @@ class VideoAnalyzer:
         
 
     def getInitialFrame(self):
+        """
+        Gets initial frame from a source video
+        
+        :return: Returns first frame
+        :rtype: numpy.ndarray
+        """
         ret, frame = self.videoCapture.read()
         
         if( ret ):
@@ -141,7 +147,17 @@ class VideoAnalyzer:
             return False
 
     def selectAndApplyMask(self, num_masks, points=None):
-        print(points)
+        """
+        Gets points as attribute to use while analyzing
+
+        :param: num_masks: number of masks to get coordinates
+        :type: num_masks: int
+
+
+        :param: points: points to use as masks
+        :type: points: list
+        """
+
         if(points == None): #Came from mousemask
             self.mask_points = self.imageAnalizer.selectMaskLocation(self.getInitialFrame(), num_masks)
             
