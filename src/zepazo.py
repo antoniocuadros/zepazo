@@ -37,7 +37,7 @@ video_analizer = VideoAnalyzer(args)
 
 #Pre Processing
 # -> Apply a mask
-
+video_analizer.selectAndApplyMask()
 
 #Proccessing
 video_analizer.analyze()

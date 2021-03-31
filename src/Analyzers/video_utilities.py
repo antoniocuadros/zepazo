@@ -129,3 +129,6 @@ class VideoAnalyzer:
             return frame
         else:
             return false
+
+    def selectAndApplyMask(self):
+        self.imageAnalizer.selectMaskLocation(self.getInitialFrame())
