@@ -63,9 +63,9 @@ class VideoAnalyzer:
             ret, frame2=cap.read()
 
             #Apply the mask for each frame
-            #if(self.mask_points.size != 0):
-            cv2.rectangle(frame, (self.mask_points[0],self.mask_points[1]), (self.mask_points[2],self.mask_points[3]), (0,0,255), -1)
-            cv2.rectangle(frame2, (self.mask_points[0],self.mask_points[1]), (self.mask_points[2],self.mask_points[3]), (0,0,255), -1)
+            if(len(self.mask_points) > 0):
+                cv2.rectangle(frame, (self.mask_points[0],self.mask_points[1]), (self.mask_points[2],self.mask_points[3]), (0,0,255), -1)
+                cv2.rectangle(frame2, (self.mask_points[0],self.mask_points[1]), (self.mask_points[2],self.mask_points[3]), (0,0,255), -1)
 
             #If there are frames left
             if ret == True:    
