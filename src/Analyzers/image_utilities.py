@@ -124,7 +124,7 @@ class ImageAnalyzer:
         #We show the first frame in order to let the user decide where to place the mask
         cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",first_frame)
 
-        cv2.setMouseCallback('Select top-left corner and bottom-right corner to apply a mask', self.get_mouse_click_coordinates, first_frame)
+        cv2.setMouseCallback('Select top-left corner and bottom-right corner to apply a mask', self.get_mouse_click_coordinates, [first_frame,num_masks])
 
         #Waits for a key event
         cv2.waitKey(0)
@@ -136,7 +136,8 @@ class ImageAnalyzer:
 
 
     def get_mouse_click_coordinates(self, event, x, y, flags, params):
-        x_1,x_2,y_1,y_2 = 0,0,0,0
+        frame = params[0]
+        num_masks = params[1]
 
         if ( event == cv2.EVENT_LBUTTONDOWN ):
             #Add 1 to mouse clicks
@@ -144,20 +145,20 @@ class ImageAnalyzer:
             
             if(self.mouse_click_count == 1):
                 #Places a circular indicator in clicked point
-                cv2.circle(params, (x,y),3,(0,0,255),-1)
+                cv2.circle(frame, (x,y),3,(0,0,255),-1)
                 #Shows the image with that point
-                cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
+                cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
                 
                 #Gets top-left corner
                 self.x_1,self.y_1 = x,y
             else:
                 if(self.mouse_click_count == 2):
                     #Places a circular indicator in clicked point
-                    cv2.circle(params, (x,y),3,(0,0,255),-1)
+                    cv2.circle(frame, (x,y),3,(0,0,255),-1)
                     #Shows the image with that point
-                    cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
+                    cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
                     
                     #Gets bottom-right corner
                     self.x_2,self.y_2 = x,y
-                    cv2.rectangle(params, (self.x_1,self.y_1), (self.x_2,self.y_2), (0,0,255), -1)    
-                    cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
+                    cv2.rectangle(frame, (self.x_1,self.y_1), (self.x_2,self.y_2), (0,0,255), -1)    
+                    cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
