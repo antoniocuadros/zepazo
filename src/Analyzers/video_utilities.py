@@ -138,6 +138,6 @@ class VideoAnalyzer:
         else:
             return false
 
-    def selectAndApplyMask(self):
-        self.mask_points = self.imageAnalizer.selectMaskLocation(self.getInitialFrame())
+    def selectAndApplyMask(self, num_masks):
+        self.mask_points = self.imageAnalizer.selectMaskLocation(self.getInitialFrame(), num_masks)
         print(self.mask_points)
