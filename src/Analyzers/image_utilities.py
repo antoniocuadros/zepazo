@@ -15,7 +15,7 @@ class ImageAnalyzer:
     """
     def __init__(self):
         self.mouse_click_count = 0
-        self.x_1,self.x_2,self.y_1,self.y_2 = 0,0,0,0
+        self.masks = []
     
     def saveImage(image, name):
         """
@@ -139,26 +139,29 @@ class ImageAnalyzer:
         frame = params[0]
         num_masks = params[1]
 
+        num_clicks = num_masks * 2
+
         if ( event == cv2.EVENT_LBUTTONDOWN ):
             #Add 1 to mouse clicks
             self.mouse_click_count = self.mouse_click_count + 1
             
-            if(self.mouse_click_count == 1):
+            if(self.mouse_click_count < num_clicks):
                 #Places a circular indicator in clicked point
                 cv2.circle(frame, (x,y),3,(0,0,255),-1)
                 #Shows the image with that point
                 cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
-                
-                #Gets top-left corner
-                self.x_1,self.y_1 = x,y
+                self.masks.append([x,y])
             else:
-                if(self.mouse_click_count == 2):
+                if(self.mouse_click_count == num_clicks):
                     #Places a circular indicator in clicked point
                     cv2.circle(frame, (x,y),3,(0,0,255),-1)
                     #Shows the image with that point
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
                     
-                    #Gets bottom-right corner
-                    self.x_2,self.y_2 = x,y
-                    cv2.rectangle(frame, (self.x_1,self.y_1), (self.x_2,self.y_2), (0,0,255), -1)    
+                    #Gets last point
+                    self.masks.append([x,y])
+
+                    for x in range(len(self.masks)/2):
+                        cv2.rectangle(frame, (self.masks[x][0], self.masks[x][1]), (self.masks[x+1][0], self.masks[x+1][0]), (0,0,255), -1) 
+                       
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
