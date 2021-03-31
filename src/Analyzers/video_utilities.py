@@ -122,3 +122,10 @@ class VideoAnalyzer:
         print("Duration: ", str(datetime.timedelta(seconds=self.seconds)))
         
 
+    def getInitialFrame(self):
+        ret, frame = self.videoCapture.read()
+        
+        if( ret ):
+            return frame
+        else:
+            return false

@@ -118,7 +118,7 @@ class ImageAnalyzer:
         
         return centerX, centerY
 
-    def selectMask(self, frist_frame):
+    def selectMaskLocation(self, frist_frame):
        
         #We show the first frame in order to let the user decide where to place the mask
         cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)

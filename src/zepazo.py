@@ -34,4 +34,10 @@ else:
 #
 #################
 video_analizer = VideoAnalyzer(args)
+
+#Pre Processing
+# -> Apply a mask
+
+
+#Proccessing
 video_analizer.analyze()
