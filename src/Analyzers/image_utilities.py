@@ -14,7 +14,8 @@ class ImageAnalyzer:
     This class will represent an Image Analizer with multiple tools for working with images.
     """
     def __init__(self):
-        pass
+        self.mouse_click_count = 0
+        self.x_1,self.x_2,self.y_1,self.y_2 = 0,0,0,0
     
     def saveImage(image, name):
         """
@@ -123,8 +124,40 @@ class ImageAnalyzer:
         #We show the first frame in order to let the user decide where to place the mask
         cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",first_frame)
 
+        cv2.setMouseCallback('Select top-left corner and bottom-right corner to apply a mask', self.get_mouse_click_coordinates, first_frame)
+
         #Waits for a key event
         cv2.waitKey(0)
 
         #Closes the window
         cv2.destroyAllWindows()
+
+
+    def get_mouse_click_coordinates(self, event, x, y, flags, params):
+        x_1,x_2,y_1,y_2 = 0,0,0,0
+
+        if ( event == cv2.EVENT_LBUTTONDOWN ):
+            #Add 1 to mouse clicks
+            self.mouse_click_count = self.mouse_click_count + 1
+            
+            if(self.mouse_click_count == 1):
+                #Places a circular indicator in clicked point
+                cv2.circle(params, (x,y),10,(0,0,255),10)
+                #Shows the image with that point
+                cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
+                
+                #Gets top-left corner
+                self.x_1,self.y_1 = x,y
+            else:
+                if(self.mouse_click_count == 2):
+                    #Places a circular indicator in clicked point
+                    cv2.circle(params, (x,y),10,(0,0,255),10)
+                    #Shows the image with that point
+                    cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
+                    
+                    #Gets bottom-right corner
+                    self.x_2,self.y_2 = x,y
+                    cv2.rectangle(params, (self.x_1,self.y_1), (self.x_2,self.y_2), (0,0,255), -1)    
+                    cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",params)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
