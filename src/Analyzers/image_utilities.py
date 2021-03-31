@@ -132,7 +132,7 @@ class ImageAnalyzer:
         #Closes the window
         cv2.destroyAllWindows()
 
-        return self.x_1, self.y_1, self.x_2, self.y_2 
+        return self.masks
 
 
     def get_mouse_click_coordinates(self, event, x, y, flags, params):
