@@ -150,7 +150,18 @@ class ImageAnalyzer:
                 cv2.circle(frame, (x,y),3,(0,0,255),-1)
                 #Shows the image with that point
                 cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
+
                 self.masks.append([x,y])
+
+                if(self.mouse_click_count % 2 == 0 and self.mouse_click_count != 0) :
+                    print(self.mouse_click_count)
+                    cv2.rectangle(frame, 
+                    (self.masks[self.mouse_click_count-2][0], self.masks[self.mouse_click_count-2][1]),
+                     (self.masks[self.mouse_click_count-1][0], self.masks[self.mouse_click_count-1][1]),
+                      (0,0,255), -1)
+                    cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
+
+
             else:
                 if(self.mouse_click_count == num_clicks):
                     #Places a circular indicator in clicked point
@@ -161,7 +172,9 @@ class ImageAnalyzer:
                     #Gets last point
                     self.masks.append([x,y])
 
-                    for x in range(len(self.masks)/2):
-                        cv2.rectangle(frame, (self.masks[x][0], self.masks[x][1]), (self.masks[x+1][0], self.masks[x+1][0]), (0,0,255), -1) 
-                       
+                    cv2.rectangle(frame, 
+                    (self.masks[self.mouse_click_count-2][0], self.masks[self.mouse_click_count-2][1]),
+                     (self.masks[self.mouse_click_count-1][0], self.masks[self.mouse_click_count-1][1]),
+                      (0,0,255), -1)
+
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
