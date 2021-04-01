@@ -4,8 +4,7 @@
 #   image_utilities.py
 #
 ##############################
-
-import cv2
+from cv2 import cv2
 import numpy as np
 import os.path
 
@@ -17,7 +16,7 @@ class ImageAnalyzer:
         self.mouse_click_count = 0
         self.masks = []
     
-    def saveImage(image, name):
+    def saveImage(self, image, name):
         """
         Save an image in the current working directory.
         :param: image: the image to save.
