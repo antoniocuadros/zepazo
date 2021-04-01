@@ -117,7 +117,7 @@ class ImageAnalyzer:
         centerY = ellipse[0][1]
         
         
-        return centerX, centerY
+        return centerX, centerY, ellipse
 
     def selectMaskLocation(self, first_frame, num_masks):
         """
