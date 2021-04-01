@@ -106,9 +106,12 @@ class ImageAnalyzer:
 
         
         #With the previous contour now we try to get the circle containing the moon 
-        c = max(moon_contour, key=cv2.contourArea)
-        
-        ellipse = cv2.fitEllipse(c)
+        c = []
+        if(len(moon_contour) > 0):
+            c = max(moon_contour, key=cv2.contourArea)
+
+        if(len(c) > 5):
+            ellipse = cv2.fitEllipse(c)
         
 
         #Uncomment to see the centter
@@ -116,12 +119,12 @@ class ImageAnalyzer:
 
         #Uncomment to see the ellipse around the moon
         #cv2.ellipse(grayFrame, ellipse,(0, 255, 255), 2)
-
-        centerX = ellipse[0][0]
-        centerY = ellipse[0][1]
-        
-        
-        return centerX, centerY, ellipse
+        if(len(c) > 5):
+            centerX = ellipse[0][0]
+            centerY = ellipse[0][1]
+            return centerX, centerY, ellipse
+        else:
+            return 0,0, None
 
     def selectMaskLocation(self, first_frame, num_masks):
         """
