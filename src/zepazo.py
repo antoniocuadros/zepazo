@@ -6,7 +6,7 @@
 ##############################
 
 import  argparse
-from Analyzers.video_utilities import *
+from Analyzers.video_utilities import VideoAnalyzer
 from sys import argv
 from pathlib import Path
 
