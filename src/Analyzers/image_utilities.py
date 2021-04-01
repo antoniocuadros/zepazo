@@ -61,7 +61,7 @@ class ImageAnalyzer:
 
         #For each pixel, if the pixel value is smaller than a value (second argument: 50) 
         #it is set to 0 (white), if not the pixel is set to a maximum value (third argument) (black)
-        ret, threshed_img = cv2.threshold(np.array(difference, dtype=np.uint8), 50, 255, cv2.THRESH_BINARY)
+        _, threshed_img = cv2.threshold(np.array(difference, dtype=np.uint8), 50, 255, cv2.THRESH_BINARY)
 
         #We obtain the contours of the image
         contours, _ = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -92,12 +92,11 @@ class ImageAnalyzer:
 
         #We get the moon thresed with the moon in white and the rest in black
         #variate 25 
-        ret, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), 35, 255, cv2.THRESH_BINARY)
+        _, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), 35, 255, cv2.THRESH_BINARY)
 
-        kernel = np.ones((5, 5),np.uint8)
 
         #With the threshed image of the moon we can obtain the moon contour
-        moon_contour, hier = cv2.findContours(threshed_moon, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        moon_contour, _ = cv2.findContours(threshed_moon, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         
         #With the previous contour now we try to get the circle containing the moon 
