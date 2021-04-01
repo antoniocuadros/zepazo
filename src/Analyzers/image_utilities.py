@@ -62,7 +62,7 @@ class ImageAnalyzer:
 
         #For each pixel, if the pixel value is smaller than a value (second argument: 50) 
         #it is set to 0 (white), if not the pixel is set to a maximum value (third argument) (black)
-        ret, threshed_img = cv2.threshold(np.array(difference, dtype=np.uint8), 30, 255, cv2.THRESH_BINARY)
+        ret, threshed_img = cv2.threshold(np.array(difference, dtype=np.uint8), 50, 255, cv2.THRESH_BINARY)
 
         #We obtain the contours of the image
         contours, _ = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
