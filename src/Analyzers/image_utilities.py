@@ -12,9 +12,15 @@ class ImageAnalyzer:
     """
     This class will represent an Image Analizer with multiple tools for working with images.
     """
-    def __init__(self):
+    def __init__(self, limit):
         self.mouse_click_count = 0
         self.masks = []
+        
+        if(limit != None):
+            self.limit = limit
+        else:
+            self.limit = 50
+
     
     def saveImage(self, image, name):
         """
