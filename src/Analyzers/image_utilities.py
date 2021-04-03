@@ -7,6 +7,7 @@
 from cv2 import cv2
 import numpy as np
 import os.path
+import math
 
 class ImageAnalyzer:
     """
@@ -73,16 +74,19 @@ class ImageAnalyzer:
         contours, _ = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         
         impact_count = 0
+        
+        moon_center_x, moon_center_y, ellipse = self.moonEnclosingCircle(frame1)
+        if(ellipse != None):
+            cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
         #for each contour finded we draw a rectangle and we save the image
         for c in contours:
             x, y, w, h = cv2.boundingRect(c)
-
-            moon_center_x, moon_center_y, ellipse = self.moonEnclosingCircle(frame1)
             if(ellipse != None):
-                cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
-
-            cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
-
+                if(self.inside_moon(ellipse, x, y, frame1)):
+                    cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
+                    cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
+                else:
+                    cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
             #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
             impact_count = impact_count + 1
 
@@ -220,7 +224,7 @@ class ImageAnalyzer:
 
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
 
-    def inside_moon(self, ellipse, point_x,point_y):
+    def inside_moon(self, ellipse, point_x,point_y, frame):
         axis1 = ellipse[1][0]
         axis2 = ellipse[1][1]
 
@@ -234,7 +238,9 @@ class ImageAnalyzer:
             minor_axis = axis1
             mayor_axis = axis2
 
-        x = ( ( point_x - centerX ) / pow(mayor_axis) ) + ( ( point_y - centerY ) / pow(minor_axis) ) 
+        angle = math.radians(ellipse[2])
+        
+        x = (pow((math.cos(angle)*(point_x - centerX) + math.sin(angle)*(point_y - centerY)), 2) / pow(axis1/2,2)) + (pow((math.sin(angle)*(point_x - centerX) - math.cos(angle)*(point_y - centerY)), 2) / pow(axis2/2,2))
 
         if(x <= 1):
             return True
