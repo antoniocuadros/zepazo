@@ -36,7 +36,10 @@ class VideoAnalyzer:
             raise Exception("Video could not be found on this path")
 
         # -> Object to work with images
-        self.imageAnalizer = ImageAnalyzer(args.detectionlimit)
+        if(args.detectionlimit) != None:
+            self.imageAnalizer = ImageAnalyzer(args.detectionlimit)
+        else:
+            self.imageAnalizer = ImageAnalyzer(None)
 
         # -> Mask points
         self.mask_points = []
