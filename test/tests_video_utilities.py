@@ -22,7 +22,7 @@ from .argument import Argument
 ################################################
 def test_if_object_is_created_ok():
 
-    arguments = Argument('test/example_video/test.mp4', 'False')
+    arguments = Argument('test/example_video/test.mp4', 'False', 50)
 
     video_analizer = VideoAnalyzer(arguments)
 
@@ -37,7 +37,7 @@ def test_if_object_is_created_ok():
 ################################################
 def test_if_object_is_created_with_error():
 
-    arguments = Argument('test/example_video/testttt.mp4', 'False')
+    arguments = Argument('test/example_video/testttt.mp4', 'False', 50)
 
     with pytest.raises(Exception) as e:
         video_analiyzer = VideoAnalyzer(arguments)
@@ -52,7 +52,7 @@ def test_if_object_is_created_with_error():
 #
 ################################################
 def test_if_current_time_ok():
-    arguments = Argument('test/example_video/test.mp4', 'False')
+    arguments = Argument('test/example_video/test.mp4', 'False', 50)
     video_analyzer = VideoAnalyzer(arguments)
     cap = video_analyzer.videoCapture
 
@@ -67,7 +67,7 @@ def test_if_current_time_ok():
 #
 ################################################
 def test_if_video_shows():
-    arguments = Argument('test/example_video/test.mp4', 'True')
+    arguments = Argument('test/example_video/test.mp4', 'True', 50)
     video_analyzer = VideoAnalyzer(arguments)
     cap = video_analyzer.videoCapture
 
@@ -84,7 +84,7 @@ def test_if_video_shows():
 #
 ################################################
 def test_if_stats_are_ok():
-    arguments = Argument('test/example_video/test.mp4', 'False')
+    arguments = Argument('test/example_video/test.mp4', 'False', 50)
     video_analyzer = VideoAnalyzer(arguments)
 
     assert video_analyzer.frames == 29.0

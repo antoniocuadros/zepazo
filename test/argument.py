@@ -6,6 +6,7 @@
 ##############################
 
 class Argument:
-    def __init__(self, videopath, show):
+    def __init__(self, videopath, show, limit):
         self.video = videopath
         self.show = show
+        self.detectionlimit = limit
