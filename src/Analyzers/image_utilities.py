@@ -75,20 +75,20 @@ class ImageAnalyzer:
         
         impact_count = 0
         
-        moon_center_x, moon_center_y, ellipse = self.moonEnclosingCircle(frame1)
-        if(ellipse != None):
-            cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
+
         #for each contour finded we draw a rectangle and we save the image
-        for c in contours:
-            x, y, w, h = cv2.boundingRect(c)
-            if(ellipse != None):
-                if(self.inside_moon(ellipse, x, y, frame1)):
-                    cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
-                    cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
-                else:
-                    cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
-            #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
-            impact_count = impact_count + 1
+        if (len(contours) > 0):
+            moon_center_x, moon_center_y, ellipse = self.moonEnclosingCircle(frame1)
+            for c in contours:
+                x, y, w, h = cv2.boundingRect(c)
+                if(ellipse != None):
+                    if(self.inside_moon(ellipse, x, y, frame1)):
+                        #cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
+                        cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
+                    else:
+                        cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
+                #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
+                impact_count = impact_count + 1
 
         return frame1
 
