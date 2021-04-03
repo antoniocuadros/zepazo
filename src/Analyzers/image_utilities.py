@@ -106,9 +106,12 @@ class ImageAnalyzer:
         grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         #We get the moon thresed with the moon in white and the rest in black
-        #variate 25 
-        _, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), 35, 255, cv2.THRESH_BINARY)
+        #variate 25         
 
+
+        umbral = np.average(grayFrame) - np.std(grayFrame)
+    
+        _, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), umbral, 255, cv2.THRESH_BINARY)
 
         #With the threshed image of the moon we can obtain the moon contour
         moon_contour, _ = cv2.findContours(threshed_moon, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
