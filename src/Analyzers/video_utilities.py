@@ -72,9 +72,6 @@ class VideoAnalyzer:
             #If there are frames left
             if ret == True:    
                 frame = (self.imageAnalizer).getDifferences(frame, frame2)
-                moon_center_x, moon_center_y, ellipse = self.imageAnalizer.moonEnclosingCircle(frame)
-                if(ellipse != None):
-                    cv2.ellipse(frame, ellipse,(0, 255, 255), 2)
 
                 if self.showVideo: 
                     self.showFrame(frame)
