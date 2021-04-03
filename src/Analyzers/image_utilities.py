@@ -83,7 +83,7 @@ class ImageAnalyzer:
                 x, y, w, h = cv2.boundingRect(c)
                 if(ellipse != None):
                     if(self.inside_moon(ellipse, x, y, frame1)):
-                        #cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
+                        cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
                         cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                     else:
                         cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
