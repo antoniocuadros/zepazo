@@ -214,3 +214,24 @@ class ImageAnalyzer:
                       (0,0,255), -1)
 
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
+
+    def inside_moon(self, ellipse, point_x,point_y):
+        axis1 = ellipse[1][0]
+        axis2 = ellipse[1][1]
+
+        centerX = ellipse[0][0]
+        centerY = ellipse[0][1]
+
+        if(axis1 > axis2):
+            minor_axis = axis2
+            mayor_axis = axis1
+        else:
+            minor_axis = axis1
+            mayor_axis = axis2
+
+        x = ( ( point_x - centerX ) / pow(mayor_axis) ) + ( ( point_y - centerY ) / pow(minor_axis) ) 
+
+        if(x <= 1):
+            return True
+        else:
+            return False
