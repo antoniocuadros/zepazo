@@ -36,7 +36,7 @@ class VideoAnalyzer:
             raise Exception("Video could not be found on this path")
 
         # -> Object to work with images
-        if(args.detectionlimit) != None:
+        if(args.detectionlimit != None):
             self.imageAnalizer = ImageAnalyzer(args.detectionlimit)
         else:
             self.imageAnalizer = ImageAnalyzer(None)
