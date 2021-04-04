@@ -37,7 +37,7 @@ class VideoAnalyzer:
 
         # -> Object to work with images
         if(args.detectionlimit != None):
-            self.imageAnalizer = ImageAnalyzer(args.detectionlimit)
+            self.imageAnalizer = ImageAnalyzer(args.detectionlimit, args.circlelimit)
         else:
             self.imageAnalizer = ImageAnalyzer(None)
 

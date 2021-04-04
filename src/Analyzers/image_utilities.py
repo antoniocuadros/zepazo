@@ -13,7 +13,7 @@ class ImageAnalyzer:
     """
     This class will represent an Image Analizer with multiple tools for working with images.
     """
-    def __init__(self, limit):
+    def __init__(self, limit, circlelimit):
         self.mouse_click_count = 0
         self.masks = []
         
@@ -21,6 +21,8 @@ class ImageAnalyzer:
             self.limit = limit
         else:
             self.limit = 50
+
+        self.circlelimit = circlelimit
 
     
     def saveImage(self, image, name):
@@ -108,8 +110,10 @@ class ImageAnalyzer:
         #We get the moon thresed with the moon in white and the rest in black
         #variate 25         
 
-
-        umbral = np.average(grayFrame) - np.std(grayFrame)
+        if(self.circlelimit != None):
+            umbral = self.circlelimit
+        else:
+            umbral = np.average(grayFrame) - np.std(grayFrame)
     
         _, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), umbral, 255, cv2.THRESH_BINARY)
 
