@@ -270,12 +270,26 @@ class ImageAnalyzer:
 
 
     def selectCircleLimitArgument(self, first_frame):
-        cv2.imshow("Use up and down keys to adjust a circle that covers the moon", first_frame)
 
+        umbral, ellipse = self.moonEnclosingCircle(first_frame)
 
+        self.circlelimit = umbral
 
         #Waits for a key event
-        cv2.waitKey(0)
+        key = cv2.waitKey(0)
+        while(key != ord('q')):
+            copy_frame = first_frame.copy()
+            
+            if(key == ord('w')):
+                self.circlelimit = self.circlelimit + 1
+            else:
+                if(key == ord('s')):
+                    self.circlelimit = self.circlelimit - 1
+
+            _, ellipse = self.moonEnclosingCircle(first_frame)
+            cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
+            cv2.imshow("Use 'w' and 's' keys to adjust a circle that covers the moon", copy_frame)
+            key = cv2.waitKey(0)
 
         #Closes the window
         cv2.destroyAllWindows()
