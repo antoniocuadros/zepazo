@@ -39,7 +39,7 @@ class VideoAnalyzer:
         if(args.detectionlimit != None):
             self.imageAnalizer = ImageAnalyzer(args.detectionlimit, args.circlelimit)
         else:
-            self.imageAnalizer = ImageAnalyzer(None)
+            self.imageAnalizer = ImageAnalyzer(None, None)
 
         # -> Mask points
         self.mask_points = []

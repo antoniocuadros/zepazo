@@ -80,7 +80,7 @@ class ImageAnalyzer:
 
         #for each contour finded we draw a rectangle and we save the image
         if (len(contours) > 0):
-            moon_center_x, moon_center_y, ellipse = self.moonEnclosingCircle(frame1)
+            _, ellipse = self.moonEnclosingCircle(frame1)
             for c in contours:
                 x, y, w, h = cv2.boundingRect(c)
                 if(ellipse != None):
@@ -138,7 +138,7 @@ class ImageAnalyzer:
         if(len(c) > 5):
             centerX = ellipse[0][0]
             centerY = ellipse[0][1]
-            return centerX, centerY, ellipse
+            return umbral, ellipse
         else:
             return 0,0, None
 
@@ -272,7 +272,7 @@ class ImageAnalyzer:
     def selectCircleLimitArgument(self, first_frame):
         cv2.imshow("Use up and down keys to adjust a circle that covers the moon", first_frame)
 
-        
+
 
         #Waits for a key event
         cv2.waitKey(0)
