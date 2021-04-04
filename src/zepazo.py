@@ -37,6 +37,10 @@ else:
 if(args.detectionlimit != None):
     if(args.detectionlimit < 1 or args.detectionlimit > 255):
         parser.error("Detection limit (-l) must be between 1 and 255")
+
+if(args.video == None):
+        parser.error("Video (-v) must be defined")
+
 #################
 #
 #  Program
