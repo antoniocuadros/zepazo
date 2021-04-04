@@ -10,3 +10,4 @@ class Argument:
         self.video = videopath
         self.show = show
         self.detectionlimit = limit
+        self.circlelimit = None
