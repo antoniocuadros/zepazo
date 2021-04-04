@@ -267,3 +267,15 @@ class ImageAnalyzer:
             return True
         else:
             return False
+
+
+    def selectCircleLimitArgument(self, first_frame):
+        cv2.imshow("Use up and down keys to adjust a circle that covers the moon", first_frame)
+
+        
+
+        #Waits for a key event
+        cv2.waitKey(0)
+
+        #Closes the window
+        cv2.destroyAllWindows()
