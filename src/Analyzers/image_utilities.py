@@ -232,6 +232,20 @@ class ImageAnalyzer:
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
 
     def inside_moon(self, ellipse, point_x,point_y, frame):
+        """
+        Checks if a point is inside an rotated ellipse
+        :param: ellipse: ellipse object that shapes moon.
+        :type: ellipse: cv2.ellipse.
+
+        :param: point_x: x coordinate of a point.
+        :type: point_x: int.
+
+        :param: point_y: y coordinate of a point.
+        :type: point_y: int.
+
+        :return: Returns true if point is inside the rotated ellipse, otherwise false
+        :rtype: bool.
+        """
         axis1 = ellipse[1][0]
         axis2 = ellipse[1][1]
 
