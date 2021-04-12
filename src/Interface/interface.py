@@ -140,20 +140,19 @@ class ZepazoParams(QMainWindow):
         self.horizontalLayoutInferior.addWidget(self.line)
 
         #Adds ellipse option
-        
+        #Configure vertical layout
         self.layoutEllipse = QtWidgets.QVBoxLayout()
         self.layoutEllipse.setObjectName("layoutEllipse")
+        #configure label
         self.labelELlipse = QtWidgets.QLabel(self.layoutWidget1)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setBold(True)
-        font.setWeight(75)
         self.labelELlipse.setFont(font)
         self.labelELlipse.setAlignment(QtCore.Qt.AlignCenter)
         self.labelELlipse.setObjectName("labelELlipse")
         self.layoutEllipse.addWidget(self.labelELlipse)
+        #Configure horizontal layout
         self.horizontalLayoutEllipse = QtWidgets.QHBoxLayout()
         self.horizontalLayoutEllipse.setObjectName("horizontalLayoutEllipse")
+        #Adds SpinBox
         self.spinboxEllipse = QtWidgets.QSpinBox(self.layoutWidget1)
         self.spinboxEllipse.setEnabled(False)
         self.spinboxEllipse.setMaximumSize(QtCore.QSize(120, 16777215))
@@ -163,6 +162,7 @@ class ZepazoParams(QMainWindow):
         self.spinboxEllipse.setProperty("value", 33)
         self.spinboxEllipse.setObjectName("spinboxEllipse")
         self.horizontalLayoutEllipse.addWidget(self.spinboxEllipse)
+        #Adds checkbox
         self.checkBoxEllipse = QtWidgets.QCheckBox(self.layoutWidget1)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -180,11 +180,14 @@ class ZepazoParams(QMainWindow):
         self.horizontalLayoutEllipse.addWidget(self.checkBoxEllipse)
         self.layoutEllipse.addLayout(self.horizontalLayoutEllipse)
         self.horizontalLayoutInferior.addLayout(self.layoutEllipse)
+        #Adds separator line
         self.line_2 = QtWidgets.QFrame(self.layoutWidget1)
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
         self.horizontalLayoutInferior.addWidget(self.line_2)
+
+        
 def launch_UI():
     app = QApplication(sys.argv)
     win = ZepazoParams()
