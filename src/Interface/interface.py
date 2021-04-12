@@ -107,6 +107,38 @@ class ZepazoParams(QMainWindow):
         self.horizontalLayoutInferior.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayoutInferior.setObjectName("horizontalLayoutInferior")
 
+        #Adds detection Limit 
+        #Configure Font
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu")
+        font.setBold(True)
+        font.setWeight(75)
+        self.layoutDetectionLimit = QtWidgets.QVBoxLayout()
+        self.layoutDetectionLimit.setObjectName("layoutDetectionLimit")
+        #Adds a label
+        self.labelDetectionLimit = QtWidgets.QLabel(self.layoutWidget1)
+        self.labelDetectionLimit.setMinimumSize(QtCore.QSize(120, 0))
+        self.labelDetectionLimit.setFont(font)
+        self.labelDetectionLimit.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelDetectionLimit.setObjectName("labelDetectionLimit")
+        self.layoutDetectionLimit.addWidget(self.labelDetectionLimit)
+        #Adds a SpinBox
+        self.spinBoxDetectionLimit = QtWidgets.QSpinBox(self.layoutWidget1)
+        self.spinBoxDetectionLimit.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.spinBoxDetectionLimit.setAlignment(QtCore.Qt.AlignCenter)
+        self.spinBoxDetectionLimit.setMinimum(1)
+        self.spinBoxDetectionLimit.setMaximum(255)
+        self.spinBoxDetectionLimit.setProperty("value", 50)
+        self.spinBoxDetectionLimit.setObjectName("spinBoxDetectionLimit")
+        self.layoutDetectionLimit.addWidget(self.spinBoxDetectionLimit)
+        self.horizontalLayoutInferior.addLayout(self.layoutDetectionLimit)
+        #Adds Delimiter line
+        self.line = QtWidgets.QFrame(self.layoutWidget1)
+        self.line.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.horizontalLayoutInferior.addWidget(self.line)
+
 
 def launch_UI():
     app = QApplication(sys.argv)
