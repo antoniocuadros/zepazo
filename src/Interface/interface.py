@@ -39,6 +39,11 @@ class ZepazoParams(QMainWindow):
         self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 104, 32))
         self.layoutWidget.setObjectName("layoutWidget")
 
+        #Defines an Horizontal Layout for items in the frame
+        self.layoutSuperior = QtWidgets.QGridLayout(self.layoutWidget)
+        self.layoutSuperior.setContentsMargins(0, 0, 0, 0)
+        self.layoutSuperior.setObjectName("layoutSuperior")
+
         
 
 def launch_UI():
