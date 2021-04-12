@@ -7,6 +7,7 @@ class ZepazoParams(QMainWindow):
         super(ZepazoParams, self).__init__()
         self.setObjectName("ZepazoWindow")
         self.resize(1052, 765)
+        self.setWindowTitle("Zepazo Params")
 
 
 def launch_UI():
