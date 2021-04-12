@@ -300,8 +300,26 @@ class ZepazoParams(QMainWindow):
         self.menubar.addAction(self.menuVideo.menuAction())
         self.menubar.addAction(self.menuParameters.menuAction())
 
-        self.addTexts(self)
+        self.addTexts()
         QtCore.QMetaObject.connectSlotsByName(self)
+
+    def addTexts(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.button_visualize_all.setToolTip(_translate("ZepazoWindow", "Preview Params"))
+        self.button_reset_all.setToolTip(_translate("ZepazoWindow", "Reset Params"))
+        self.button_play.setToolTip(_translate("ZepazoWindow", "Play a sample"))
+        self.labelDetectionLimit.setText(_translate("ZepazoWindow", "Detection Limit"))
+        self.labelELlipse.setText(_translate("ZepazoWindow", "Ellipse"))
+        self.checkBoxEllipse.setText(_translate("ZepazoWindow", "Auto"))
+        self.labelDilate.setText(_translate("ZepazoWindow", "Dilate"))
+        self.labelMasks.setText(_translate("ZepazoWindow", "Masks"))
+        self.buttonAddMask.setToolTip(_translate("ZepazoWindow", "Add Mask"))
+        self.buttonResetMask.setToolTip(_translate("ZepazoWindow", "Reset all Masks"))
+        self.menuVideo.setTitle(_translate("ZepazoWindow", "Video"))
+        self.menuParameters.setTitle(_translate("ZepazoWindow", "Parameters"))
+        self.actionLoad_Video.setText(_translate("ZepazoWindow", "Open file"))
+        self.actionOpen_file.setText(_translate("ZepazoWindow", "Open file"))
+        self.actionSave_file.setText(_translate("ZepazoWindow", "Save file"))
 
 def launch_UI():
     app = QApplication(sys.argv)
