@@ -1,9 +1,19 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
+from PyQt5.QtGui import QImage
+
 import sys
 
 class ZepazoParams(QMainWindow):
     def __init__(self):
+        #Parameters
+        self.detectionLimit = 50
+        self.ellipse = "auto"
+        self.dilate = "disabled"
+        self.masks = []
+        self.videoPath = None
+
+        #Init main window
         super(ZepazoParams, self).__init__()
         self.setObjectName("ZepazoWindow")
         self.resize(1052, 765)
