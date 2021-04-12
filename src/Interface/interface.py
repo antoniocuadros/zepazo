@@ -9,6 +9,17 @@ class ZepazoParams(QMainWindow):
         self.resize(1052, 765)
         self.setWindowTitle("Zepazo Params")
 
+    def setupUI(self):
+        self.setUpCentralWidget()
+
+    """
+    This centralWidget contains all elements in the main window in a Grid Layout
+    """
+    def setUpCentralWidget(self):
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+
 
 def launch_UI():
     app = QApplication(sys.argv)
