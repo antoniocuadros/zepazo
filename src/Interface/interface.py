@@ -20,8 +20,8 @@ class ZepazoParams(QMainWindow):
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-
-        
+        self.layoutVerticalTresPaneles = QtWidgets.QVBoxLayout()
+        self.layoutVerticalTresPaneles.setObjectName("layoutVerticalTresPaneles")
 
 
 def launch_UI():
