@@ -11,6 +11,7 @@ class ZepazoParams(QMainWindow):
 
     def setupUI(self):
         self.setUpCentralWidget()
+        self.setSuperiorFrame()
 
     """
     This centralWidget contains all elements in the main window in a Grid Layout
@@ -23,6 +24,14 @@ class ZepazoParams(QMainWindow):
         self.layoutVerticalTresPaneles = QtWidgets.QVBoxLayout()
         self.layoutVerticalTresPaneles.setObjectName("layoutVerticalTresPaneles")
 
+
+    def setSuperiorFrame(self):
+        self.frame_superior = QtWidgets.QFrame(self.centralwidget)
+        self.frame_superior.setMinimumSize(QtCore.QSize(800, 50))
+        self.frame_superior.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frame_superior.setFrameShape(QtWidgets.QFrame.Panel)
+        self.frame_superior.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_superior.setObjectName("frame_superior")
 
 def launch_UI():
     app = QApplication(sys.argv)
