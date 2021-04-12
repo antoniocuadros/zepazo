@@ -1,7 +1,9 @@
 from src.Analyzers.video_utilities import VideoAnalyzer
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
-from PyQt5.QtGui import QImage
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLabel, QSizePolicy
+from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtCore import Qt
+from cv2 import cv2
 
 import sys
 
@@ -13,7 +15,6 @@ class ZepazoParams(QMainWindow):
         self.dilate = "disabled"
         self.masks = []
         self.videoPath = None
-        #self.videoAnalyzer = VideoAnalyzer(self.videoPath, False, self.detectionLimit, self.ellipse)
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -23,9 +24,21 @@ class ZepazoParams(QMainWindow):
         self.setupUI()
 
     def loadVideo(self):
-        self.videoPath = QFileDialog.getOpenFileName()
-
+        self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
+        self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
+        first_frame = self.videoAnalyzer.getInitialFrame()
         
+        self.showFrame(first_frame)
+
+
+    def showFrame(self, first_frame):
+        first_frame_qt = cv2.cvtColor(first_frame, cv2.COLOR_BGR2RGB)
+        height, width, ch = first_frame_qt.shape
+        bytes_lines = ch * width
+        qt_image = QtGui.QImage(first_frame_qt.data, width,height, bytes_lines, QtGui.QImage.Format_RGB888)
+        p = qt_image.scaled(width/1.4, height/1.4, Qt.KeepAspectRatio)
+        self.centralPanel.setPixmap(QPixmap.fromImage(p))
+        self.centralPanel.setScaledContents(True)
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -105,7 +118,9 @@ class ZepazoParams(QMainWindow):
         self.layoutVerticalTresPaneles.addWidget(self.frame_superior)
 
     def setCentralContent(self):
-        self.centralPanel = QtWidgets.QGraphicsView(self.centralwidget)
+        self.centralPanel = QLabel(self)
+        self.centralPanel.setAlignment(Qt.AlignCenter)
+        self.centralPanel.setStyleSheet("QLabel {background-color: black;}")
         self.centralPanel.setObjectName("centralPanel")
         self.layoutVerticalTresPaneles.addWidget(self.centralPanel)
 
