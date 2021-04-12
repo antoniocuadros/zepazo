@@ -187,6 +187,51 @@ class ZepazoParams(QMainWindow):
         self.line_2.setObjectName("line_2")
         self.horizontalLayoutInferior.addWidget(self.line_2)
 
+        #Masks
+        #Sets vertical layout
+        self.layoutDilate = QtWidgets.QVBoxLayout()
+        self.layoutDilate.setObjectName("layoutDilate")
+        #Sets label
+        self.labelDilate = QtWidgets.QLabel(self.layoutWidget1)
+        self.labelDilate.setFont(font)
+        self.labelDilate.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelDilate.setObjectName("labelDilate")
+        self.layoutDilate.addWidget(self.labelDilate)
+        #Horizontal layout
+        self.horizontalLayoutDilate = QtWidgets.QHBoxLayout()
+        self.horizontalLayoutDilate.setObjectName("horizontalLayoutDilate")
+        self.checkBoxDilate = QtWidgets.QCheckBox(self.layoutWidget1)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.checkBoxDilate.sizePolicy().hasHeightForWidth())
+        #Checkbox
+        self.checkBoxDilate.setSizePolicy(sizePolicy)
+        self.checkBoxDilate.setMinimumSize(QtCore.QSize(30, 30))
+        self.checkBoxDilate.setMaximumSize(QtCore.QSize(30, 30))
+        self.checkBoxDilate.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.checkBoxDilate.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.checkBoxDilate.setStyleSheet("QCheckBox::indicator{width:20px; height:20px};")
+        self.checkBoxDilate.setText("")
+        self.checkBoxDilate.setIconSize(QtCore.QSize(30, 30))
+        self.checkBoxDilate.setObjectName("checkBoxDilate")
+        self.horizontalLayoutDilate.addWidget(self.checkBoxDilate)
+        #SpinBox
+        self.spinBoxDilate = QtWidgets.QSpinBox(self.layoutWidget1)
+        self.spinBoxDilate.setEnabled(False)
+        self.spinBoxDilate.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.spinBoxDilate.setAlignment(QtCore.Qt.AlignCenter)
+        self.spinBoxDilate.setObjectName("spinBoxDilate")
+        self.horizontalLayoutDilate.addWidget(self.spinBoxDilate)
+        self.layoutDilate.addLayout(self.horizontalLayoutDilate)
+        self.horizontalLayoutInferior.addLayout(self.layoutDilate)
+        #Separator Line
+        self.line_3 = QtWidgets.QFrame(self.layoutWidget1)
+        self.line_3.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.horizontalLayoutInferior.addWidget(self.line_3)
+
         
 def launch_UI():
     app = QApplication(sys.argv)
