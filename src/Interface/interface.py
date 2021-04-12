@@ -26,12 +26,20 @@ class ZepazoParams(QMainWindow):
 
 
     def setSuperiorFrame(self):
+        #Creates a frame
         self.frame_superior = QtWidgets.QFrame(self.centralwidget)
         self.frame_superior.setMinimumSize(QtCore.QSize(800, 50))
         self.frame_superior.setMaximumSize(QtCore.QSize(16777215, 50))
         self.frame_superior.setFrameShape(QtWidgets.QFrame.Panel)
         self.frame_superior.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_superior.setObjectName("frame_superior")
+
+        #Defines top frame's layout
+        self.layoutWidget = QtWidgets.QWidget(self.frame_superior)
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 104, 32))
+        self.layoutWidget.setObjectName("layoutWidget")
+
+        
 
 def launch_UI():
     app = QApplication(sys.argv)
