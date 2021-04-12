@@ -8,12 +8,14 @@ class ZepazoParams(QMainWindow):
         self.setObjectName("ZepazoWindow")
         self.resize(1052, 765)
         self.setWindowTitle("Zepazo Params")
+        self.setupUI()
 
     def setupUI(self):
         self.setUpCentralWidget()
         self.setSuperiorFrame()
         self.setCentralContent()
         self.setInferiorFrame()
+        self.addMenu()
 
     """
     This centralWidget contains all elements in the main window in a Grid Layout
@@ -277,7 +279,29 @@ class ZepazoParams(QMainWindow):
         self.setCentralWidget(self.centralwidget)
 
 
+    def addMenu(self):
+        self.menubar = QtWidgets.QMenuBar(self)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1052, 22))
+        self.menubar.setObjectName("menubar")
+        self.menuVideo = QtWidgets.QMenu(self.menubar)
+        self.menuVideo.setObjectName("menuVideo")
+        self.menuParameters = QtWidgets.QMenu(self.menubar)
+        self.menuParameters.setObjectName("menuParameters")
+        self.setMenuBar(self.menubar)
+        self.actionLoad_Video = QtWidgets.QAction(self)
+        self.actionLoad_Video.setObjectName("actionLoad_Video")
+        self.actionOpen_file = QtWidgets.QAction(self)
+        self.actionOpen_file.setObjectName("actionOpen_file")
+        self.actionSave_file = QtWidgets.QAction(self)
+        self.actionSave_file.setObjectName("actionSave_file")
+        self.menuVideo.addAction(self.actionLoad_Video)
+        self.menuParameters.addAction(self.actionOpen_file)
+        self.menuParameters.addAction(self.actionSave_file)
+        self.menubar.addAction(self.menuVideo.menuAction())
+        self.menubar.addAction(self.menuParameters.menuAction())
 
+        self.addTexts(self)
+        QtCore.QMetaObject.connectSlotsByName(self)
 
 def launch_UI():
     app = QApplication(sys.argv)
