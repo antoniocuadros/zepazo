@@ -21,10 +21,7 @@ from .argument import Argument
 #
 ################################################
 def test_if_object_is_created_ok():
-
-    arguments = Argument('test/example_video/test.mp4', 'False', 50)
-
-    video_analizer = VideoAnalyzer(arguments)
+    video_analizer = VideoAnalyzer('test/example_video/test.mp4', 'False', None, None)
 
     assert video_analizer.videoPath == 'test/example_video/test.mp4'  
 
@@ -36,11 +33,8 @@ def test_if_object_is_created_ok():
 #
 ################################################
 def test_if_object_is_created_with_error():
-
-    arguments = Argument('test/example_video/testttt.mp4', 'False', 50)
-
     with pytest.raises(Exception) as e:
-        video_analiyzer = VideoAnalyzer(arguments)
+        video_analiyzer = VideoAnalyzer('test/example_video/test5.mp4', 'False', None, None)
 
     assert str(e.value) == "Video could not be found on this path"
 
@@ -52,8 +46,7 @@ def test_if_object_is_created_with_error():
 #
 ################################################
 def test_if_current_time_ok():
-    arguments = Argument('test/example_video/test.mp4', 'False', 50)
-    video_analyzer = VideoAnalyzer(arguments)
+    video_analyzer = VideoAnalyzer('test/example_video/test.mp4', 'False', None, None)
     cap = video_analyzer.videoCapture
 
     assert video_analyzer.getCurrentTime(cap) == '0:00:00'
@@ -67,8 +60,7 @@ def test_if_current_time_ok():
 #
 ################################################
 def test_if_video_shows():
-    arguments = Argument('test/example_video/test.mp4', 'True', 50)
-    video_analyzer = VideoAnalyzer(arguments)
+    video_analyzer = VideoAnalyzer('test/example_video/test.mp4', 'True', None, None)
     cap = video_analyzer.videoCapture
 
     ret, frame = cap.read()
@@ -84,8 +76,7 @@ def test_if_video_shows():
 #
 ################################################
 def test_if_stats_are_ok():
-    arguments = Argument('test/example_video/test.mp4', 'False', 50)
-    video_analyzer = VideoAnalyzer(arguments)
+    video_analyzer = VideoAnalyzer('test/example_video/test.mp4', 'False', None, None)
 
     assert video_analyzer.frames == 29.0
     assert video_analyzer.fps == 23

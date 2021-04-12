@@ -20,6 +20,10 @@ class ZepazoParams(QMainWindow):
         self.setWindowTitle("Zepazo Params")
         self.setupUI()
 
+    def loadVideo(self):
+        self.videoPath = QFileDialog.getOpenFileName()
+        
+
     def setupUI(self):
         self.setUpCentralWidget()
         self.setSuperiorFrame()
@@ -312,6 +316,8 @@ class ZepazoParams(QMainWindow):
 
         self.addTexts()
         QtCore.QMetaObject.connectSlotsByName(self)
+
+        self.actionLoad_Video.triggered.connect(lambda:self.loadVideo())
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
