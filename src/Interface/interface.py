@@ -83,6 +83,12 @@ class ZepazoParams(QMainWindow):
         #Adds superior frame to general layout
         self.layoutVerticalTresPaneles.addWidget(self.frame_superior)
 
+    def setCentralContent(self):
+        self.centralPanel = QtWidgets.QGraphicsView(self.centralwidget)
+        self.centralPanel.setObjectName("centralPanel")
+        self.layoutVerticalTresPaneles.addWidget(self.centralPanel)
+
+
 def launch_UI():
     app = QApplication(sys.argv)
     win = ZepazoParams()
