@@ -1,3 +1,4 @@
+from src.Analyzers.video_utilities import VideoAnalyzer
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 from PyQt5.QtGui import QImage
@@ -12,6 +13,7 @@ class ZepazoParams(QMainWindow):
         self.dilate = "disabled"
         self.masks = []
         self.videoPath = None
+        #self.videoAnalyzer = VideoAnalyzer(self.videoPath, False, self.detectionLimit, self.ellipse)
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -22,6 +24,7 @@ class ZepazoParams(QMainWindow):
 
     def loadVideo(self):
         self.videoPath = QFileDialog.getOpenFileName()
+
         
 
     def setupUI(self):
@@ -68,7 +71,7 @@ class ZepazoParams(QMainWindow):
         self.button_visualize_all.setMaximumSize(QtCore.QSize(30, 30))
         self.button_visualize_all.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("Interface/icons/visualize_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("src/Interface/icons/visualize_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.button_visualize_all.setIcon(icon)
         self.button_visualize_all.setIconSize(QtCore.QSize(25, 25))
         self.button_visualize_all.setObjectName("button_visualize_all")
@@ -80,7 +83,7 @@ class ZepazoParams(QMainWindow):
         self.button_reset_all.setMaximumSize(QtCore.QSize(30, 30))
         self.button_reset_all.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("Interface/icons/reset_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("src/Interface/icons/reset_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.button_reset_all.setIcon(icon1)
         self.button_reset_all.setIconSize(QtCore.QSize(18, 18))
         self.button_reset_all.setObjectName("button_reset_all")
@@ -92,7 +95,7 @@ class ZepazoParams(QMainWindow):
         self.button_play.setMaximumSize(QtCore.QSize(30, 30))
         self.button_play.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("Interface/icons/play_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("src/Interface/icons/play_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.button_play.setIcon(icon2)
         self.button_play.setIconSize(QtCore.QSize(25, 25))
         self.button_play.setObjectName("button_play")
@@ -270,7 +273,7 @@ class ZepazoParams(QMainWindow):
         self.buttonAddMask.setStyleSheet("QPushButton { padding: 10px; }")
         self.buttonAddMask.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("Interface/icons/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("src/Interface/icons/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.buttonAddMask.setIcon(icon3)
         self.buttonAddMask.setObjectName("buttonAddMask")
         self.horizontalLayoutMasks.addWidget(self.buttonAddMask)
@@ -280,7 +283,7 @@ class ZepazoParams(QMainWindow):
         self.buttonResetMask.setMaximumSize(QtCore.QSize(25, 25))
         self.buttonResetMask.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("Interface/icons/reset_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("src/Interface/icons/reset_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.buttonResetMask.setIcon(icon1)
         self.buttonResetMask.setObjectName("buttonResetMask")
         self.horizontalLayoutMasks.addWidget(self.buttonResetMask)
