@@ -187,7 +187,7 @@ class ZepazoParams(QMainWindow):
         self.line_2.setObjectName("line_2")
         self.horizontalLayoutInferior.addWidget(self.line_2)
 
-        #Masks
+        #Dilate
         #Sets vertical layout
         self.layoutDilate = QtWidgets.QVBoxLayout()
         self.layoutDilate.setObjectName("layoutDilate")
@@ -232,7 +232,53 @@ class ZepazoParams(QMainWindow):
         self.line_3.setObjectName("line_3")
         self.horizontalLayoutInferior.addWidget(self.line_3)
 
+
+        #Masks
+        #Vertical layout
+        self.layoutMasks = QtWidgets.QVBoxLayout()
+        self.layoutMasks.setObjectName("layoutMasks")
+        #label
+        self.labelMasks = QtWidgets.QLabel(self.layoutWidget1)
+        self.labelMasks.setFont(font)
+        self.labelMasks.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelMasks.setObjectName("labelMasks")
+        self.layoutMasks.addWidget(self.labelMasks)
+        #Horizontal layout
+        self.horizontalLayoutMasks = QtWidgets.QHBoxLayout()
+        self.horizontalLayoutMasks.setContentsMargins(-1, -1, -1, 3)
+        self.horizontalLayoutMasks.setObjectName("horizontalLayoutMasks")
+        #Button add mask
+        self.buttonAddMask = QtWidgets.QPushButton(self.layoutWidget1)
+        self.buttonAddMask.setMinimumSize(QtCore.QSize(25, 25))
+        self.buttonAddMask.setMaximumSize(QtCore.QSize(25, 25))
+        self.buttonAddMask.setStyleSheet("QPushButton { padding: 10px; }")
+        self.buttonAddMask.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("/icons/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.buttonAddMask.setIcon(icon3)
+        self.buttonAddMask.setObjectName("buttonAddMask")
+        self.horizontalLayoutMasks.addWidget(self.buttonAddMask)
+        #Button reset mask
+        self.buttonResetMask = QtWidgets.QPushButton(self.layoutWidget1)
+        self.buttonResetMask.setMinimumSize(QtCore.QSize(25, 25))
+        self.buttonResetMask.setMaximumSize(QtCore.QSize(25, 25))
+        self.buttonResetMask.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("icons/reset_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.buttonResetMask.setIcon(icon1)
+        self.buttonResetMask.setObjectName("buttonResetMask")
+        self.horizontalLayoutMasks.addWidget(self.buttonResetMask)
+        self.layoutMasks.addLayout(self.horizontalLayoutMasks)
+        self.horizontalLayoutInferior.addLayout(self.layoutMasks)
         
+        #Adding frame inferior to layoutVerticalTresPaneles
+        self.layoutVerticalTresPaneles.addWidget(self.frame_inferior)
+        self.gridLayout.addLayout(self.layoutVerticalTresPaneles, 0, 0, 1, 1)
+        self.setCentralWidget(self.centralwidget)
+
+
+
+
 def launch_UI():
     app = QApplication(sys.argv)
     win = ZepazoParams()
