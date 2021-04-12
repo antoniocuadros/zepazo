@@ -36,8 +36,8 @@ class ZepazoParams(QMainWindow):
         height, width, ch = first_frame_qt.shape
         bytes_lines = ch * width
         qt_image = QtGui.QImage(first_frame_qt.data, width,height, bytes_lines, QtGui.QImage.Format_RGB888)
-        p = qt_image.scaled(width/1.4, height/1.4, Qt.KeepAspectRatio)
-        self.centralPanel.setPixmap(QPixmap.fromImage(p))
+        qt_image_scaled = qt_image.scaled(width/1.4, height/1.4, Qt.KeepAspectRatio)
+        self.centralPanel.setPixmap(QPixmap.fromImage(qt_image_scaled))
         self.centralPanel.setScaledContents(True)
 
     def setupUI(self):
