@@ -12,6 +12,8 @@ class ZepazoParams(QMainWindow):
     def setupUI(self):
         self.setUpCentralWidget()
         self.setSuperiorFrame()
+        self.setCentralContent()
+        self.setInferiorFrame()
 
     """
     This centralWidget contains all elements in the main window in a Grid Layout
@@ -87,6 +89,23 @@ class ZepazoParams(QMainWindow):
         self.centralPanel = QtWidgets.QGraphicsView(self.centralwidget)
         self.centralPanel.setObjectName("centralPanel")
         self.layoutVerticalTresPaneles.addWidget(self.centralPanel)
+
+    def setInferiorFrame(self):
+        #Adds Inferior Frame
+        self.frame_inferior = QtWidgets.QFrame(self.centralwidget)
+        self.frame_inferior.setMinimumSize(QtCore.QSize(800, 80))
+        self.frame_inferior.setMaximumSize(QtCore.QSize(16777215, 80))
+        self.frame_inferior.setFrameShape(QtWidgets.QFrame.Panel)
+        self.frame_inferior.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_inferior.setObjectName("frame_inferior")
+
+        #Adds Inferior's Frame Layout
+        self.layoutWidget1 = QtWidgets.QWidget(self.frame_inferior)
+        self.layoutWidget1.setGeometry(QtCore.QRect(21, 10, 449, 59))
+        self.layoutWidget1.setObjectName("layoutWidget1")
+        self.horizontalLayoutInferior = QtWidgets.QHBoxLayout(self.layoutWidget1)
+        self.horizontalLayoutInferior.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayoutInferior.setObjectName("horizontalLayoutInferior")
 
 
 def launch_UI():
