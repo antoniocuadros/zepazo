@@ -56,6 +56,17 @@ class ZepazoParams(QMainWindow):
         self.button_visualize_all.setObjectName("button_visualize_all")
         self.layoutSuperior.addWidget(self.button_visualize_all, 0, 0, 1, 1)
 
+        #Adds a button to reset all parameters
+        self.button_reset_all = QtWidgets.QPushButton(self.layoutWidget)
+        self.button_reset_all.setMinimumSize(QtCore.QSize(30, 30))
+        self.button_reset_all.setMaximumSize(QtCore.QSize(30, 30))
+        self.button_reset_all.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("icons/reset_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.button_reset_all.setIcon(icon1)
+        self.button_reset_all.setIconSize(QtCore.QSize(18, 18))
+        self.button_reset_all.setObjectName("button_reset_all")
+        self.layoutSuperior.addWidget(self.button_reset_all, 0, 1, 1, 1)
 
 
 def launch_UI():
