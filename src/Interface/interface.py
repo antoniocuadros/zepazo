@@ -44,7 +44,17 @@ class ZepazoParams(QMainWindow):
         self.layoutSuperior.setContentsMargins(0, 0, 0, 0)
         self.layoutSuperior.setObjectName("layoutSuperior")
 
-        
+        #Adds a button to preview parameters
+        self.button_visualize_all = QtWidgets.QPushButton(self.layoutWidget)
+        self.button_visualize_all.setMinimumSize(QtCore.QSize(30, 30))
+        self.button_visualize_all.setMaximumSize(QtCore.QSize(30, 30))
+        self.button_visualize_all.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("icons/visualize_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.button_visualize_all.setIcon(icon)
+        self.button_visualize_all.setIconSize(QtCore.QSize(25, 25))
+        self.button_visualize_all.setObjectName("button_visualize_all")
+        self.layoutSuperior.addWidget(self.button_visualize_all, 0, 0, 1, 1)
 
 def launch_UI():
     app = QApplication(sys.argv)
