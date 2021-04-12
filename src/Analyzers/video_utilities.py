@@ -19,7 +19,7 @@ class VideoAnalyzer:
 
     #Constructor
     #Gets the video path
-    def __init__(self, args):
+    def __init__(self, video, show, detectionlimit, circlelimit):
         """
         Inits VideoAnalyzer with the data of the selected video.
 
@@ -28,16 +28,16 @@ class VideoAnalyzer:
 
         # -> VideoPath: video to analize
         # -> VideoCaputre: cv2 object to analize the video
-        self.videoPath = args.video
+        self.videoPath = video
         self.videoCapture = cv2.VideoCapture(self.videoPath)
-        self.showVideo = args.show
+        self.showVideo = show
 
         if not (self.videoCapture).isOpened():
             raise Exception("Video could not be found on this path")
 
         # -> Object to work with images
-        if(args.detectionlimit != None):
-            self.imageAnalizer = ImageAnalyzer(args.detectionlimit, args.circlelimit)
+        if(detectionlimit != None):
+            self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit)
         else:
             self.imageAnalizer = ImageAnalyzer(None, None)
 
