@@ -67,7 +67,21 @@ class ZepazoParams(QMainWindow):
         self.button_reset_all.setIconSize(QtCore.QSize(18, 18))
         self.button_reset_all.setObjectName("button_reset_all")
         self.layoutSuperior.addWidget(self.button_reset_all, 0, 1, 1, 1)
+
+        #Adds a button to preview a video sample
+        self.button_play = QtWidgets.QPushButton(self.layoutWidget)
+        self.button_play.setMinimumSize(QtCore.QSize(30, 30))
+        self.button_play.setMaximumSize(QtCore.QSize(30, 30))
+        self.button_play.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("play_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.button_play.setIcon(icon2)
+        self.button_play.setIconSize(QtCore.QSize(25, 25))
+        self.button_play.setObjectName("button_play")
+        self.layoutSuperior.addWidget(self.button_play, 0, 2, 1, 1)
         
+        #Adds superior frame to general layout
+        self.layoutVerticalTresPaneles.addWidget(self.frame_superior)
 
 def launch_UI():
     app = QApplication(sys.argv)
