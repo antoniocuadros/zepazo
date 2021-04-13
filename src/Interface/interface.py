@@ -36,9 +36,9 @@ class ZepazoParams(QMainWindow):
         height, width, ch = first_frame_qt.shape
         bytes_lines = ch * width
         qt_image = QtGui.QImage(first_frame_qt.data, width,height, bytes_lines, QtGui.QImage.Format_RGB888)
-        qt_image_scaled = qt_image.scaled(int(width/1.4), int(height/1.4), Qt.KeepAspectRatio)
+        qt_image_scaled = qt_image.scaled(int(width), int(height), Qt.KeepAspectRatio)
         self.centralPanel.setPixmap(QPixmap.fromImage(qt_image_scaled))
-        self.centralPanel.setScaledContents(True)
+        self.centralPanel.setScaledContents(False)
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -118,11 +118,23 @@ class ZepazoParams(QMainWindow):
         self.layoutVerticalTresPaneles.addWidget(self.frame_superior)
 
     def setCentralContent(self):
-        self.centralPanel = QLabel(self)
-        self.centralPanel.setAlignment(Qt.AlignCenter)
-        self.centralPanel.setStyleSheet("QLabel {background-color: black;}")
-        self.centralPanel.setObjectName("centralPanel")
-        self.layoutVerticalTresPaneles.addWidget(self.centralPanel)
+
+        self.scrollAreaImage = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollAreaImage.setWidgetResizable(True)
+        self.scrollAreaImage.setObjectName("scrollAreaImage")
+        self.scrollAreaWidgetContentsImage = QtWidgets.QWidget()
+        self.scrollAreaWidgetContentsImage.setGeometry(QtCore.QRect(0, 0, 1030, 579))
+        self.scrollAreaWidgetContentsImage.setObjectName("scrollAreaWidgetContentsImage")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.scrollAreaWidgetContentsImage)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.centralPanel = QtWidgets.QLabel(self.scrollAreaWidgetContentsImage)
+        self.centralPanel.setObjectName("labelImage")
+        self.gridLayout_2.addWidget(self.centralPanel, 0, 0, 1, 1)
+        self.scrollAreaImage.setWidget(self.scrollAreaWidgetContentsImage)
+        self.layoutVerticalTresPaneles.addWidget(self.scrollAreaImage)
+
+        
+        #self.layoutVerticalTresPaneles.addWidget(self.centralPanel)
 
     def setInferiorFrame(self):
         #Adds Inferior Frame
