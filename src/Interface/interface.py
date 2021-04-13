@@ -12,7 +12,7 @@ class ZepazoParams(QMainWindow):
         #Parameters
         self.detectionLimit = 50
         self.ellipse = None
-        self.dilate = "disabled"
+        self.dilate = None
         self.masks = []
         self.videoPath = None
         self.first_frame = None
