@@ -168,6 +168,7 @@ class VideoAnalyzer:
             for i in range(len(points)//2):
                 self.mask_points.append( [ points[2*i], points[2*i+1] ] )
 
-    def selectAndApplyCircleLimitArgment(self):
-        frame = self.getInitialFrame()
-        self.imageAnalizer.selectCircleLimitArgument(frame)
+    def selectAndApplyCircleLimitArgment(self, circlelimit, first_frame):
+        frame = first_frame
+        frame_result = self.imageAnalizer.selectCircleLimitArgument(circlelimit, frame)
+        return frame_result

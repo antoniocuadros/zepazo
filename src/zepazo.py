@@ -60,8 +60,8 @@ else:
             video_analizer.selectAndApplyMask(len(args.coordinatesmask), args.coordinatesmask)
 
 # -> Interface to adjust circlelimit argument
-if(args.helpcirclelimit != None and args.helpcirclelimit == True):
-    video_analizer.selectAndApplyCircleLimitArgment()
+#if(args.helpcirclelimit != None and args.helpcirclelimit == True):
+#    video_analizer.selectAndApplyCircleLimitArgment()
 
 #Proccessing
 video_analizer.analyze()

@@ -15,6 +15,7 @@ class ZepazoParams(QMainWindow):
         self.dilate = "disabled"
         self.masks = []
         self.videoPath = None
+        self.first_frame = None
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -26,9 +27,9 @@ class ZepazoParams(QMainWindow):
     def loadVideo(self):
         self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
         self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
-        first_frame = self.videoAnalyzer.getInitialFrame()
+        self.first_frame = self.videoAnalyzer.getInitialFrame()
         
-        self.showFrame(first_frame)
+        self.showFrame(self.first_frame)
 
 
     def showFrame(self, first_frame):
@@ -39,6 +40,24 @@ class ZepazoParams(QMainWindow):
         qt_image_scaled = qt_image.scaled(int(width), int(height), Qt.KeepAspectRatio)
         self.centralPanel.setPixmap(QPixmap.fromImage(qt_image_scaled))
         self.centralPanel.setScaledContents(False)
+
+    def adjustEllipse(self):
+        self.ellipse = self.spinboxEllipse.value()
+        print(self.ellipse)
+        if(self.videoPath == None):
+            self.loadVideo()
+        
+        frame = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
+        self.showFrame(frame)
+
+
+    def checkAutoEllipse(self):
+        if self.checkBoxEllipse.isChecked() == True:
+            self.ellipse = "auto"
+            self.spinboxEllipse.setEnabled(False)
+        else:
+            self.ellipse = self.spinboxEllipse.value()
+            self.spinboxEllipse.setEnabled(True)
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -348,6 +367,8 @@ class ZepazoParams(QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self)
 
         self.actionLoad_Video.triggered.connect(lambda:self.loadVideo())
+        self.spinboxEllipse.valueChanged.connect(self.adjustEllipse)
+        self.checkBoxEllipse.stateChanged.connect(self.checkAutoEllipse)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
