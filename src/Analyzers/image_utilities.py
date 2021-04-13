@@ -111,7 +111,7 @@ class ImageAnalyzer:
         #variate 25         
 
         if(self.circlelimit != None):
-            umbral = self.circlelimit
+            umbral = int(self.circlelimit)
         else:
             umbral = np.average(grayFrame) - np.std(grayFrame)
     
@@ -272,12 +272,12 @@ class ImageAnalyzer:
     def selectCircleLimitArgument(self, circlelimit, first_frame):
         copy_frame = first_frame.copy()
         
-        if(circlelimit != "auto"):
-            self.circlelimit = circlelimit
+        if(circlelimit != None):
+            self.circlelimit = int(circlelimit)
         else:
             umbral, ellipse = self.moonEnclosingCircle(copy_frame)
             self.circlelimit = umbral
 
         _, ellipse = self.moonEnclosingCircle(copy_frame)
         cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
-        return copy_frame
+        return copy_frame, self.circlelimit

@@ -170,5 +170,5 @@ class VideoAnalyzer:
 
     def selectAndApplyCircleLimitArgment(self, circlelimit, first_frame):
         frame = first_frame
-        frame_result = self.imageAnalizer.selectCircleLimitArgument(circlelimit, frame)
-        return frame_result
+        frame_result, limit = self.imageAnalizer.selectCircleLimitArgument(circlelimit, frame)
+        return frame_result, limit

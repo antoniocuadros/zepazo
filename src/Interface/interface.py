@@ -11,7 +11,7 @@ class ZepazoParams(QMainWindow):
     def __init__(self):
         #Parameters
         self.detectionLimit = 50
-        self.ellipse = "auto"
+        self.ellipse = None
         self.dilate = "disabled"
         self.masks = []
         self.videoPath = None
@@ -43,18 +43,26 @@ class ZepazoParams(QMainWindow):
 
     def adjustEllipse(self):
         self.ellipse = self.spinboxEllipse.value()
-        print(self.ellipse)
+
         if(self.videoPath == None):
             self.loadVideo()
         
-        frame = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
+        frame, _ = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
         self.showFrame(frame)
 
 
     def checkAutoEllipse(self):
         if self.checkBoxEllipse.isChecked() == True:
-            self.ellipse = "auto"
+            self.ellipse = None
+            
+            if(self.videoPath == None):
+                self.loadVideo()
+            
+            frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
+            self.ellipse = int(value)
+            self.spinboxEllipse.setValue(int(value))
             self.spinboxEllipse.setEnabled(False)
+            self.showFrame(frame)
         else:
             self.ellipse = self.spinboxEllipse.value()
             self.spinboxEllipse.setEnabled(True)
@@ -219,7 +227,7 @@ class ZepazoParams(QMainWindow):
         self.horizontalLayoutEllipse.setObjectName("horizontalLayoutEllipse")
         #Adds SpinBox
         self.spinboxEllipse = QtWidgets.QSpinBox(self.layoutWidget1)
-        self.spinboxEllipse.setEnabled(False)
+        self.spinboxEllipse.setEnabled(True)
         self.spinboxEllipse.setMaximumSize(QtCore.QSize(120, 16777215))
         self.spinboxEllipse.setAlignment(QtCore.Qt.AlignCenter)
         self.spinboxEllipse.setMinimum(1)
@@ -240,7 +248,7 @@ class ZepazoParams(QMainWindow):
         self.checkBoxEllipse.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.checkBoxEllipse.setStyleSheet("QCheckBox::indicator{width:20px; height:20px};")
         self.checkBoxEllipse.setIconSize(QtCore.QSize(30, 30))
-        self.checkBoxEllipse.setChecked(True)
+        self.checkBoxEllipse.setChecked(False)
         self.checkBoxEllipse.setObjectName("checkBoxEllipse")
         self.horizontalLayoutEllipse.addWidget(self.checkBoxEllipse)
         self.layoutEllipse.addLayout(self.horizontalLayoutEllipse)
