@@ -52,6 +52,9 @@ class ZepazoParams(QMainWindow):
 
 
     def checkAutoEllipse(self):
+        if(self.videoPath == None):
+            self.loadVideo()
+
         if self.checkBoxEllipse.isChecked() == True:
             self.ellipse = None
             
@@ -66,6 +69,12 @@ class ZepazoParams(QMainWindow):
         else:
             self.ellipse = self.spinboxEllipse.value()
             self.spinboxEllipse.setEnabled(True)
+
+
+    def clickImage(self, event):
+        x_pos = event.pos().x()
+        y_pos = event.pos().y()
+        
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -377,6 +386,7 @@ class ZepazoParams(QMainWindow):
         self.actionLoad_Video.triggered.connect(lambda:self.loadVideo())
         self.spinboxEllipse.valueChanged.connect(self.adjustEllipse)
         self.checkBoxEllipse.stateChanged.connect(self.checkAutoEllipse)
+        self.centralPanel.mousePressEvent = self.clickImage
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
