@@ -99,6 +99,18 @@ class ZepazoParams(QMainWindow):
         if(self.addingMask == False):
             self.addingMask = True
             
+    def resetParams(self):
+        #Parameters
+        self.detectionLimit = 50
+        self.ellipse = None
+        self.dilate = None
+        self.masks = []
+        self.videoPath = None
+        self.first_frame = None
+        self.addingMask = False
+        self.spinBoxDetectionLimit.value = 50
+        self.spinboxEllipse.value = 33
+        self.checkBoxEllipse.setChecked = False
 
     def setupUI(self):
         self.setUpCentralWidget()
