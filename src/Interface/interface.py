@@ -16,6 +16,7 @@ class ZepazoParams(QMainWindow):
         self.masks = []
         self.videoPath = None
         self.first_frame = None
+        self.addingMask = False
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -72,9 +73,32 @@ class ZepazoParams(QMainWindow):
 
 
     def clickImage(self, event):
-        x_pos = event.pos().x()
-        y_pos = event.pos().y()
+        if(self.addingMask):
+            x_pos = event.pos().x()
+            y_pos = event.pos().y()
+
+            self.masks.append([x_pos,y_pos])
+
+
+            if(len(self.masks) % 2 == 0):
+                self.addingMask = False
+                num_masks = len(self.masks)
+                
+                if(num_masks > 0):
+                    cv2.rectangle(self.first_frame, 
+                            (self.masks[num_masks-2][0],self.masks[num_masks-2][1] ),
+                            (self.masks[num_masks-1][0], self.masks[num_masks-1][1]),
+                            (0,0,255), -1)
+
+            self.showFrame(self.first_frame)
         
+    def addMask(self):
+        if(self.videoPath == None):
+            self.loadVideo()
+            
+        if(self.addingMask == False):
+            self.addingMask = True
+            
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -387,6 +411,7 @@ class ZepazoParams(QMainWindow):
         self.spinboxEllipse.valueChanged.connect(self.adjustEllipse)
         self.checkBoxEllipse.stateChanged.connect(self.checkAutoEllipse)
         self.centralPanel.mousePressEvent = self.clickImage
+        self.buttonAddMask.clicked.connect(self.addMask)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
