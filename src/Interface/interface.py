@@ -121,6 +121,14 @@ class ZepazoParams(QMainWindow):
         self.frame_masks = self.first_frame.copy()
         self.showFrame(self.first_frame)
 
+    def resetMasks(self):
+        if(self.videoPath == None):
+            self.loadVideo()
+            
+        self.frame_masks = self.first_frame.copy()
+        self.masks = []
+        self.showFrame(self.frame_masks)
+
     def setupUI(self):
         self.setUpCentralWidget()
         self.setSuperiorFrame()
