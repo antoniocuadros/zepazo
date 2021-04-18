@@ -142,17 +142,18 @@ class ZepazoParams(QMainWindow):
 
 
     def saveParams(self):
-        json_args = {
-            'detectionlimit':self.detectionLimit,
-            'dilate':self.dilate,
-            'coordinatesmask':self.masks,
-            'circlelimit':self.ellipse
-        }
+        if(self.videoPath != None):
+            json_args = {
+                'detectionlimit':self.detectionLimit,
+                'dilate':self.dilate,
+                'coordinatesmask':self.masks,
+                'circlelimit':self.ellipse
+            }
 
-        path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File","JSON file (*.json)")
-        print(path)
-        with open(path[0], 'w') as json_file:
-            json.dump(json_args, json_file)
+            path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json)")
+            print(path)
+            with open(path[0], 'w') as json_file:
+                json.dump(json_args, json_file)
 
     def setupUI(self):
         self.setUpCentralWidget()
