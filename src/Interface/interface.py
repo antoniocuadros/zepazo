@@ -124,7 +124,7 @@ class ZepazoParams(QMainWindow):
     def resetMasks(self):
         if(self.videoPath == None):
             self.loadVideo()
-            
+
         self.frame_masks = self.first_frame.copy()
         self.masks = []
         self.showFrame(self.frame_masks)
@@ -442,6 +442,7 @@ class ZepazoParams(QMainWindow):
         self.centralPanel.mousePressEvent = self.clickImage
         self.buttonAddMask.clicked.connect(self.addMask)
         self.button_reset_all.clicked.connect(self.resetParams)
+        self.buttonResetMask.clicked.connect(self.resetMasks)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
