@@ -31,8 +31,8 @@ class ZepazoParams(QMainWindow):
         self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
         self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
         self.first_frame = self.videoAnalyzer.getInitialFrame()
-        self.frame_ellipse = self.first_frame
-        self.frame_masks = self.first_frame
+        self.frame_ellipse = self.first_frame.copy()
+        self.frame_masks = self.first_frame.copy()
         
         self.showFrame(self.first_frame)
 
@@ -117,6 +117,8 @@ class ZepazoParams(QMainWindow):
         self.spinboxEllipse.setValue(33)
         self.ellipse = None
         self.checkBoxEllipse.setChecked(False)
+        self.frame_ellipse = self.first_frame.copy()
+        self.frame_masks = self.first_frame.copy()
         self.showFrame(self.first_frame)
 
     def setupUI(self):
