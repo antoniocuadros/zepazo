@@ -17,6 +17,7 @@ class ZepazoParams(QMainWindow):
         self.videoPath = None
         self.first_frame = None
         self.addingMask = False
+        self.frame_ellipse = None
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -29,6 +30,7 @@ class ZepazoParams(QMainWindow):
         self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
         self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
         self.first_frame = self.videoAnalyzer.getInitialFrame()
+        self.frame_ellipse = self.first_frame
         
         self.showFrame(self.first_frame)
 
@@ -49,7 +51,8 @@ class ZepazoParams(QMainWindow):
             self.loadVideo()
         
         frame, _ = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
-        self.showFrame(frame)
+        self.frame_ellipse = frame
+        self.showFrame(self.frame_ellipse)
 
 
     def checkAutoEllipse(self):
