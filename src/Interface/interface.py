@@ -132,6 +132,14 @@ class ZepazoParams(QMainWindow):
         self.masks = []
         self.showFrame(self.frame_masks)
 
+    def showAllParams(self):
+        all_frame = self.frame_ellipse.copy()
+        num_masks = len(self.masks)
+        for i in range(num_masks//2):
+                    cv2.rectangle(all_frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
+        self.showFrame(all_frame)
+
+
     def setupUI(self):
         self.setUpCentralWidget()
         self.setSuperiorFrame()
@@ -446,6 +454,7 @@ class ZepazoParams(QMainWindow):
         self.buttonAddMask.clicked.connect(self.addMask)
         self.button_reset_all.clicked.connect(self.resetParams)
         self.buttonResetMask.clicked.connect(self.resetMasks)
+        self.button_visualize_all.clicked.connect(self.showAllParams)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
