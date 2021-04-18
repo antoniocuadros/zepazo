@@ -28,6 +28,7 @@ class ZepazoParams(QMainWindow):
         self.setupUI()
 
     def loadVideo(self):
+        self.addingMask = False
         self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
         self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
         self.first_frame = self.videoAnalyzer.getInitialFrame()
@@ -47,6 +48,7 @@ class ZepazoParams(QMainWindow):
         self.centralPanel.setScaledContents(False)
 
     def adjustEllipse(self):
+        self.addingMask = False
         self.ellipse = self.spinboxEllipse.value()
 
         if(self.videoPath == None):
@@ -58,6 +60,7 @@ class ZepazoParams(QMainWindow):
 
 
     def checkAutoEllipse(self):
+        self.addingMask = False
         if(self.videoPath == None):
             self.loadVideo()
 
@@ -124,7 +127,7 @@ class ZepazoParams(QMainWindow):
     def resetMasks(self):
         if(self.videoPath == None):
             self.loadVideo()
-
+        self.addingMask = False
         self.frame_masks = self.first_frame.copy()
         self.masks = []
         self.showFrame(self.frame_masks)
