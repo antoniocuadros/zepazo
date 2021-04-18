@@ -151,8 +151,13 @@ class ZepazoParams(QMainWindow):
             }
 
             path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json)")
-            print(path)
-            with open(path[0], 'w') as json_file:
+            
+            if(path[0].endswith(".json") == False):
+                path_file = path[0] + ".json"
+            else:
+                path_file = path[0]
+
+            with open(path_file, 'w') as json_file:
                 json.dump(json_args, json_file)
 
     def setupUI(self):
