@@ -102,15 +102,14 @@ class ZepazoParams(QMainWindow):
     def resetParams(self):
         #Parameters
         self.detectionLimit = 50
-        self.ellipse = None
         self.dilate = None
         self.masks = []
-        self.videoPath = None
-        self.first_frame = None
         self.addingMask = False
-        self.spinBoxDetectionLimit.value = 50
-        self.spinboxEllipse.value = 33
-        self.checkBoxEllipse.setChecked = False
+        self.spinBoxDetectionLimit.setValue(50)
+        self.spinboxEllipse.setValue(33)
+        self.ellipse = None
+        self.checkBoxEllipse.setChecked(False)
+        self.showFrame(self.first_frame)
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -424,6 +423,7 @@ class ZepazoParams(QMainWindow):
         self.checkBoxEllipse.stateChanged.connect(self.checkAutoEllipse)
         self.centralPanel.mousePressEvent = self.clickImage
         self.buttonAddMask.clicked.connect(self.addMask)
+        self.button_reset_all.clicked.connect(self.resetParams)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
