@@ -275,6 +275,7 @@ class ImageAnalyzer:
         if(circlelimit != None):
             self.circlelimit = int(circlelimit)
         else:
+            self.circlelimit = None
             umbral, ellipse = self.moonEnclosingCircle(copy_frame)
             self.circlelimit = umbral
 
