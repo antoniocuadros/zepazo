@@ -72,7 +72,7 @@ class ZepazoParams(QMainWindow):
                 self.loadVideo()
             
             frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
-            self.ellipse = int(value)
+            self.ellipse = None
             self.frame_ellipse = frame
             self.spinboxEllipse.setValue(int(value))
             self.spinboxEllipse.setEnabled(False)
