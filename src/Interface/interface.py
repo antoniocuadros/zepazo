@@ -18,6 +18,7 @@ class ZepazoParams(QMainWindow):
         self.first_frame = None
         self.addingMask = False
         self.frame_ellipse = None
+        self.frame_masks = None
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -31,6 +32,7 @@ class ZepazoParams(QMainWindow):
         self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
         self.first_frame = self.videoAnalyzer.getInitialFrame()
         self.frame_ellipse = self.first_frame
+        self.frame_masks = self.first_frame
         
         self.showFrame(self.first_frame)
 
@@ -67,9 +69,10 @@ class ZepazoParams(QMainWindow):
             
             frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
             self.ellipse = int(value)
+            self.frame_ellipse = frame
             self.spinboxEllipse.setValue(int(value))
             self.spinboxEllipse.setEnabled(False)
-            self.showFrame(frame)
+            self.showFrame(self.frame_ellipse)
         else:
             self.ellipse = self.spinboxEllipse.value()
             self.spinboxEllipse.setEnabled(True)
@@ -88,17 +91,19 @@ class ZepazoParams(QMainWindow):
                 num_masks = len(self.masks)
                 
                 if(num_masks > 0):
-                    cv2.rectangle(self.first_frame, 
+                    cv2.rectangle(self.frame_masks, 
                             (self.masks[num_masks-2][0],self.masks[num_masks-2][1] ),
                             (self.masks[num_masks-1][0], self.masks[num_masks-1][1]),
                             (0,0,255), -1)
 
-            self.showFrame(self.first_frame)
+            self.showFrame(self.frame_masks)
         
     def addMask(self):
         if(self.videoPath == None):
             self.loadVideo()
             
+        self.showFrame(self.frame_masks)
+
         if(self.addingMask == False):
             self.addingMask = True
             
