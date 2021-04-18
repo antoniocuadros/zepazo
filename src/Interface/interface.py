@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLabel, QSiz
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from cv2 import cv2
+import json
 
 import sys
 
@@ -139,6 +140,19 @@ class ZepazoParams(QMainWindow):
                     cv2.rectangle(all_frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
         self.showFrame(all_frame)
 
+
+    def saveParams(self):
+        json_args = {
+            'detectionlimit':self.detectionLimit,
+            'dilate':self.dilate,
+            'coordinatesmask':self.masks,
+            'circlelimit':self.ellipse
+        }
+
+        path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File","JSON file (*.json)")
+        print(path)
+        with open(path[0], 'w') as json_file:
+            json.dump(json_args, json_file)
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -455,6 +469,7 @@ class ZepazoParams(QMainWindow):
         self.button_reset_all.clicked.connect(self.resetParams)
         self.buttonResetMask.clicked.connect(self.resetMasks)
         self.button_visualize_all.clicked.connect(self.showAllParams)
+        self.actionSave_file.triggered.connect(lambda:self.saveParams())
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
