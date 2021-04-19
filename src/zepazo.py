@@ -26,7 +26,6 @@ parser.add_argument( "-mm", "--mousemask", type=int, help="Place num_masks recta
 parser.add_argument( "-cm", "--coordinatesmask",nargs='+', type=int, help="Place num_masks rectangular masks  by giving a list of points")
 parser.add_argument( "-l", "--detectionlimit", type=int, help="Detection limit (1-255) Default 50")
 parser.add_argument( "-cl", "--circlelimit", type=int, help="Moon contour detection limit (1-255) Default ~33 calculated while analysis")
-parser.add_argument( "-hcl", "--helpcirclelimit", type=bool, help="Interface to adjust circlelimit param")
 
 if ( Path(argv[0]).name != 'sphinx-build' ):
     args = parser.parse_args()
@@ -59,9 +58,6 @@ else:
         else:
             video_analizer.selectAndApplyMask(len(args.coordinatesmask), args.coordinatesmask)
 
-# -> Interface to adjust circlelimit argument
-#if(args.helpcirclelimit != None and args.helpcirclelimit == True):
-#    video_analizer.selectAndApplyCircleLimitArgment()
 
 #Proccessing
 video_analizer.analyze()
