@@ -21,7 +21,7 @@ class VideoAnalyzer:
 
     #Constructor
     #Gets the video path
-    def __init__(self, video, show, detectionlimit, circlelimit):
+    def __init__(self, video, show, detectionlimit, circlelimit, masks):
         """
         Inits VideoAnalyzer with the data of the selected video.
 
@@ -35,6 +35,7 @@ class VideoAnalyzer:
             self.videoCapture = cv2.VideoCapture(self.videoPath)
             self.showVideo = show
 
+
             if not (self.videoCapture).isOpened():
                 raise Exception("Video could not be found on this path")
 
@@ -45,7 +46,7 @@ class VideoAnalyzer:
                 self.imageAnalizer = ImageAnalyzer(None, None, show)
 
             # -> Mask points
-            self.mask_points = []
+            self.mask_points = masks
 
             #Gets: 
             # -> frames
@@ -75,14 +76,19 @@ class VideoAnalyzer:
                 return True
 
     #Analize the video frame per frame
-    def analyze(self):
+    def analyze(self, fps, num_frames_show):
         """
         Analyzes the video to detect lunar impacts.
         """
         cap = self.videoCapture
         play = True
 
+        if(fps == None and num_frames_show == None):
+            fps = 10
+            num_frames_show = self.frames
+
         while(cap.isOpened() and play):
+            num_frames_show = num_frames_show - 1
             ret, frame=cap.read() #read a single frame, ret will be true if frame captured
             ret, frame2=cap.read()
 
@@ -100,7 +106,7 @@ class VideoAnalyzer:
                 if self.showVideo: 
                     self.showFrame(frame)
 
-                if(cv2.waitKey(10) & 0xFF == ord('q')):
+                if(cv2.waitKey(fps) & 0xFF == ord('q')):
                     play = False
             
             #No more frames, exit loop
@@ -202,26 +208,13 @@ class VideoAnalyzer:
             fps = 25
         seconds = 20
         
+        frames = self.frames
+        fps = self.fps
+        if(fps >= 100):
+            fps = 25
+        seconds = 20
+        
         #We want to display a sample of 20 seconds
         num_frames_show = seconds * fps
         
-        cap = self.videoCapture
-        play = True
-
-        while(cap.isOpened() and play and num_frames_show > 0):
-            num_frames_show = num_frames_show - 1
-            ret, frame=cap.read() #read a single frame, ret will be true if frame captured
-
-            #If there are frames left
-            if ret == True:    
-                self.showFrame(frame)
-
-                if(cv2.waitKey(fps) & 0xFF == ord('q')):
-                    play = False
-            
-            #No more frames, exit loop
-            else:
-                play = False
-        
-        cap.release()
-        cv2.destroyAllWindows()
+        self.analyze(fps, num_frames_show)

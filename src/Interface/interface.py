@@ -182,6 +182,7 @@ class ZepazoParams(QMainWindow):
 
     def showVideoSample(self):
         if(self.videoPath != None):
+            self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], True, self.detectionLimit, self.ellipse)
             self.videoAnalyzer.showASample()
         else:
             self.addMessage("First select a video file")
