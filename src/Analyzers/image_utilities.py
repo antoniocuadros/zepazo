@@ -17,10 +17,12 @@ class ImageAnalyzer:
         self.mouse_click_count = 0
         self.masks = []
 
-        print(debug)
+        
         if(debug != None):
             self.debug = debug
-        
+        else:
+            self.debug = None
+            
         if(limit != None):
             self.limit = limit
         else:
