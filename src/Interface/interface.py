@@ -182,11 +182,6 @@ class ZepazoParams(QMainWindow):
         else:
             self.addMessage("First select and configure a video file")
 
-    def showVideoSample(self):
-        if(self.videoPath != None):
-            self.videoAnalyzer.showASample()
-        else:
-            self.addMessage("First select a video file")
 
     def setupUI(self):
         self.setUpCentralWidget()
