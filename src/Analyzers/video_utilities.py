@@ -108,7 +108,8 @@ class VideoAnalyzer:
                 frame = (self.imageAnalizer).getDifferences(frame, frame2)
 
                 if self.showVideo: 
-                    self.showFrame(frame)
+                    resized_frame = cv2.resize(frame, (1600,900))
+                    self.showFrame(resized_frame)
 
                 if(cv2.waitKey(fps) & 0xFF == ord('q')):
                     play = False
