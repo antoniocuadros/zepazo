@@ -9,6 +9,8 @@ from cv2 import cv2
 import numpy as np
 import datetime 
 import ntpath
+from pathlib import Path
+import mimetypes
 from .image_utilities import ImageAnalyzer
 
 
@@ -26,32 +28,51 @@ class VideoAnalyzer:
         :param args: arguments given by user.
         """
 
-        # -> VideoPath: video to analize
-        # -> VideoCaputre: cv2 object to analize the video
-        self.videoPath = video
-        self.videoCapture = cv2.VideoCapture(self.videoPath)
-        self.showVideo = show
+        if(self.checkVideo(video)):
+            # -> VideoPath: video to analize
+            # -> VideoCaputre: cv2 object to analize the video
+            self.videoPath = video
+            self.videoCapture = cv2.VideoCapture(self.videoPath)
+            self.showVideo = show
 
-        if not (self.videoCapture).isOpened():
-            raise Exception("Video could not be found on this path")
+            if not (self.videoCapture).isOpened():
+                raise Exception("Video could not be found on this path")
 
-        # -> Object to work with images
-        if(detectionlimit != None):
-            self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit)
+            # -> Object to work with images
+            if(detectionlimit != None):
+                self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit)
+            else:
+                self.imageAnalizer = ImageAnalyzer(None, None)
+
+            # -> Mask points
+            self.mask_points = []
+
+            #Gets: 
+            # -> frames
+            # -> fps
+            # -> seconds
+            self.__getGeneralVideoStats(self.videoCapture)
+
+            #Show info about the video
+            self.showVideoInfo()
         else:
-            self.imageAnalizer = ImageAnalyzer(None, None)
+            raise Exception("Video could not be found on this path or incorrect file type")
 
-        # -> Mask points
-        self.mask_points = []
 
-        #Gets: 
-        # -> frames
-        # -> fps
-        # -> seconds
-        self.__getGeneralVideoStats(self.videoCapture)
 
-        #Show info about the video
-        self.showVideoInfo()
+
+    def checkVideo(self, path):
+        file = Path(path)
+        if(file.is_file() == False):
+            return False
+        else:
+            try:
+                if(mimetypes.guess_type(path)[0].startswith('video') == False):
+                    return False
+            except:
+                return False
+            else:
+                return True
 
     #Analize the video frame per frame
     def analyze(self):
