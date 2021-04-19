@@ -193,3 +193,8 @@ class VideoAnalyzer:
         frame = first_frame
         frame_result, limit = self.imageAnalizer.selectCircleLimitArgument(circlelimit, frame)
         return frame_result, limit
+
+    
+    def showASample(self):
+        frames = self.frames
+        print(frames)

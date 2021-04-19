@@ -182,6 +182,12 @@ class ZepazoParams(QMainWindow):
         else:
             self.addMessage("First select and configure a video file")
 
+    def showVideoSample(self):
+        if(self.videoPath != None):
+            self.videoAnalyzer.showASample()
+        else:
+            self.addMessage("First select a video file")
+
     def setupUI(self):
         self.setUpCentralWidget()
         self.setSuperiorFrame()
@@ -498,6 +504,7 @@ class ZepazoParams(QMainWindow):
         self.buttonResetMask.clicked.connect(self.resetMasks)
         self.button_visualize_all.clicked.connect(self.showAllParams)
         self.actionSave_file.triggered.connect(lambda:self.saveParams())
+        self.button_play.clicked.connect(self.showVideoSample)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
