@@ -150,7 +150,7 @@ class ZepazoParams(QMainWindow):
                 'circlelimit':self.ellipse
             }
 
-            path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json)")
+            path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json")
             
             if(path[0].endswith(".json") == False):
                 path_file = path[0] + ".json"
