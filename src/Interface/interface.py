@@ -30,7 +30,6 @@ class ZepazoParams(QMainWindow):
 
     def loadVideo(self):
         try:
-            self.resetParams()
             self.addingMask = False
             self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
             self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse, None)
@@ -38,7 +37,19 @@ class ZepazoParams(QMainWindow):
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
             
+            #Reset Params
+            self.detectionLimit = 50
+            self.dilate = None
+            self.masks = []
+            self.addingMask = False
+            self.spinBoxDetectionLimit.setValue(50)
+            self.spinboxEllipse.setValue(33)
+            self.ellipse = None
+            self.checkBoxEllipse.setChecked(False)
+
+            #Show Frame
             self.showFrame(self.first_frame)
+            
         except:
             self.addMessage("Please select a correct video file")
 
@@ -124,9 +135,6 @@ class ZepazoParams(QMainWindow):
                 self.addingMask = True
             
     def resetParams(self):
-        if(self.videoPath == None):
-            self.addMessage("First select a video file")
-        else:
             #Parameters
             self.detectionLimit = 50
             self.dilate = None
