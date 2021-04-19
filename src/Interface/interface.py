@@ -125,18 +125,21 @@ class ZepazoParams(QMainWindow):
                 self.addingMask = True
             
     def resetParams(self):
-        #Parameters
-        self.detectionLimit = 50
-        self.dilate = None
-        self.masks = []
-        self.addingMask = False
-        self.spinBoxDetectionLimit.setValue(50)
-        self.spinboxEllipse.setValue(33)
-        self.ellipse = None
-        self.checkBoxEllipse.setChecked(False)
-        self.frame_ellipse = self.first_frame.copy()
-        self.frame_masks = self.first_frame.copy()
-        self.showFrame(self.first_frame)
+        if(self.videoPath == None):
+            self.addMessage("First select a video file")
+        else:
+            #Parameters
+            self.detectionLimit = 50
+            self.dilate = None
+            self.masks = []
+            self.addingMask = False
+            self.spinBoxDetectionLimit.setValue(50)
+            self.spinboxEllipse.setValue(33)
+            self.ellipse = None
+            self.checkBoxEllipse.setChecked(False)
+            self.frame_ellipse = self.first_frame.copy()
+            self.frame_masks = self.first_frame.copy()
+            self.showFrame(self.first_frame)
 
     def resetMasks(self):
         if(self.videoPath == None):
