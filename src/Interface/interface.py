@@ -70,10 +70,8 @@ class ZepazoParams(QMainWindow):
 
 
     def checkAutoEllipse(self):
-        print("method")
         self.addingMask = False
         if(self.videoPath == None):
-            print("entro")
             if(self.checkBoxEllipse.isChecked()):
                 self.addMessage("First select a video file")
                 self.checkBoxEllipse.setChecked(False)
