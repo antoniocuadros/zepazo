@@ -1,6 +1,6 @@
 from src.Analyzers.video_utilities import VideoAnalyzer
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLabel, QSizePolicy
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLabel, QSizePolicy, QMessageBox
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from cv2 import cv2
@@ -29,15 +29,17 @@ class ZepazoParams(QMainWindow):
         self.setupUI()
 
     def loadVideo(self):
-        self.addingMask = False
-        self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
-        self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
-        self.first_frame = self.videoAnalyzer.getInitialFrame()
-        self.frame_ellipse = self.first_frame.copy()
-        self.frame_masks = self.first_frame.copy()
-        
-        self.showFrame(self.first_frame)
-
+        try:
+            self.addingMask = False
+            self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
+            self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse)
+            self.first_frame = self.videoAnalyzer.getInitialFrame()
+            self.frame_ellipse = self.first_frame.copy()
+            self.frame_masks = self.first_frame.copy()
+            
+            self.showFrame(self.first_frame)
+        except:
+            QMessageBox.about(self,"Error", "Please select a correct video file")
 
     def showFrame(self, first_frame):
         first_frame_qt = cv2.cvtColor(first_frame, cv2.COLOR_BGR2RGB)
