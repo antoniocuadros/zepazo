@@ -13,9 +13,13 @@ class ImageAnalyzer:
     """
     This class will represent an Image Analizer with multiple tools for working with images.
     """
-    def __init__(self, limit, circlelimit):
+    def __init__(self, limit, circlelimit, debug):
         self.mouse_click_count = 0
         self.masks = []
+
+        print(debug)
+        if(debug != None):
+            self.debug = debug
         
         if(limit != None):
             self.limit = limit
@@ -77,24 +81,33 @@ class ImageAnalyzer:
         
         impact_count = 0
         
+        _, ellipse = self.moonEnclosingCircle(frame1)
+        
+        if(self.debug == True):
+            copy_frame = frame1.copy()
+            cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
 
         #for each contour finded we draw a rectangle and we save the image
         if (len(contours) > 0):
-            _, ellipse = self.moonEnclosingCircle(frame1)
+            
             for c in contours:
                 x, y, w, h = cv2.boundingRect(c)
                 if(ellipse != None):
-                    if(self.inside_moon(ellipse, x, y, frame1)):
-                        cv2.ellipse(frame1, ellipse,(0, 255, 255), 2)
-                        cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
-                    else:
-                        cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
-                else:
-                    cv2.rectangle(frame1, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
+                    if(self.inside_moon(ellipse, x, y, frame1)):                                #Possible impact! Inside Moon
+                        if(self.debug == True):
+                            cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
+                    else:               
+                        if(self.debug == True):                                                        #False positive! Discarded
+                            cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
+                else:                                                                                   #No ellipse obtained, Possible impact!
+                    if(self.debug == True):
+                        cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
                 #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
                 impact_count = impact_count + 1
-
-        return frame1
+        if(self.debug):
+            return copy_frame
+        else:
+            return frame1
 
 
     def moonEnclosingCircle(self, frame):
