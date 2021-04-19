@@ -39,7 +39,7 @@ class ZepazoParams(QMainWindow):
             
             self.showFrame(self.first_frame)
         except:
-            QMessageBox.about(self,"Error", "Please select a correct video file")
+            self.addMessage("Please select a correct video file")
 
     def showFrame(self, first_frame):
         first_frame_qt = cv2.cvtColor(first_frame, cv2.COLOR_BGR2RGB)
@@ -50,38 +50,49 @@ class ZepazoParams(QMainWindow):
         self.centralPanel.setPixmap(QPixmap.fromImage(qt_image_scaled))
         self.centralPanel.setScaledContents(False)
 
+    def addMessage(self, message):
+        QMessageBox.about(self,"Error", message)
+
     def adjustEllipse(self):
         self.addingMask = False
-        self.ellipse = self.spinboxEllipse.value()
+        
 
         if(self.videoPath == None):
-            self.loadVideo()
+            if(self.spinboxEllipse.value() != 33):
+                self.addMessage("First select a video file")
+            self.spinboxEllipse.setValue(33)
+        else:
+            self.ellipse = self.spinboxEllipse.value()
+            frame, _ = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
+            self.frame_ellipse = frame
+            self.showFrame(self.frame_ellipse)
         
-        frame, _ = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
-        self.frame_ellipse = frame
-        self.showFrame(self.frame_ellipse)
 
 
     def checkAutoEllipse(self):
+        print("method")
         self.addingMask = False
         if(self.videoPath == None):
-            self.loadVideo()
-
-        if self.checkBoxEllipse.isChecked() == True:
-            self.ellipse = None
-            
-            if(self.videoPath == None):
-                self.loadVideo()
-            
-            frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
-            self.ellipse = None
-            self.frame_ellipse = frame
-            self.spinboxEllipse.setValue(int(value))
-            self.spinboxEllipse.setEnabled(False)
-            self.showFrame(self.frame_ellipse)
+            print("entro")
+            if(self.checkBoxEllipse.isChecked()):
+                self.addMessage("First select a video file")
+                self.checkBoxEllipse.setChecked(False)
         else:
-            self.ellipse = self.spinboxEllipse.value()
-            self.spinboxEllipse.setEnabled(True)
+            if self.checkBoxEllipse.isChecked() == True:
+                self.ellipse = None
+                
+                if(self.videoPath == None):
+                    self.loadVideo()
+                
+                frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
+                self.ellipse = None
+                self.frame_ellipse = frame
+                self.spinboxEllipse.setValue(int(value))
+                self.spinboxEllipse.setEnabled(False)
+                self.showFrame(self.frame_ellipse)
+            else:
+                self.ellipse = self.spinboxEllipse.value()
+                self.spinboxEllipse.setEnabled(True)
 
 
     def clickImage(self, event):
@@ -106,12 +117,12 @@ class ZepazoParams(QMainWindow):
         
     def addMask(self):
         if(self.videoPath == None):
-            self.loadVideo()
-            
-        self.showFrame(self.frame_masks)
+            self.addMessage("First select a video file")
+        else:
+            self.showFrame(self.frame_masks)
 
-        if(self.addingMask == False):
-            self.addingMask = True
+            if(self.addingMask == False):
+                self.addingMask = True
             
     def resetParams(self):
         #Parameters
@@ -129,18 +140,22 @@ class ZepazoParams(QMainWindow):
 
     def resetMasks(self):
         if(self.videoPath == None):
-            self.loadVideo()
-        self.addingMask = False
-        self.frame_masks = self.first_frame.copy()
-        self.masks = []
-        self.showFrame(self.frame_masks)
+            self.addMessage("First select a video file")
+        else:
+            self.addingMask = False
+            self.frame_masks = self.first_frame.copy()
+            self.masks = []
+            self.showFrame(self.frame_masks)
 
     def showAllParams(self):
-        all_frame = self.frame_ellipse.copy()
-        num_masks = len(self.masks)
-        for i in range(num_masks//2):
-                    cv2.rectangle(all_frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
-        self.showFrame(all_frame)
+        if(self.videoPath == None):
+            self.addMessage("First select a video file")
+        else:
+            all_frame = self.frame_ellipse.copy()
+            num_masks = len(self.masks)
+            for i in range(num_masks//2):
+                        cv2.rectangle(all_frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
+            self.showFrame(all_frame)
 
 
     def saveParams(self):
@@ -161,6 +176,8 @@ class ZepazoParams(QMainWindow):
 
             with open(path_file, 'w') as json_file:
                 json.dump(json_args, json_file)
+        else:
+            self.addMessage("First select and configure a video file")
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -471,7 +488,7 @@ class ZepazoParams(QMainWindow):
 
         self.actionLoad_Video.triggered.connect(lambda:self.loadVideo())
         self.spinboxEllipse.valueChanged.connect(self.adjustEllipse)
-        self.checkBoxEllipse.stateChanged.connect(self.checkAutoEllipse)
+        self.checkBoxEllipse.clicked.connect(self.checkAutoEllipse)
         self.centralPanel.mousePressEvent = self.clickImage
         self.buttonAddMask.clicked.connect(self.addMask)
         self.button_reset_all.clicked.connect(self.resetParams)
