@@ -30,6 +30,7 @@ class ZepazoParams(QMainWindow):
 
     def loadVideo(self):
         try:
+            self.resetParams()
             self.addingMask = False
             self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
             self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse, None)
