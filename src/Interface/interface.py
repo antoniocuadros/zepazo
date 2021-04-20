@@ -203,6 +203,9 @@ class ZepazoParams(QMainWindow):
         else:
             self.addMessage("First select and configure a video file")
 
+    def loadParams(self):
+        json_path = QFileDialog.getOpenFileName(None, "Select a Configuration File", "", "*.json")
+
     def showVideoSample(self):
         if(self.videoPath != None):
             self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], True, self.detectionLimit, self.ellipse, self.masks)
@@ -530,6 +533,7 @@ class ZepazoParams(QMainWindow):
         self.actionSave_file.triggered.connect(lambda:self.saveParams())
         self.button_play.clicked.connect(self.showVideoSample)
         self.spinBoxDetectionLimit.valueChanged.connect(self.adjustDetectionLimit)
+        self.actionOpen_file.triggered.connect(self.loadParams)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
