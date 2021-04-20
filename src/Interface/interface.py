@@ -246,6 +246,7 @@ class ZepazoParams(QMainWindow):
         icon = QtGui.QIcon()
         os.chdir(abspath(join(dirname(__file__))))
         icon.addPixmap(QtGui.QPixmap("icons/visualize_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setWindowIcon(QtGui.QIcon("icons/main.png"))
         self.button_visualize_all.setIcon(icon)
         self.button_visualize_all.setIconSize(QtCore.QSize(25, 25))
         self.button_visualize_all.setObjectName("button_visualize_all")
