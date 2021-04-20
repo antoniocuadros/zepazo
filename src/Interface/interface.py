@@ -82,7 +82,14 @@ class ZepazoParams(QMainWindow):
             frame, _ = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
             self.frame_ellipse = frame
             self.showFrame(self.frame_ellipse)
-        
+    
+    def adjustDetectionLimit(self):
+        if(self.videoPath == None):
+            if(self.spinBoxDetectionLimit != 50):
+                self.addMessage("First select a video file")
+            self.spinBoxDetectionLimit.setValue(50)
+        else:
+            self.detectionLimit = self.spinBoxDetectionLimit.value()
 
 
     def checkAutoEllipse(self):
@@ -519,6 +526,7 @@ class ZepazoParams(QMainWindow):
         self.button_visualize_all.clicked.connect(self.showAllParams)
         self.actionSave_file.triggered.connect(lambda:self.saveParams())
         self.button_play.clicked.connect(self.showVideoSample)
+        self.spinBoxDetectionLimit.valueChanged.connect(self.adjustDetectionLimit)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
