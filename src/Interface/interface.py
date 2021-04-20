@@ -56,6 +56,8 @@ class ZepazoParams(QMainWindow):
             
         except:
             self.addMessage("Please select a correct video file")
+            self.videoPath = None
+
 
     def showFrame(self, first_frame):
         first_frame_qt = cv2.cvtColor(first_frame, cv2.COLOR_BGR2RGB)
@@ -85,7 +87,7 @@ class ZepazoParams(QMainWindow):
     
     def adjustDetectionLimit(self):
         if(self.videoPath == None):
-            if(self.spinBoxDetectionLimit != 50):
+            if(self.spinBoxDetectionLimit.value() != 50):
                 self.addMessage("First select a video file")
             self.spinBoxDetectionLimit.setValue(50)
         else:
@@ -146,6 +148,7 @@ class ZepazoParams(QMainWindow):
                 self.addingMask = True
             
     def resetParams(self):
+        if(self.videoPath != None):
             #Parameters
             self.detectionLimit = 50
             self.dilate = None
