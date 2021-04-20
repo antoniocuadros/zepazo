@@ -6,7 +6,8 @@ from PyQt5.QtCore import Qt
 from cv2 import cv2
 import json
 
-from os.path import dirname, join, abspath, sys
+from os.path import dirname, join, abspath
+import os, sys
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 from Analyzers.video_utilities import VideoAnalyzer
 sys.path.insert(0, abspath(join(dirname(__file__))))
