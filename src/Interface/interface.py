@@ -181,6 +181,10 @@ class ZepazoParams(QMainWindow):
                         cv2.rectangle(all_frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
             self.showFrame(all_frame)
 
+    def drawMasks(self, frame):
+        num_masks = len(self.masks)
+        for i in range(num_masks//2):
+                        cv2.rectangle(frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
 
     def saveParams(self):
         if(self.videoPath != None):
@@ -204,7 +208,29 @@ class ZepazoParams(QMainWindow):
             self.addMessage("First select and configure a video file")
 
     def loadParams(self):
-        json_path = QFileDialog.getOpenFileName(None, "Select a Configuration File", "", "*.json")
+        if(self.videoPath == None):
+            self.addMessage("First select a video file first")
+        else:
+            json_path = QFileDialog.getOpenFileName(None, "Select a Configuration File", "", "*.json")
+
+            with open(json_path[0], 'r') as json_file:
+                args = json.load(json_file)
+
+            self.detectionLimit = args["detectionlimit"]
+            self.dilate = args["dilate"]
+            self.masks = args["coordinatesmask"]
+            self.ellipse = args["circlelimit"]
+            self.drawMasks(self.frame_masks)
+            
+            self.spinboxEllipse.setValue(self.ellipse)
+            self.spinBoxDetectionLimit.setValue(self.detectionLimit)
+            
+            if(self.ellipse == None):
+                self.checkBoxEllipse.setChecked(True)
+            else:
+                self.checkBoxEllipse.setChecked(False)
+
+            self.showAllParams()
 
     def showVideoSample(self):
         if(self.videoPath != None):
