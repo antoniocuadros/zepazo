@@ -22,6 +22,7 @@ class ZepazoParams(QMainWindow):
         self.videoPath = None
         self.first_frame = None
         self.addingMask = False
+        self.deletingMask = False
         self.frame_ellipse = None
         self.frame_masks = None
 
@@ -35,6 +36,7 @@ class ZepazoParams(QMainWindow):
     def loadVideo(self):
         try:
             self.addingMask = False
+            self.deletingMask = False
             self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
             self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse, None)
             self.first_frame = self.videoAnalyzer.getInitialFrame()
@@ -73,6 +75,7 @@ class ZepazoParams(QMainWindow):
 
     def adjustEllipse(self):
         self.addingMask = False
+        self.deletingMask = False
         
 
         if(self.videoPath == None):
@@ -96,6 +99,7 @@ class ZepazoParams(QMainWindow):
 
     def checkAutoEllipse(self):
         self.addingMask = False
+        self.deletingMask = False
         if(self.videoPath == None):
             if(self.checkBoxEllipse.isChecked()):
                 self.addMessage("First select a video file")
@@ -119,15 +123,18 @@ class ZepazoParams(QMainWindow):
 
 
     def clickImage(self, event):
+        x_pos = event.pos().x()
+        y_pos = event.pos().y()
+
         if(self.addingMask):
-            x_pos = event.pos().x()
-            y_pos = event.pos().y()
+            self.deletingMask = False
 
             self.masks.append([x_pos,y_pos])
 
 
             if(len(self.masks) % 2 == 0):
                 self.addingMask = False
+                self.deletingMask = False
                 num_masks = len(self.masks)
                 
                 if(num_masks > 0):
@@ -137,7 +144,51 @@ class ZepazoParams(QMainWindow):
                             (0,0,255), -1)
 
             self.showFrame(self.frame_masks)
+        else: #Deleting mask
+            if(self.deletingMask):
+                self.deletingMask = False
+                mask = self.inMask(x_pos, y_pos)
+
+                if(mask != None):
+                    self.masks.pop(mask*2)
+                    self.masks.pop(mask*2)
+                    
+                    num_masks = len(self.masks) // 2
+                    
+                    self.frame_masks = self.first_frame.copy()
+                    
+                    for i in range(num_masks):
+                                cv2.rectangle(self.frame_masks, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
+                    
+                    self.showFrame(self.frame_masks)
+                else:
+                    self.addMessage("No mask selected")
+
+    def deleteMask(self):
+        self.addingMask = False
+        self.deletingMask = True
+
+
+    def inMask(self, x,y):
+        num_masks = len(self.masks) // 2
+        mask = None
+    
+        for i in range(num_masks):
+            x1 = self.masks[2*i][0]
+            y1 = self.masks[2*i][1] 
+            x2 = self.masks[2*i+1][0]
+            y2 = self.masks[2*i+1][1]
+
+            for j in range(x1, x2):
+                for k in range(y1,y2):
+                    if(x == j and y == k):
+                        mask = i
+
+        return mask
+
+            
         
+
     def addMask(self):
         if(self.videoPath == None):
             self.addMessage("First select a video file")
@@ -154,6 +205,7 @@ class ZepazoParams(QMainWindow):
             self.dilate = None
             self.masks = []
             self.addingMask = False
+            self.deletingMask = False
             self.spinBoxDetectionLimit.setValue(50)
             self.spinboxEllipse.setValue(33)
             self.ellipse = None
@@ -167,6 +219,7 @@ class ZepazoParams(QMainWindow):
             self.addMessage("First select a video file")
         else:
             self.addingMask = False
+            self.deletingMask = False
             self.frame_masks = self.first_frame.copy()
             self.masks = []
             self.showFrame(self.frame_masks)
@@ -573,6 +626,7 @@ class ZepazoParams(QMainWindow):
         self.button_play.clicked.connect(self.showVideoSample)
         self.spinBoxDetectionLimit.valueChanged.connect(self.adjustDetectionLimit)
         self.actionOpen_file.triggered.connect(self.loadParams)
+        self.buttonDeleteMask.clicked.connect(self.deleteMask)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
@@ -585,6 +639,7 @@ class ZepazoParams(QMainWindow):
         self.labelDilate.setText(_translate("ZepazoWindow", "Dilate"))
         self.labelMasks.setText(_translate("ZepazoWindow", "Masks"))
         self.buttonAddMask.setToolTip(_translate("ZepazoWindow", "Add Mask"))
+        self.buttonDeleteMask.setToolTip(_translate("ZepazoWindow", "Delete Mask"))
         self.buttonResetMask.setToolTip(_translate("ZepazoWindow", "Reset all Masks"))
         self.menuVideo.setTitle(_translate("ZepazoWindow", "Video"))
         self.menuParameters.setTitle(_translate("ZepazoWindow", "Parameters"))
