@@ -1,6 +1,6 @@
 #from src.Analyzers.video_utilities import VideoAnalyzer
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLabel, QSizePolicy, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLabel, QSizePolicy, QMessageBox, QComboBox
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from cv2 import cv2
@@ -505,6 +505,19 @@ class ZepazoParams(QMainWindow):
         self.buttonAddMask.setIcon(icon3)
         self.buttonAddMask.setObjectName("buttonAddMask")
         self.horizontalLayoutMasks.addWidget(self.buttonAddMask)
+        
+        #Button delete mask
+        self.buttonDeleteMask = QtWidgets.QPushButton(self.layoutWidget1)
+        self.buttonDeleteMask.setMinimumSize(QtCore.QSize(25, 25))
+        self.buttonDeleteMask.setMaximumSize(QtCore.QSize(25, 25))
+        self.buttonDeleteMask.setStyleSheet("QPushButton { padding: 10px; }")
+        self.buttonDeleteMask.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("icons/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.buttonDeleteMask.setIcon(icon3)
+        self.buttonDeleteMask.setObjectName("buttonDeleteMask")
+        self.horizontalLayoutMasks.addWidget(self.buttonDeleteMask)
+        
         #Button reset mask
         self.buttonResetMask = QtWidgets.QPushButton(self.layoutWidget1)
         self.buttonResetMask.setMinimumSize(QtCore.QSize(25, 25))
