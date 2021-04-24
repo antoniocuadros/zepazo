@@ -322,7 +322,7 @@ class ZepazoParams(QMainWindow):
 
         #Defines top frame's layout
         self.layoutWidget = QtWidgets.QWidget(self.frame_superior)
-        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 104, 32))
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 140, 32))
         self.layoutWidget.setObjectName("layoutWidget")
 
         #Defines an Horizontal Layout for items in the frame
@@ -366,8 +366,21 @@ class ZepazoParams(QMainWindow):
         self.button_play.setIcon(icon2)
         self.button_play.setIconSize(QtCore.QSize(25, 25))
         self.button_play.setObjectName("button_play")
-        self.layoutSuperior.addWidget(self.button_play, 0, 2, 1, 1)
+        self.layoutSuperior.addWidget(self.button_play, 0, 3, 1, 1)
         
+
+        #Adds a button to get a command
+        self.button_command = QtWidgets.QPushButton(self.layoutWidget)
+        self.button_command.setMinimumSize(QtCore.QSize(30, 30))
+        self.button_command.setMaximumSize(QtCore.QSize(30, 30))
+        self.button_command.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("icons/command.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.button_command.setIcon(icon2)
+        self.button_command.setIconSize(QtCore.QSize(25, 25))
+        self.button_command.setObjectName("button_command")
+        self.layoutSuperior.addWidget(self.button_command, 0, 2, 1, 1)
+
         #Adds superior frame to general layout
         self.layoutVerticalTresPaneles.addWidget(self.frame_superior)
 
@@ -633,6 +646,7 @@ class ZepazoParams(QMainWindow):
         self.button_visualize_all.setToolTip(_translate("ZepazoWindow", "Preview Params"))
         self.button_reset_all.setToolTip(_translate("ZepazoWindow", "Reset Params"))
         self.button_play.setToolTip(_translate("ZepazoWindow", "Play a sample"))
+        self.button_command.setToolTip(_translate("ZepazoWindow", "Get command"))
         self.labelDetectionLimit.setText(_translate("ZepazoWindow", "Detection Limit"))
         self.labelELlipse.setText(_translate("ZepazoWindow", "Ellipse"))
         self.checkBoxEllipse.setText(_translate("ZepazoWindow", "Auto"))
