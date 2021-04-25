@@ -441,7 +441,7 @@ class ZepazoParams(QMainWindow):
 
         #Adds Inferior's Frame Layout
         self.layoutWidget1 = QtWidgets.QWidget(self.frame_inferior)
-        self.layoutWidget1.setGeometry(QtCore.QRect(21, 10, 449, 59))
+        self.layoutWidget1.setGeometry(QtCore.QRect(21, 10, 605, 59))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.horizontalLayoutInferior = QtWidgets.QHBoxLayout(self.layoutWidget1)
         self.horizontalLayoutInferior.setContentsMargins(0, 0, 0, 0)
@@ -624,6 +624,39 @@ class ZepazoParams(QMainWindow):
         self.layoutMasks.addLayout(self.horizontalLayoutMasks)
         self.horizontalLayoutInferior.addLayout(self.layoutMasks)
         
+        #Folder Save Impacts
+        self.line_4 = QtWidgets.QFrame(self.layoutWidget1)
+        self.line_4.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_4.setObjectName("line_4")
+        self.horizontalLayoutInferior.addWidget(self.line_4)
+        self.layoutSaveImpacts = QtWidgets.QVBoxLayout()
+        self.layoutSaveImpacts.setObjectName("layoutSaveImpacts")
+        self.labelSaveImpacts = QtWidgets.QLabel(self.layoutWidget1)
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu")
+        font.setBold(True)
+        font.setWeight(75)
+        self.labelSaveImpacts.setFont(font)
+        self.labelSaveImpacts.setAlignment(QtCore.Qt.AlignCenter)
+        self.labelSaveImpacts.setObjectName("labelSaveImpacts")
+        self.layoutSaveImpacts.addWidget(self.labelSaveImpacts)
+        self.horizontalLayoutSaveImpacts = QtWidgets.QHBoxLayout()
+        self.horizontalLayoutSaveImpacts.setContentsMargins(-1, -1, -1, 3)
+        self.horizontalLayoutSaveImpacts.setObjectName("horizontalLayoutSaveImpacts")
+        self.buttonSaveImpacts = QtWidgets.QPushButton(self.layoutWidget1)
+        self.buttonSaveImpacts.setMinimumSize(QtCore.QSize(25, 25))
+        self.buttonSaveImpacts.setMaximumSize(QtCore.QSize(25, 25))
+        self.buttonSaveImpacts.setStyleSheet("QPushButton { padding: 10px; }")
+        self.buttonSaveImpacts.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("icons/folder.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.buttonSaveImpacts.setIcon(icon3)
+        self.buttonSaveImpacts.setObjectName("buttonSaveImpacts")
+        self.horizontalLayoutSaveImpacts.addWidget(self.buttonSaveImpacts)
+        self.layoutSaveImpacts.addLayout(self.horizontalLayoutSaveImpacts)
+        self.horizontalLayoutInferior.addLayout(self.layoutSaveImpacts)
+
         #Adding frame inferior to layoutVerticalTresPaneles
         self.layoutVerticalTresPaneles.addWidget(self.frame_inferior)
         self.gridLayout.addLayout(self.layoutVerticalTresPaneles, 0, 0, 1, 1)
@@ -688,6 +721,8 @@ class ZepazoParams(QMainWindow):
         self.actionLoad_Video.setText(_translate("ZepazoWindow", "Open file"))
         self.actionOpen_file.setText(_translate("ZepazoWindow", "Open file"))
         self.actionSave_file.setText(_translate("ZepazoWindow", "Save file"))
+        self.labelSaveImpacts.setText(_translate("ZepazoWindow", "Impacts Folder"))
+        self.buttonSaveImpacts.setToolTip(_translate("ZepazoWindow", "Folder to save impacts"))
 
 def launch_UI():
     app = QApplication(sys.argv)
