@@ -21,7 +21,7 @@ class VideoAnalyzer:
 
     #Constructor
     #Gets the video path
-    def __init__(self, video, show, detectionlimit, circlelimit, masks):
+    def __init__(self, video, show, detectionlimit, circlelimit, masks, folder):
         """
         Inits VideoAnalyzer with the data of the selected video.
 
@@ -34,6 +34,8 @@ class VideoAnalyzer:
             self.videoPath = video
             self.videoCapture = cv2.VideoCapture(self.videoPath)
             self.showVideo = show
+
+            self.folder = folder
 
 
             if not (self.videoCapture).isOpened():

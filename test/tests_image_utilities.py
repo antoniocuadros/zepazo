@@ -26,7 +26,7 @@ from src.Analyzers.video_utilities import VideoAnalyzer
 def test_if_image_is_saved():
 
     image_analyzer = ImageAnalyzer(50, None, None)
-    video_analyzer = VideoAnalyzer('test/example_video/test.mp4', True, None, None,None)
+    video_analyzer = VideoAnalyzer('test/example_video/test.mp4', True, None, None,None, None)
     cap = video_analyzer.videoCapture
 
     ret, frame = cap.read()
@@ -45,7 +45,7 @@ def test_if_image_is_saved():
 def test_if_difference_image_is_ok():
 
     image_analyzer = ImageAnalyzer(50, None, None)
-    video_analyzer = VideoAnalyzer('test/example_video/test.mp4', True, None, None,None)
+    video_analyzer = VideoAnalyzer('test/example_video/test.mp4', True, None, None,None, None)
     cap = video_analyzer.videoCapture
 
     ret, frame = cap.read()
