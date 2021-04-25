@@ -26,6 +26,7 @@ class ZepazoParams(QMainWindow):
         self.deletingMask = False
         self.frame_ellipse = None
         self.frame_masks = None
+        self.folder = None
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -204,6 +205,7 @@ class ZepazoParams(QMainWindow):
             #Parameters
             self.detectionLimit = 50
             self.dilate = None
+            self.folder = None
             self.masks = []
             self.addingMask = False
             self.deletingMask = False
@@ -260,6 +262,10 @@ class ZepazoParams(QMainWindow):
                 for i in range(0,len(self.masks)):
                     message = message + str(self.masks[i][0]) + " " + str(self.masks[i][1]) + " "
 
+
+            if(self.folder != None):
+                message = message + " -f " + self.folder
+
             QMessageBox.about(self,"Command", message)
 
             pyperclip.copy(message)
@@ -311,6 +317,10 @@ class ZepazoParams(QMainWindow):
                 self.checkBoxEllipse.setChecked(False)
 
             self.showAllParams()
+    
+    def selectSaveImpactsFolder(self):
+        folder_path = str(QFileDialog.getExistingDirectory(self, "Select a folder to save impact frames"))
+        self.folder = folder_path
 
     def showVideoSample(self):
         if(self.videoPath != None):
@@ -701,6 +711,7 @@ class ZepazoParams(QMainWindow):
         self.actionOpen_file.triggered.connect(self.loadParams)
         self.buttonDeleteMask.clicked.connect(self.deleteMask)
         self.button_command.clicked.connect(self.showCommand)
+        self.buttonSaveImpacts.clicked.connect(self.selectSaveImpactsFolder)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
