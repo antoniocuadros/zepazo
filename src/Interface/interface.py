@@ -5,6 +5,7 @@ from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt
 from cv2 import cv2
 import json
+import pyperclip
 
 from os.path import dirname, join, abspath
 import os, sys
@@ -260,6 +261,9 @@ class ZepazoParams(QMainWindow):
                     message = message + str(self.masks[i][0]) + " " + str(self.masks[i][1]) + " "
 
             QMessageBox.about(self,"Command", message)
+
+            pyperclip.copy(message)
+
             QMessageBox.information(self, "Copied to clipboard", "Copied to clipboard")
 
     def saveParams(self):
