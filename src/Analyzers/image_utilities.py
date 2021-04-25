@@ -13,9 +13,10 @@ class ImageAnalyzer:
     """
     This class will represent an Image Analizer with multiple tools for working with images.
     """
-    def __init__(self, limit, circlelimit, debug, folder):
+    def __init__(self, limit, circlelimit, debug, folder, videoName):
         self.mouse_click_count = 0
         self.masks = []
+        self.videoName = videoName
 
         self.folder = folder
         
@@ -31,6 +32,8 @@ class ImageAnalyzer:
 
         self.circlelimit = circlelimit
 
+        self.impact_count = 0
+
     
     def saveImage(self, image, name):
         """
@@ -44,13 +47,13 @@ class ImageAnalyzer:
         :return: Returns true if the image is saved correctly.
         :rtype: Boolean.
         """
-
-        #Check if filename exists
-        if (os.path.isfile(name +'.png')):
-            return False
-        else: 
-            cv2.imwrite(name + ".png", image)
-            return True
+        if(self.folder != None):
+            if(self.folder[-1] != "/"):
+                self.folder = self.folder + "/"
+                print(name)
+            cv2.imwrite(self.folder + name, image)
+        else:
+            cv2.imwrite(name , image)
 
     def getDifferences(self, frame1, frame2):
         """
@@ -82,7 +85,7 @@ class ImageAnalyzer:
         #We obtain the contours of the image
         contours, _ = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         
-        impact_count = 0
+
         
         _, ellipse = self.moonEnclosingCircle(frame1)
         
@@ -99,14 +102,19 @@ class ImageAnalyzer:
                     if(self.inside_moon(ellipse, x, y, frame1)):                                #Possible impact! Inside Moon
                         if(self.debug == True):
                             cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
+                            self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count) + ".png")
+                            print(self.impact_count)
+                            self.impact_count = self.impact_count + 1
                     else:               
                         if(self.debug == True):                                                        #False positive! Discarded
                             cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
                 else:                                                                                   #No ellipse obtained, Possible impact!
                     if(self.debug == True):
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
+                        self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count) + ".png")
+                        self.impact_count = self.impact_count + 1
                 #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
-                impact_count = impact_count + 1
+                
         if(self.debug):
             return copy_frame
         else:
