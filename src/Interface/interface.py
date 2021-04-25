@@ -239,6 +239,28 @@ class ZepazoParams(QMainWindow):
         for i in range(num_masks//2):
                         cv2.rectangle(frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
 
+
+    def showCommand(self):
+        if(self.videoPath == None):
+            self.addMessage("First select and configure a video file")
+        else:
+            message = "python3 zepazo.py "
+            message = message + "-v " + self.videoPath[0] + " -l " + str(self.detectionLimit) 
+            
+            if(self.ellipse != None):
+                message = message + " -cl " + str(self.ellipse)
+
+            if(self.dilate != None):
+                message = message + " -dt" + str(self.dilate)
+
+            if(len(self.masks) > 0):
+                message = message + " -cm "
+                print(self.masks)
+                for i in range(0,len(self.masks)):
+                    message = message + str(self.masks[i][0]) + " " + str(self.masks[i][1]) + " "
+
+            QMessageBox.about(self,"Command", message)
+
     def saveParams(self):
         if(self.videoPath != None):
             json_args = {
@@ -640,6 +662,7 @@ class ZepazoParams(QMainWindow):
         self.spinBoxDetectionLimit.valueChanged.connect(self.adjustDetectionLimit)
         self.actionOpen_file.triggered.connect(self.loadParams)
         self.buttonDeleteMask.clicked.connect(self.deleteMask)
+        self.button_command.clicked.connect(self.showCommand)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
