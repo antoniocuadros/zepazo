@@ -43,9 +43,9 @@ class VideoAnalyzer:
 
             # -> Object to work with images
             if(detectionlimit != None):
-                self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit, show)
+                self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit, show, self.folder)
             else:
-                self.imageAnalizer = ImageAnalyzer(None, None, show)
+                self.imageAnalizer = ImageAnalyzer(None, None, show,self.folder)
 
             # -> Mask points
             if(masks != None):
