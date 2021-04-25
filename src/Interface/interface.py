@@ -39,7 +39,7 @@ class ZepazoParams(QMainWindow):
             self.addingMask = False
             self.deletingMask = False
             self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
-            self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse, None)
+            self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], False, self.detectionLimit, self.ellipse, None, None)
             self.first_frame = self.videoAnalyzer.getInitialFrame()
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
@@ -314,7 +314,7 @@ class ZepazoParams(QMainWindow):
 
     def showVideoSample(self):
         if(self.videoPath != None):
-            self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], True, self.detectionLimit, self.ellipse, self.masks)
+            self.videoAnalyzer = VideoAnalyzer(self.videoPath[0], True, self.detectionLimit, self.ellipse, self.masks, None)
             self.videoAnalyzer.showASample()
         else:
             self.addMessage("First select a video file")
