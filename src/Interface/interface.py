@@ -260,6 +260,7 @@ class ZepazoParams(QMainWindow):
                     message = message + str(self.masks[i][0]) + " " + str(self.masks[i][1]) + " "
 
             QMessageBox.about(self,"Command", message)
+            QMessageBox.information(self, "Copied to clipboard", "Copied to clipboard")
 
     def saveParams(self):
         if(self.videoPath != None):
