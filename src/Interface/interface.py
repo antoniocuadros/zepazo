@@ -278,7 +278,8 @@ class ZepazoParams(QMainWindow):
                 'detectionlimit':self.detectionLimit,
                 'dilate':self.dilate,
                 'coordinatesmask':self.masks,
-                'circlelimit':self.ellipse
+                'circlelimit':self.ellipse,
+                'folder':self.folder
             }
 
             path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json")
