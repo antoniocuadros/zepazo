@@ -47,8 +47,7 @@ class ImageAnalyzer:
         :return: Returns true if the image is saved correctly.
         :rtype: Boolean.
         """
-        print(self.debug)
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+
         if(self.debug != True):
             if(self.folder != None):
                 if(self.folder[-1] != "/"):
