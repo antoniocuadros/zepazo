@@ -52,7 +52,6 @@ class ImageAnalyzer:
             if(self.folder != None):
                 if(self.folder[-1] != "/"):
                     self.folder = self.folder + "/"
-                    print(name)
                 cv2.imwrite(self.folder + name, image)
             else:
                 cv2.imwrite(name , image)
@@ -91,8 +90,8 @@ class ImageAnalyzer:
         
         _, ellipse = self.moonEnclosingCircle(frame1)
         
+        copy_frame = frame1.copy()
         if(self.debug == True):
-            copy_frame = frame1.copy()
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
 
         #for each contour finded we draw a rectangle and we save the image
@@ -102,19 +101,15 @@ class ImageAnalyzer:
                 x, y, w, h = cv2.boundingRect(c)
                 if(ellipse != None):
                     if(self.inside_moon(ellipse, x, y, frame1)):                                #Possible impact! Inside Moon
-                        if(self.debug == True):
-                            cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
-                            self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count) + ".png")
-                            print(self.impact_count)
-                            self.impact_count = self.impact_count + 1
-                    else:               
-                        if(self.debug == True):                                                        #False positive! Discarded
-                            cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
-                else:                                                                                   #No ellipse obtained, Possible impact!
-                    if(self.debug == True):
-                        cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
-                        self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count) + ".png")
+                        cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
+                        self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count) + ".png")
                         self.impact_count = self.impact_count + 1
+                    else:                                                                     #False positive! Discarded
+                        cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
+                else:                                                                                   #No ellipse obtained, Possible impact!
+                    cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
+                    self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count) + ".png")
+                    self.impact_count = self.impact_count + 1
                 #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
                 
         if(self.debug):
