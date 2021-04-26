@@ -43,7 +43,7 @@ class VideoAnalyzer:
 
             # -> Object to work with images
             if(detectionlimit != None):
-                self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit, show, self.folder, self.videoPath)
+                self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit, show, self.folder, self.videoPath, self.num_frames_save)
             else:
                 self.imageAnalizer = ImageAnalyzer(None, None, show,self.folder, self.videoPath)
 
