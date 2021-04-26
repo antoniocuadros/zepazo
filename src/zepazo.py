@@ -47,7 +47,7 @@ if(args.video == None):
 #  Program
 #
 #################
-video_analizer = VideoAnalyzer(args.video, args.debug, args.detectionlimit, args.circlelimit, args.mousemask, args.folder)
+video_analizer = VideoAnalyzer(args.video, args.debug, args.detectionlimit, args.circlelimit, args.mousemask, args.folder, args.saveSurroundingFrames)
 
 #Pre Processing
 # -> Apply a mask

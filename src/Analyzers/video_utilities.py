@@ -21,7 +21,7 @@ class VideoAnalyzer:
 
     #Constructor
     #Gets the video path
-    def __init__(self, video, show, detectionlimit, circlelimit, masks, folder):
+    def __init__(self, video, show, detectionlimit, circlelimit, masks, folder, num_frames_save):
         """
         Inits VideoAnalyzer with the data of the selected video.
 
@@ -36,7 +36,7 @@ class VideoAnalyzer:
             self.showVideo = show
 
             self.folder = folder
-
+            self.num_frames_save = num_frames_save
 
             if not (self.videoCapture).isOpened():
                 raise Exception("Video could not be found on this path")
