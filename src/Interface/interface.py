@@ -655,6 +655,7 @@ class ZepazoParams(QMainWindow):
         self.horizontalLayoutSaveImpacts = QtWidgets.QHBoxLayout()
         self.horizontalLayoutSaveImpacts.setContentsMargins(-1, -1, -1, 3)
         self.horizontalLayoutSaveImpacts.setObjectName("horizontalLayoutSaveImpacts")
+        #ButtonFolder
         self.buttonSaveImpacts = QtWidgets.QPushButton(self.layoutWidget1)
         self.buttonSaveImpacts.setMinimumSize(QtCore.QSize(25, 25))
         self.buttonSaveImpacts.setMaximumSize(QtCore.QSize(25, 25))
@@ -665,6 +666,16 @@ class ZepazoParams(QMainWindow):
         self.buttonSaveImpacts.setIcon(icon3)
         self.buttonSaveImpacts.setObjectName("buttonSaveImpacts")
         self.horizontalLayoutSaveImpacts.addWidget(self.buttonSaveImpacts)
+        #SpinBox
+        self.spinBoxFrames = QtWidgets.QSpinBox(self.layoutWidget1)
+        self.spinBoxFrames.setEnabled(True)
+        self.spinBoxFrames.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.spinBoxFrames.setAlignment(QtCore.Qt.AlignCenter)
+        self.spinBoxFrames.setProperty("value", 0)
+        self.spinBoxFrames.setMinimum(0)
+        self.spinBoxFrames.setObjectName("spinBoxFrames")
+        self.horizontalLayoutSaveImpacts.addWidget(self.spinBoxFrames)
+
         self.layoutSaveImpacts.addLayout(self.horizontalLayoutSaveImpacts)
         self.horizontalLayoutInferior.addLayout(self.layoutSaveImpacts)
 
@@ -733,8 +744,9 @@ class ZepazoParams(QMainWindow):
         self.actionLoad_Video.setText(_translate("ZepazoWindow", "Open file"))
         self.actionOpen_file.setText(_translate("ZepazoWindow", "Open file"))
         self.actionSave_file.setText(_translate("ZepazoWindow", "Save file"))
-        self.labelSaveImpacts.setText(_translate("ZepazoWindow", "Impacts Folder"))
+        self.labelSaveImpacts.setText(_translate("ZepazoWindow", "Impacts"))
         self.buttonSaveImpacts.setToolTip(_translate("ZepazoWindow", "Folder to save impacts"))
+        self.spinBoxFrames.setToolTip(_translate("ZepazoWindows", "Number of sorrounded frames to save additionally"))
 
 def launch_UI():
     app = QApplication(sys.argv)
