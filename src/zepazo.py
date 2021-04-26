@@ -27,6 +27,7 @@ parser.add_argument( "-cm", "--coordinatesmask",nargs='+', type=int, help="Place
 parser.add_argument( "-l", "--detectionlimit", type=int, help="Detection limit (1-255) Default 50")
 parser.add_argument( "-cl", "--circlelimit", type=int, help="Moon contour detection limit (1-255) Default ~33 calculated while analysis")
 parser.add_argument( "-f", "--folder", type=str, help="Folder path to save impacts")
+parser.add_argument( "-ssf", "--saveSurroundingFrames", type=int, help="save n frames before and after each detection")
 
 if ( Path(argv[0]).name != 'sphinx-build' ):
     args = parser.parse_args()
