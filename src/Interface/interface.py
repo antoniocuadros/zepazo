@@ -27,6 +27,7 @@ class ZepazoParams(QMainWindow):
         self.frame_ellipse = None
         self.frame_masks = None
         self.folder = None
+        self.numFrames = None
 
         #Init main window
         super(ZepazoParams, self).__init__()
@@ -216,6 +217,7 @@ class ZepazoParams(QMainWindow):
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
             self.showFrame(self.first_frame)
+            self.numFrames = None
 
     def resetMasks(self):
         if(self.videoPath == None):
@@ -266,6 +268,9 @@ class ZepazoParams(QMainWindow):
             if(self.folder != None):
                 message = message + " -f " + self.folder
 
+            if(self.numFrames != None):
+                message = message + " -ssf " + str(self.numFrames)
+
             QMessageBox.about(self,"Command", message)
 
             pyperclip.copy(message)
@@ -279,7 +284,8 @@ class ZepazoParams(QMainWindow):
                 'dilate':self.dilate,
                 'coordinatesmask':self.masks,
                 'circlelimit':self.ellipse,
-                'folder':self.folder
+                'folder':self.folder,
+                'saveSurroundingFrames':self.numFrames
             }
 
             path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json")
@@ -329,6 +335,9 @@ class ZepazoParams(QMainWindow):
             self.videoAnalyzer.showASample()
         else:
             self.addMessage("First select a video file")
+
+    def selectNumFrames(self):
+        self.numFrames = self.spinBoxFrames.value()
 
     def setupUI(self):
         self.setUpCentralWidget()
@@ -724,6 +733,7 @@ class ZepazoParams(QMainWindow):
         self.buttonDeleteMask.clicked.connect(self.deleteMask)
         self.button_command.clicked.connect(self.showCommand)
         self.buttonSaveImpacts.clicked.connect(self.selectSaveImpactsFolder)
+        self.spinBoxFrames.valueChanged.connect(self.selectNumFrames)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
