@@ -48,13 +48,20 @@ class ImageAnalyzer:
         :return: Returns true if the image is saved correctly.
         :rtype: Boolean.
         """
+        path_to_image = ""
 
         if(self.folder != None):
             if(self.folder[-1] != "/"):
-                self.folder = self.folder + "/"
-            cv2.imwrite(self.folder + name, image)
+                path_to_image = path_to_image + self.folder + "/" + name
+            else:
+                path_to_image = path_to_image + self.folder + name
+        
         else:
-            cv2.imwrite(name , image)
+            path_to_image = path_to_image + name
+
+        print(path_to_image)
+        
+        cv2.imwrite(path_to_image , image)
 
     def getDifferences(self, frame1, frame2):
         """
