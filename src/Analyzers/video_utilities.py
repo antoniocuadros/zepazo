@@ -37,6 +37,7 @@ class VideoAnalyzer:
 
             self.folder = folder
             self.num_frames_save = num_frames_save
+            self.current_frame = 0
 
             if not (self.videoCapture).isOpened():
                 raise Exception("Video could not be found on this path")
@@ -107,7 +108,7 @@ class VideoAnalyzer:
 
             #If there are frames left
             if ret == True:    
-                frame = (self.imageAnalizer).getDifferences(frame, frame2)
+                frame = (self.imageAnalizer).getDifferences(frame, frame2, self.current_frame)
 
                 if self.showVideo: 
                     resized_frame = cv2.resize(frame, (1600,900))
@@ -119,6 +120,7 @@ class VideoAnalyzer:
             #No more frames, exit loop
             else:
                 play = False
+            self.current_frame = self.current_frame + 1
         
         cap.release()
         cv2.destroyAllWindows()

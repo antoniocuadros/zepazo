@@ -36,7 +36,7 @@ class ImageAnalyzer:
         self.impact_count = 0
 
     
-    def saveImage(self, image, name, num_frames):
+    def saveImage(self, image, name, num_frames, current_frame):
         """
         Save an image in the current working directory.
         :param: image: the image to save.
@@ -59,11 +59,11 @@ class ImageAnalyzer:
         else:
             path_to_image = path_to_image + name
 
-        print(path_to_image)
-        
         cv2.imwrite(path_to_image , image)
 
-    def getDifferences(self, frame1, frame2):
+        print(image["frameNumber"])
+
+    def getDifferences(self, frame1, frame2, current_frame):
         """
         Subtract the two frames to get the differences.
         :param: frame1: video frame 1.
@@ -110,14 +110,14 @@ class ImageAnalyzer:
                     if(self.inside_moon(ellipse, x, y, frame1)):                                #Possible impact! Inside Moon
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                         if(self.debug != True):
-                            self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count) + ".png", self.num_frames)
+                            self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count) + ".png", self.num_frames, current_frame)
                             self.impact_count = self.impact_count + 1
                     else:                                                                     #False positive! Discarded
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
                 else:                                                                                   #No ellipse obtained, Possible impact!
                     cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
                     if(self.debug != True):
-                        self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count) + ".png", self.num_frames)
+                        self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count) + ".png", self.num_frames, current_frame)
                         self.impact_count = self.impact_count + 1
                 #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
                 
