@@ -58,10 +58,30 @@ class ImageAnalyzer:
         
         else:
             path_to_image = path_to_image + name
+        
+        if(self.num_frames != None):
+            init_frame = current_frame - num_frames
+            end_frame = current_frame + num_frames
 
-        cv2.imwrite(path_to_image , image)
+            video_capturer = cv2.VideoCapture(self.videoName)
 
-        print(image["frameNumber"])
+            count = init_frame
+            video_capturer.set(cv2.CAP_PROP_POS_FRAMES, init_frame)
+            name_count = 0
+            while count<=end_frame:
+                path_to_image2 = path_to_image
+                path_to_image2 = path_to_image2 + "." + str(name_count)
+                ret,frame = video_capturer.read()
+                count+=1
+                
+                if(name_count != num_frames):
+                    cv2.imwrite(path_to_image2 + ".png", frame)
+                else:
+                    cv2.imwrite(path_to_image2 + "_IMPACT.png", image)
+                name_count+=1
+                
+        else:
+            cv2.imwrite(path_to_image + ".png" , image)
 
     def getDifferences(self, frame1, frame2, current_frame):
         """
@@ -110,14 +130,14 @@ class ImageAnalyzer:
                     if(self.inside_moon(ellipse, x, y, frame1)):                                #Possible impact! Inside Moon
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                         if(self.debug != True):
-                            self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count) + ".png", self.num_frames, current_frame)
+                            self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count), self.num_frames, current_frame)
                             self.impact_count = self.impact_count + 1
                     else:                                                                     #False positive! Discarded
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
                 else:                                                                                   #No ellipse obtained, Possible impact!
                     cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
                     if(self.debug != True):
-                        self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count) + ".png", self.num_frames, current_frame)
+                        self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
                         self.impact_count = self.impact_count + 1
                 #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
                 
