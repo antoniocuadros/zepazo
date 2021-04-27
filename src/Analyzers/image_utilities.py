@@ -100,8 +100,11 @@ class ImageAnalyzer:
         difference = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
 
         #from RGB space to GrayScale space for simplicity
-        grayFrame1 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
-        grayFrame2 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
+        grayFrame1 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
+        grayFrame2 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
+        #If neccessary, dilate the image
+        if(self.dilate != None):
+            grayFrame2 = self.dilateImage(grayFrame2)
 
         #get the difference between frame1 and frame2
         difference = cv2.subtract(grayFrame1, grayFrame2, difference)
@@ -335,3 +338,8 @@ class ImageAnalyzer:
         if(ellipse != None):
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
         return copy_frame, self.circlelimit
+
+    def dilateImage(self, frame):
+        kernel = np.ones((2,2),dtype=np.float32)
+        dilated_frame = cv2.dilate(frame,kernel,iterations = 1)
+        return dilated_frame

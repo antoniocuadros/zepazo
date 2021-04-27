@@ -114,7 +114,7 @@ class VideoAnalyzer:
                     resized_frame = cv2.resize(frame, (1600,900))
                     self.showFrame(resized_frame)
 
-                if(cv2.waitKey(fps) & 0xFF == ord('q')):
+                if(cv2.waitKey(100) & 0xFF == ord('q')):
                     play = False
             
             #No more frames, exit loop
