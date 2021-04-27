@@ -47,14 +47,15 @@ class ZepazoParams(QMainWindow):
             self.frame_masks = self.first_frame.copy()
             
             #Reset Params
-            self.detectionLimit = 50
             self.dilate = None
             self.folder = None
             self.numFrames = None
             self.masks = []
             self.addingMask = False
             self.spinBoxDetectionLimit.setValue(50)
+            self.detectionLimit = None
             self.spinboxEllipse.setValue(33)
+            self.checkBoxEllipse.isChecked(True)
             self.spinBoxDilate.setValue(0)
             self.ellipse = None
             self.checkBoxEllipse.setChecked(False)
