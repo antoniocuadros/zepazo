@@ -351,10 +351,13 @@ class ZepazoParams(QMainWindow):
         self.addMenu()
 
     def checkboxDilateClicked(self):
-        if(self.checkBoxDilate.isChecked()):
-            self.spinBoxDilate.setEnabled(True)
+        if(self.videoPath != None):
+            if(self.checkBoxDilate.isChecked()):
+                self.spinBoxDilate.setEnabled(True)
+            else:
+                self.spinBoxDilate.setEnabled(False)
         else:
-            self.spinBoxDilate.setEnabled(False)
+            self.addMessage("First select a video file")
 
     """
     This centralWidget contains all elements in the main window in a Grid Layout
