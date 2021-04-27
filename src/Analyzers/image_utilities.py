@@ -13,13 +13,14 @@ class ImageAnalyzer:
     """
     This class will represent an Image Analizer with multiple tools for working with images.
     """
-    def __init__(self, limit, circlelimit, debug, folder, videoName, num_frames):
+    def __init__(self, limit, circlelimit, debug, folder, videoName, num_frames, dilate):
         self.mouse_click_count = 0
         self.masks = []
         self.videoName = videoName
         self.num_frames = num_frames
 
         self.folder = folder
+        self.dilate = dilate
         
         if(debug != None):
             self.debug = debug

@@ -27,7 +27,8 @@ parser.add_argument( "-cm", "--coordinatesmask",nargs='+', type=int, help="Place
 parser.add_argument( "-l", "--detectionlimit", type=int, help="Detection limit (1-255) Default 50")
 parser.add_argument( "-cl", "--circlelimit", type=int, help="Moon contour detection limit (1-255) Default ~33 calculated while analysis")
 parser.add_argument( "-f", "--folder", type=str, help="Folder path to save impacts")
-parser.add_argument( "-ssf", "--saveSurroundingFrames", type=int, help="save n frames before and after each detection")
+parser.add_argument( "-ssf", "--saveSurroundingFrames", type=int, help="Save n frames before and after each detection")
+parser.add_argument( "-dt", "--dilate", type=int, help="Dilate previous images to avoid clear parts of the moon due to movement")
 
 if ( Path(argv[0]).name != 'sphinx-build' ):
     args = parser.parse_args()
@@ -47,7 +48,7 @@ if(args.video == None):
 #  Program
 #
 #################
-video_analizer = VideoAnalyzer(args.video, args.debug, args.detectionlimit, args.circlelimit, args.mousemask, args.folder, args.saveSurroundingFrames)
+video_analizer = VideoAnalyzer(args.video, args.debug, args.detectionlimit, args.circlelimit, args.mousemask, args.folder, args.saveSurroundingFrames, args.dilate)
 
 #Pre Processing
 # -> Apply a mask

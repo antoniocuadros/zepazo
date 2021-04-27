@@ -21,7 +21,7 @@ class VideoAnalyzer:
 
     #Constructor
     #Gets the video path
-    def __init__(self, video, show, detectionlimit, circlelimit, masks, folder, num_frames_save):
+    def __init__(self, video, show, detectionlimit, circlelimit, masks, folder, num_frames_save, dilate):
         """
         Inits VideoAnalyzer with the data of the selected video.
 
@@ -44,9 +44,9 @@ class VideoAnalyzer:
 
             # -> Object to work with images
             if(detectionlimit != None):
-                self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit, show, self.folder, self.videoPath, self.num_frames_save)
+                self.imageAnalizer = ImageAnalyzer(detectionlimit, circlelimit, show, self.folder, self.videoPath, self.num_frames_save, dilate)
             else:
-                self.imageAnalizer = ImageAnalyzer(None, None, show,self.folder, self.videoPath, self.num_frames_save)
+                self.imageAnalizer = ImageAnalyzer(None, None, show,self.folder, self.videoPath, self.num_frames_save, dilate)
 
             # -> Mask points
             if(masks != None):
@@ -114,7 +114,7 @@ class VideoAnalyzer:
                     resized_frame = cv2.resize(frame, (1600,900))
                     self.showFrame(resized_frame)
 
-                if(cv2.waitKey(100) & 0xFF == ord('q')):
+                if(cv2.waitKey(fps) & 0xFF == ord('q')):
                     play = False
             
             #No more frames, exit loop
