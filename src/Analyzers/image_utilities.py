@@ -118,7 +118,7 @@ class ImageAnalyzer:
         _, ellipse = self.moonEnclosingCircle(frame1)
         
         copy_frame = frame1.copy()
-        if(self.debug == True):
+        if(self.debug == True and ellipse != None):
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
 
         #for each contour finded we draw a rectangle and we save the image
@@ -332,5 +332,6 @@ class ImageAnalyzer:
             self.circlelimit = umbral
 
         _, ellipse = self.moonEnclosingCircle(copy_frame)
-        cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
+        if(ellipse != None):
+            cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
         return copy_frame, self.circlelimit
