@@ -341,6 +341,6 @@ class ImageAnalyzer:
         return copy_frame, self.circlelimit
 
     def dilateImage(self, frame):
-        kernel = np.ones((2,2),dtype=np.float32)
+        kernel = np.ones((self.dilate,self.dilate),dtype=np.float32)
         dilated_frame = cv2.dilate(frame,kernel,iterations = 1)
         return dilated_frame
