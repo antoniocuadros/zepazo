@@ -55,8 +55,10 @@ class ZepazoParams(QMainWindow):
             self.addingMask = False
             self.spinBoxDetectionLimit.setValue(50)
             self.spinboxEllipse.setValue(33)
+            self.spinboxDilate.setValue(0)
             self.ellipse = None
             self.checkBoxEllipse.setChecked(False)
+            self.checkBoxDilate.setChecked(False)
 
             #Show Frame
             self.showFrame(self.first_frame)
