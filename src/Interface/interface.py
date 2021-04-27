@@ -55,7 +55,7 @@ class ZepazoParams(QMainWindow):
             self.addingMask = False
             self.spinBoxDetectionLimit.setValue(50)
             self.spinboxEllipse.setValue(33)
-            self.spinboxDilate.setValue(0)
+            self.spinBoxDilate.setValue(0)
             self.ellipse = None
             self.checkBoxEllipse.setChecked(False)
             self.checkBoxDilate.setChecked(False)
@@ -208,15 +208,17 @@ class ZepazoParams(QMainWindow):
     def resetParams(self):
         if(self.videoPath != None):
             #Parameters
-            self.detectionLimit = 50
-            self.dilate = None
             self.folder = None
             self.masks = []
             self.addingMask = False
             self.deletingMask = False
             self.spinBoxDetectionLimit.setValue(50)
+            self.spinBoxDilate.setValue(0)
+            self.checkBoxDilate.setChecked(False)
             self.spinboxEllipse.setValue(33)
+            self.detectionLimit = 50
             self.ellipse = None
+            self.dilate = None
             self.checkBoxEllipse.setChecked(False)
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
@@ -260,7 +262,7 @@ class ZepazoParams(QMainWindow):
                 message = message + " -cl " + str(self.ellipse)
 
             if(self.dilate != None):
-                message = message + " -dt" + str(self.dilate)
+                message = message + " -dt " + str(self.dilate)
 
             if(len(self.masks) > 0):
                 message = message + " -cm "
@@ -358,6 +360,9 @@ class ZepazoParams(QMainWindow):
                 self.spinBoxDilate.setEnabled(False)
         else:
             self.addMessage("First select a video file")
+
+    def setDilateValue(self):
+        self.dilate = self.spinBoxDilate.value()
 
     """
     This centralWidget contains all elements in the main window in a Grid Layout
@@ -748,6 +753,7 @@ class ZepazoParams(QMainWindow):
         self.buttonSaveImpacts.clicked.connect(self.selectSaveImpactsFolder)
         self.spinBoxFrames.valueChanged.connect(self.selectNumFrames)
         self.checkBoxDilate.clicked.connect(self.checkboxDilateClicked)
+        self.spinBoxDilate.valueChanged.connect(self.setDilateValue)
 
     def addTexts(self):
         _translate = QtCore.QCoreApplication.translate
