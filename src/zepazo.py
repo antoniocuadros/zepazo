@@ -47,6 +47,9 @@ if(args.video == None):
 if(os.path.exists(args.folder) == False):
     parser.error("Folder (-f) must exists")
 
+if(args.saveSurroundingFrames < 0):
+    parser.error("Surrounding farmes (-ssf) must be a possitive number")
+
 #################
 #
 #  Program
