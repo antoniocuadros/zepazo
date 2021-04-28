@@ -53,14 +53,16 @@ class ZepazoParams(QMainWindow):
             self.masks = []
             self.addingMask = False
             self.spinBoxDetectionLimit.setValue(50)
-            self.detectionLimit = None
-            self.spinboxEllipse.setValue(33)
-            self.checkBoxEllipse.isChecked(True)
+            self.detectionLimit = 50
+            frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
+            self.spinboxEllipse.setValue(int(value))
+            self.spinboxEllipse.setEnabled(False)
+            self.checkBoxEllipse.setChecked(True)
+            self.adjustEllipse()
             self.spinBoxDilate.setValue(0)
-            self.ellipse = None
-            self.checkBoxEllipse.setChecked(False)
             self.checkBoxDilate.setChecked(False)
-
+            self.ellipse = None
+            print(self.ellipse)
             #Show Frame
             self.showFrame(self.first_frame)
             
@@ -216,11 +218,13 @@ class ZepazoParams(QMainWindow):
             self.spinBoxDetectionLimit.setValue(50)
             self.spinBoxDilate.setValue(0)
             self.checkBoxDilate.setChecked(False)
-            self.spinboxEllipse.setValue(33)
-            self.detectionLimit = 50
             self.ellipse = None
+            frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
+            self.spinboxEllipse.setValue(value)
+            self.checkBoxEllipse.setChecked(True)
+            self.spinboxEllipse.setEnabled(False)
+            self.detectionLimit = 50
             self.dilate = None
-            self.checkBoxEllipse.setChecked(False)
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
             self.showFrame(self.first_frame)
@@ -257,7 +261,10 @@ class ZepazoParams(QMainWindow):
             self.addMessage("First select and configure a video file")
         else:
             message = "python3 zepazo.py "
-            message = message + "-v " + self.videoPath[0] + " -l " + str(self.detectionLimit) 
+            message = message + "-v " + self.videoPath[0]
+
+            if(self.detectionLimit != None):
+                message = message  + " -l " + str(self.detectionLimit) 
             
             if(self.ellipse != None):
                 message = message + " -cl " + str(self.ellipse)
@@ -359,6 +366,7 @@ class ZepazoParams(QMainWindow):
                 self.spinBoxDilate.setEnabled(True)
             else:
                 self.spinBoxDilate.setEnabled(False)
+                self.dilate = None
         else:
             self.addMessage("First select a video file")
 

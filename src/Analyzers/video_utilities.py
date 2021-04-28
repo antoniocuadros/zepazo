@@ -61,7 +61,8 @@ class VideoAnalyzer:
             self.__getGeneralVideoStats(self.videoCapture)
 
             #Show info about the video
-            self.showVideoInfo()
+            if(self.showVideo != True):
+                self.showVideoInfo()
         else:
             raise Exception("Video could not be found on this path or incorrect file type")
 
