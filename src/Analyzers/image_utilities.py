@@ -165,12 +165,12 @@ class ImageAnalyzer:
 
         #We get the moon thresed with the moon in white and the rest in black
         #variate 25         
-
+        umbral = 0
         if(self.circlelimit != None):
             umbral = int(self.circlelimit)
         else:
             umbral = np.average(grayFrame) - np.std(grayFrame)
-    
+
         _, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), umbral, 255, cv2.THRESH_BINARY)
 
         #With the threshed image of the moon we can obtain the moon contour
@@ -191,7 +191,11 @@ class ImageAnalyzer:
 
         #Uncomment to see the ellipse around the moon
         #cv2.ellipse(grayFrame, ellipse,(0, 255, 255), 2)
-        if(len(c) > 5):
+        print(umbral)
+        if(umbral < 5 or umbral > 70):
+            ellipse = None
+
+        if(len(c) > 5 and ellipse != None):
             centerX = ellipse[0][0]
             centerY = ellipse[0][1]
             return umbral, ellipse

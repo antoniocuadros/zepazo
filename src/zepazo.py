@@ -44,10 +44,10 @@ if(args.detectionlimit != None):
 if(args.video == None):
         parser.error("Video (-v) must be defined")
 
-if(os.path.exists(args.folder) == False):
+if(args.folder !=None and os.path.exists(args.folder) == False):
     parser.error("Folder (-f) must exists")
 
-if(args.saveSurroundingFrames < 0):
+if(args.saveSurroundingFrames != None and args.saveSurroundingFrames < 0):
     parser.error("Surrounding farmes (-ssf) must be a possitive number")
 
 #################
