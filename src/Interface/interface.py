@@ -327,6 +327,9 @@ class ZepazoParams(QMainWindow):
             self.dilate = args["dilate"]
             self.masks = args["coordinatesmask"]
             self.ellipse = args["circlelimit"]
+            self.folder = args["folder"]
+            self.numFrames = args["saveSurroundingFrames"]
+            
             self.drawMasks(self.frame_masks)
             
             self.spinboxEllipse.setValue(self.ellipse)

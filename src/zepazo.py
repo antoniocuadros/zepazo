@@ -10,6 +10,7 @@ from Analyzers.video_utilities import VideoAnalyzer
 from sys import argv
 from pathlib import Path
 import os
+import json
 
 
 #################
@@ -55,13 +56,33 @@ if(args.configFile != None and os.path.exists(args.configFile) == False):
     parser.error("Config file (-cf) must exists")
 
 #CHECK IF JSON FILES IS GIVEN
+video = args.video
+print(video)
+debug = args.debug
 
+if(args.configFile == None):
+    detectionlimit = args.detectionlimit
+    circlelimit = args.circlelimit
+    mousemask = args.mousemask
+    folder = args.folder
+    saveSurroundingFrames = args.saveSurroundingFrames
+    dilate = args.dilate
+else:
+    with open(args.configFile, 'r') as json_file:
+        jsonFile = json.load(json_file)
+    
+    detectionlimit = jsonFile["detectionlimit"]
+    circlelimit = jsonFile["circlelimit"]
+    mousemask = jsonFile["coordinatesmask"]
+    folder = jsonFile["folder"]
+    saveSurroundingFrames = jsonFile["saveSurroundingFrames"]
+    dilate = jsonFile["dilate"]
 #################
 #
 #  Program
 #
 #################
-video_analizer = VideoAnalyzer(args.video, args.debug, args.detectionlimit, args.circlelimit, args.mousemask, args.folder, args.saveSurroundingFrames, args.dilate)
+video_analizer = VideoAnalyzer(video, debug, detectionlimit, circlelimit, mousemask, folder, saveSurroundingFrames, dilate)
 
 #Pre Processing
 # -> Apply a mask
