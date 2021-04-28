@@ -9,6 +9,7 @@ import  argparse
 from Analyzers.video_utilities import VideoAnalyzer
 from sys import argv
 from pathlib import Path
+import os
 
 
 #################
@@ -42,6 +43,9 @@ if(args.detectionlimit != None):
 
 if(args.video == None):
         parser.error("Video (-v) must be defined")
+
+if(os.path.exists(args.folder) == False):
+    parser.error("Folder (-f) must exists")
 
 #################
 #
