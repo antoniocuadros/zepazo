@@ -165,7 +165,7 @@ class ImageAnalyzer:
 
         #We get the moon thresed with the moon in white and the rest in black
         #variate 25         
-        umbral = 0
+
         if(self.circlelimit != None):
             umbral = int(self.circlelimit)
         else:
@@ -191,7 +191,7 @@ class ImageAnalyzer:
 
         #Uncomment to see the ellipse around the moon
         #cv2.ellipse(grayFrame, ellipse,(0, 255, 255), 2)
-        print(umbral)
+        
         if(umbral < 5 or umbral > 70):
             ellipse = None
 
