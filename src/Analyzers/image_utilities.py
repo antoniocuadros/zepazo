@@ -125,7 +125,7 @@ class ImageAnalyzer:
         if(self.debug == True and ellipse != None):
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
 
-
+        #Mark hits
         copy_frame = self.markHits(contours, ellipse, frame1, copy_frame)
                 
         if(self.debug):
