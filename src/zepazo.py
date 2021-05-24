@@ -57,7 +57,6 @@ if(args.configFile != None and os.path.exists(args.configFile) == False):
 
 #CHECK IF JSON FILES IS GIVEN
 video = args.video
-print(video)
 debug = args.debug
 
 if(args.configFile == None):

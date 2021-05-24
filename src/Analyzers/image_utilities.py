@@ -90,7 +90,6 @@ class ImageAnalyzer:
         else:
             cv2.imwrite(path_to_image + ".png" , image)
 
-
     def saveSurroundingFrames(self):
         print("")
 
