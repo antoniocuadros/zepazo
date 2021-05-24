@@ -192,8 +192,13 @@ class ImageAnalyzer:
 
         _, threshed_moon = cv2.threshold(np.array(grayFrame, dtype=np.uint8), umbral, 255, cv2.THRESH_BINARY)
 
+        kernel = np.ones((5,5),np.uint8)        
+        closing = cv2.morphologyEx(threshed_moon, cv2.MORPH_CLOSE, kernel)
+        #cv2.imshow("",closing)
+
+
         #With the threshed image of the moon we can obtain the moon contour
-        moon_contour, _ = cv2.findContours(threshed_moon, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        moon_contour, _ = cv2.findContours(closing, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         
         #With the previous contour now we try to get the circle containing the moon 
