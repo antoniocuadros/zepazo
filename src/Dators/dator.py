@@ -16,3 +16,7 @@ class Dator:
     
     def saveFrame(self, name, frame):
         raise Exception("The method must be implemented by another class")
+
+
+    def saveSurroundingFrames(self, num_frames, current_frame, name):
+        raise Exception("The method must be implemented by another class")

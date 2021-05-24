@@ -139,6 +139,7 @@ class VideoAnalyzer:
             #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoPath) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
             name = os.path.basename(self.videoPath) + "_" + str(impact.impact_number)
             self.dator.saveFrame(name, impact.frame)
+            self.dator.saveSurroundingFrames(self.num_frames_save, impact.frame_number, name, self.videoPath)
 
 
     def applyMasks(self, frame, frame2):

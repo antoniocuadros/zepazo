@@ -84,7 +84,7 @@ class ImageAnalyzer:
                 if(name_count != num_frames):
                     cv2.imwrite(path_to_image2 + ".png", frame)
                 else:
-                    cv2.imwrite(path_to_image2 + "_IMPACT.png", image)
+                    cv2.imwrite(path_to_image2 + "_IMPACT.png", frame)
                 name_count+=1
                 
         else:
@@ -117,7 +117,7 @@ class ImageAnalyzer:
             grayFrame2 = self.dilateImage(grayFrame2)
 
         #get the difference between frame1 and frame2
-        difference = cv2.subtract(grayFrame1, grayFrame2, difference)
+        difference = cv2.subtract(grayFrame2, grayFrame1, difference)
 
         #For each pixel, if the pixel value is smaller than a value (second argument: 50) 
         #it is set to 0 (white), if not the pixel is set to a maximum value (third argument) (black)
@@ -155,7 +155,7 @@ class ImageAnalyzer:
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                         if(self.debug != True):
                             #self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count), self.num_frames, current_frame)
-                            impact = Impact(frame1, self.impact_count, current_frame)
+                            impact = Impact(copy_frame, self.impact_count, current_frame)
                             
                             self.impact_count = self.impact_count + 1
                     else:                                                                     #False positive! Discarded
@@ -164,7 +164,7 @@ class ImageAnalyzer:
                     cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
                     if(self.debug != True):
                         #self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
-                        impact = Impact(frame1, self.impact_count, current_frame)
+                        impact = Impact(copy_frame, self.impact_count, current_frame)
 
                         self.impact_count = self.impact_count + 1
         
