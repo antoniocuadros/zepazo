@@ -11,6 +11,7 @@ import datetime
 import ntpath
 from pathlib import Path
 import mimetypes
+import os
 from .image_utilities import ImageAnalyzer
 
 
@@ -126,6 +127,15 @@ class VideoAnalyzer:
         
         cap.release()
         cv2.destroyAllWindows()
+
+
+        #We save all impacts
+        self.saveAllImpacts()
+
+    
+    def saveAllImpacts(self):
+        for impact in self.impacts:
+            self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoName) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
 
 
     def applyMasks(self, frame, frame2):
