@@ -7,6 +7,7 @@
 
 import  argparse
 from Analyzers.video_utilities import VideoAnalyzer
+from Dators.fsdator import FSDator
 from sys import argv
 from pathlib import Path
 import os
@@ -77,13 +78,14 @@ else:
     saveSurroundingFrames = jsonFile["saveSurroundingFrames"]
     dilate = jsonFile["dilate"]
 
-    
+
 #################
 #
 #  Program
 #
 #################
-video_analizer = VideoAnalyzer(video, debug, detectionlimit, circlelimit, mousemask, folder, saveSurroundingFrames, dilate)
+dator = FSDator(video)
+video_analizer = VideoAnalyzer(dator, video, debug, detectionlimit, circlelimit, mousemask, folder, saveSurroundingFrames, dilate)
 
 #Pre Processing
 # -> Apply a mask

@@ -5,7 +5,7 @@
 #
 ##############################
 
-from dator import Dator
+from .dator import Dator
 import os
 from cv2 import cv2
 
