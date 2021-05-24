@@ -111,7 +111,6 @@ class VideoAnalyzer:
 
                 if(impact) != None:
                     self.impacts.append(impact)
-                    print(impact.impact_number)
 
                 if self.showVideo: 
                     resized_frame = cv2.resize(frame, (1600,900))
@@ -134,8 +133,10 @@ class VideoAnalyzer:
 
     
     def saveAllImpacts(self):
+        print(len(self.impacts))
         for impact in self.impacts:
-            self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoName) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
+            print(os.path.basename(self.videoPath) + "_" + str(impact.impact_number))
+            #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoName) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
 
 
     def applyMasks(self, frame, frame2):

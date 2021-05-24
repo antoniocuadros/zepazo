@@ -135,7 +135,7 @@ class ImageAnalyzer:
         copy_frame, detected_impact = self.markHits(contours, ellipse, frame1, copy_frame, current_frame)
                 
         if(self.debug):
-            return copy_frame
+            return copy_frame, detected_impact
         else:
             return frame1, detected_impact
 
@@ -161,7 +161,7 @@ class ImageAnalyzer:
                     cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
                     if(self.debug != True):
                         #self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
-                        impacto = Impact(frame1, self.impact_count, current_frame)
+                        impact = Impact(frame1, self.impact_count, current_frame)
 
                         self.impact_count = self.impact_count + 1
         
