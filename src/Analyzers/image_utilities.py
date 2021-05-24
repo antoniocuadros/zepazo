@@ -125,6 +125,16 @@ class ImageAnalyzer:
         if(self.debug == True and ellipse != None):
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
 
+
+        copy_frame = self.markHits(contours, ellipse, frame1, copy_frame)
+                
+        if(self.debug):
+            return copy_frame
+        else:
+            return frame1
+
+
+    def markHits(self, contours, ellipse, frame1, copy_frame):
         #for each contour finded we draw a rectangle and we save the image
         if (len(contours) > 0):
             
@@ -143,13 +153,7 @@ class ImageAnalyzer:
                     if(self.debug != True):
                         self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
                         self.impact_count = self.impact_count + 1
-                #cv2.imwrite(self.videoPath + "_" + str(impact_count) + ".png", frame1)
-                
-        if(self.debug):
-            return copy_frame
-        else:
-            return frame1
-
+        return copy_frame
 
     def moonEnclosingCircle(self, frame):
         """
