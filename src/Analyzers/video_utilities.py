@@ -39,6 +39,8 @@ class VideoAnalyzer:
             self.num_frames_save = num_frames_save
             self.current_frame = 0
 
+            self.impacts = []
+
             if not (self.videoCapture).isOpened():
                 raise Exception("Video could not be found on this path")
 
@@ -104,7 +106,11 @@ class VideoAnalyzer:
 
             #If there are frames left
             if ret == True:    
-                frame = (self.imageAnalizer).getDifferences(frame, frame2, self.current_frame)
+                frame, impact = (self.imageAnalizer).getDifferences(frame, frame2, self.current_frame)
+
+                if(impact) != None:
+                    self.impacts.append(impact)
+                    print(impact.impact_number)
 
                 if self.showVideo: 
                     resized_frame = cv2.resize(frame, (1600,900))
