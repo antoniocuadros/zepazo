@@ -9,6 +9,12 @@ import numpy as np
 import os.path
 import math
 
+from os.path import dirname, join, abspath
+import os, sys
+sys.path.insert(0, abspath(join(dirname(__file__), '..')))
+from Impacts.impact import Impact
+sys.path.insert(0, abspath(join(dirname(__file__))))
+
 class ImageAnalyzer:
     """
     This class will represent an Image Analizer with multiple tools for working with images.
