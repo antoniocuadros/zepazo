@@ -49,5 +49,5 @@ def test_if_difference_image_is_ok():
     cap = video_analyzer.videoCapture
 
     ret, frame = cap.read()
-    resulting_frame = image_analyzer.getDifferences(frame, frame, 1)  
+    resulting_frame, impact = image_analyzer.getDifferences(frame, frame, 1)  
     assert np.max(resulting_frame[0][0]) <= 1
