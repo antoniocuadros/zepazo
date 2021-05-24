@@ -141,6 +141,7 @@ class ImageAnalyzer:
 
 
     def markHits(self, contours, ellipse, frame1, copy_frame, current_frame):
+        impact = None
         #for each contour finded we draw a rectangle and we save the image
         if (len(contours) > 0):
             
@@ -151,8 +152,8 @@ class ImageAnalyzer:
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                         if(self.debug != True):
                             #self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count), self.num_frames, current_frame)
-                            impacto = Impact(frame1, self.impact_count, current_frame)
-                            print(impacto.impact_number)
+                            impact = Impact(frame1, self.impact_count, current_frame)
+                            
                             self.impact_count = self.impact_count + 1
                     else:                                                                     #False positive! Discarded
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
@@ -161,9 +162,10 @@ class ImageAnalyzer:
                     if(self.debug != True):
                         #self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
                         impacto = Impact(frame1, self.impact_count, current_frame)
-                        print(impacto)
+
                         self.impact_count = self.impact_count + 1
-        return copy_frame
+        
+        return copy_frame, impact
 
     def moonEnclosingCircle(self, frame):
         """
