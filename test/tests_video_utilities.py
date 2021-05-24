@@ -49,7 +49,7 @@ def test_if_current_time_ok():
     video_analyzer = VideoAnalyzer('test/example_video/test.mp4', 'False', None, None, None, None, None, None)
     cap = video_analyzer.videoCapture
 
-    assert video_analyzer.getCurrentTime(cap) == '0:00:00'
+    assert video_analyzer.getCurrentTime(0) == '0:00:00'
 
 
 ################################################
