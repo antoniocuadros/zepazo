@@ -133,10 +133,9 @@ class VideoAnalyzer:
 
     
     def saveAllImpacts(self):
-        print(len(self.impacts))
         for impact in self.impacts:
-            print(os.path.basename(self.videoPath) + "_" + str(impact.impact_number))
-            #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoName) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
+            impact.setTime(self.getCurrentTime(impact.frame_number))
+            #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoPath) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
 
 
     def applyMasks(self, frame, frame2):
@@ -161,16 +160,14 @@ class VideoAnalyzer:
         #video duration in seconds 
         self.seconds = int(self.frames / self.fps)
     
-    def getCurrentTime(self, cap):
+    def getCurrentTime(self, current_frame):
         """
         Gets the current time of a of a video playing when is called.
 
-        :param cap: videoCapture cv2 object.
+        :param current_frame: current frame to get the time.
         """
-        
-        self.__getGeneralVideoStats(cap)
-        current_frame = cap.get(cv2.CAP_PROP_POS_FRAMES)
-        return str(datetime.timedelta(seconds = current_frame / self.fps))
+
+        return str(datetime.timedelta(seconds = current_frame*2 / self.fps))
 
     def showFrame(self, frame):
         """

@@ -90,6 +90,10 @@ class ImageAnalyzer:
         else:
             cv2.imwrite(path_to_image + ".png" , image)
 
+
+    def saveSurroundingFrames(self):
+        print("")
+
     def getDifferences(self, frame1, frame2, current_frame):
         """
         Subtract the two frames to get the differences.
