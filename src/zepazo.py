@@ -76,6 +76,8 @@ else:
     folder = jsonFile["folder"]
     saveSurroundingFrames = jsonFile["saveSurroundingFrames"]
     dilate = jsonFile["dilate"]
+
+    
 #################
 #
 #  Program
