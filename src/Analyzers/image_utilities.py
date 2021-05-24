@@ -132,12 +132,12 @@ class ImageAnalyzer:
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
 
         #Mark hits
-        copy_frame = self.markHits(contours, ellipse, frame1, copy_frame, current_frame)
+        copy_frame, detected_impact = self.markHits(contours, ellipse, frame1, copy_frame, current_frame)
                 
         if(self.debug):
             return copy_frame
         else:
-            return frame1
+            return frame1, detected_impact
 
 
     def markHits(self, contours, ellipse, frame1, copy_frame, current_frame):
