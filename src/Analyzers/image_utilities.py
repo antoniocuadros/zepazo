@@ -132,7 +132,7 @@ class ImageAnalyzer:
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
 
         #Mark hits
-        copy_frame = self.markHits(contours, ellipse, frame1, copy_frame)
+        copy_frame = self.markHits(contours, ellipse, frame1, copy_frame, current_frame)
                 
         if(self.debug):
             return copy_frame
@@ -140,7 +140,7 @@ class ImageAnalyzer:
             return frame1
 
 
-    def markHits(self, contours, ellipse, frame1, copy_frame):
+    def markHits(self, contours, ellipse, frame1, copy_frame, current_frame):
         #for each contour finded we draw a rectangle and we save the image
         if (len(contours) > 0):
             
