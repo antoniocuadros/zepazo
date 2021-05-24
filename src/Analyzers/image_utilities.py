@@ -150,14 +150,18 @@ class ImageAnalyzer:
                     if(self.inside_moon(ellipse, x, y, frame1)):                                #Possible impact! Inside Moon
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                         if(self.debug != True):
-                            self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count), self.num_frames, current_frame)
+                            #self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count), self.num_frames, current_frame)
+                            impacto = Impact(frame1, self.impact_count, current_frame)
+                            print(impacto.impact_number)
                             self.impact_count = self.impact_count + 1
                     else:                                                                     #False positive! Discarded
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (255, 0, 255), 2)
                 else:                                                                                   #No ellipse obtained, Possible impact!
                     cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
                     if(self.debug != True):
-                        self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
+                        #self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
+                        impacto = Impact(frame1, self.impact_count, current_frame)
+                        print(impacto)
                         self.impact_count = self.impact_count + 1
         return copy_frame
 
