@@ -99,12 +99,7 @@ class VideoAnalyzer:
             ret, frame=cap.read() #read a single frame, ret will be true if frame captured
             ret, frame2=cap.read()
 
-            #Apply the mask for each frame
-            if(len(self.mask_points) > 0):
-                if(len(self.mask_points) > 0 and len(self.mask_points) % 2 == 0):
-                    for i in range(len(self.mask_points)//2):
-                        cv2.rectangle(frame, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
-                        cv2.rectangle(frame2, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
+            frame, frame2 = self.applyMasks(frame, frame2)
 
 
             #If there are frames left
@@ -125,6 +120,16 @@ class VideoAnalyzer:
         
         cap.release()
         cv2.destroyAllWindows()
+
+
+    def applyMasks(self, frame, frame2):
+        #Apply the mask for each frame
+        if(len(self.mask_points) > 0):
+            if(len(self.mask_points) > 0 and len(self.mask_points) % 2 == 0):
+                for i in range(len(self.mask_points)//2):
+                    cv2.rectangle(frame, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
+                    cv2.rectangle(frame2, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
+        return frame, frame2
 
     def __getGeneralVideoStats(self, cap):
         """
