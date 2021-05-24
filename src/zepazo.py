@@ -84,7 +84,7 @@ else:
 #  Program
 #
 #################
-dator = FSDator(video)
+dator = FSDator(folder)
 video_analizer = VideoAnalyzer(dator, video, debug, detectionlimit, circlelimit, mousemask, folder, saveSurroundingFrames, dilate)
 
 #Pre Processing

@@ -26,8 +26,9 @@ class FSDator(Dator):
     def saveFrame(self, name, frame):
         path_to_image = ""
         if(self.path[-1] != "/"):
-                path_to_image = path_to_image + self.path + "/" + name
+                path_to_image =  self.path + "/" + name
         else:
-            path_to_image = path_to_image + self.path + name
-
+            path_to_image =  self.path + name
+            
+        print(path_to_image)
         cv2.imwrite(path_to_image + ".png", frame)
