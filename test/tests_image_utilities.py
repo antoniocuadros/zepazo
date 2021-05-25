@@ -28,7 +28,7 @@ from src.Dators.fsdator import FSDator
 #
 #    image_analyzer = ImageAnalyzer(50, None, None, None,"test.mp4", None, None)
 #    dator = FSDator('.')
-#    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,None, None)
+#    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,None, None,None,None)
 #    cap = video_analyzer.videoCapture
 
 #    ret, frame = cap.read()
@@ -47,7 +47,7 @@ from src.Dators.fsdator import FSDator
 def test_if_difference_image_is_ok():
 
     image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
-    video_analyzer = VideoAnalyzer(None, 'test/example_video/test.mp4', True, None, None,None, None,None, None)
+    video_analyzer = VideoAnalyzer(None, 'test/example_video/test.mp4', True, None, None,None, None,None, None,None,None)
     cap = video_analyzer.videoCapture
 
     ret, frame = cap.read()

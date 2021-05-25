@@ -21,7 +21,7 @@ from .argument import Argument
 #
 ################################################
 def test_if_object_is_created_ok():
-    video_analizer = VideoAnalyzer(None,'test/example_video/test.mp4', 'False', None, None, None, None, None, None)
+    video_analizer = VideoAnalyzer(None,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
 
     assert video_analizer.videoPath == 'test/example_video/test.mp4'  
 
@@ -34,7 +34,7 @@ def test_if_object_is_created_ok():
 ################################################
 def test_if_object_is_created_with_error():
     with pytest.raises(Exception) as e:
-        video_analiyzer = VideoAnalyzer(None,'test/example_video/test5.mp4', 'False', None, None, None, None, None, None)
+        video_analiyzer = VideoAnalyzer(None,'test/example_video/test5.mp4', 'False', None, None, None, None, None, None,None,None)
 
     assert str(e.value) == "Video could not be found on this path or incorrect file type"
 
@@ -46,7 +46,7 @@ def test_if_object_is_created_with_error():
 #
 ################################################
 def test_if_current_time_ok():
-    video_analyzer = VideoAnalyzer(None,'test/example_video/test.mp4', 'False', None, None, None, None, None, None)
+    video_analyzer = VideoAnalyzer(None,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
     cap = video_analyzer.videoCapture
 
     assert video_analyzer.getCurrentTime(0) == '0:00:00'
@@ -60,7 +60,7 @@ def test_if_current_time_ok():
 #
 ################################################
 def test_if_video_shows():
-    video_analyzer = VideoAnalyzer(None,'test/example_video/test.mp4', 'True', None, None, None, None, None, None)
+    video_analyzer = VideoAnalyzer(None,'test/example_video/test.mp4', 'True', None, None, None, None, None, None,None,None)
     cap = video_analyzer.videoCapture
 
     ret, frame = cap.read()
@@ -76,7 +76,7 @@ def test_if_video_shows():
 #
 ################################################
 def test_if_stats_are_ok():
-    video_analyzer = VideoAnalyzer(None,'test/example_video/test.mp4', 'False', None, None, None, None, None, None)
+    video_analyzer = VideoAnalyzer(None,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
 
     assert video_analyzer.frames == 29.0
     assert video_analyzer.fps == 23
