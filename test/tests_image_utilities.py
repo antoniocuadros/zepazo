@@ -24,17 +24,17 @@ from src.Dators.fsdator import FSDator
 # Checks if an image is saved
 #
 ################################################
-def test_if_image_is_saved():
+#def test_if_image_is_saved():
+#
+#    image_analyzer = ImageAnalyzer(50, None, None, None,"test.mp4", None, None)
+#    dator = FSDator('.')
+#    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,None, None)
+#    cap = video_analyzer.videoCapture
 
-    image_analyzer = ImageAnalyzer(50, None, None, None,"test.mp4", None, None)
-    dator = FSDator('.')
-    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,None, None)
-    cap = video_analyzer.videoCapture
-
-    ret, frame = cap.read()
-    image_analyzer.saveImage(frame, 'test_image',None,0)  
-    assert os.path.isfile('test_image.png') == True
-    os.remove("test_image.png")
+#    ret, frame = cap.read()
+#    image_analyzer.saveImage(frame, 'test_image',None,0)  
+#    assert os.path.isfile('test_image.png') == True
+#    os.remove("test_image.png")
 
 ################################################
 #

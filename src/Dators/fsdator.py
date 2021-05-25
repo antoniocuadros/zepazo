@@ -24,13 +24,20 @@ class FSDator(Dator):
 
     
     def saveFrame(self, name, frame):
+        """
+        Save an image in a selected directory.
+        :param: frame: the image to save.
+        :type: frame: numpy.ndarray.
+
+        :param: name: name of the image to save.
+        :type: frame1: str.
+        """
         path_to_image = ""
         if(self.path[-1] != "/"):
                 path_to_image =  self.path + "/" + name
         else:
             path_to_image =  self.path + name
             
-        print(path_to_image)
         cv2.imwrite(path_to_image + ".png", frame)
 
     def saveSurroundingFrames(self, num_frames, current_frame, name,videopath):

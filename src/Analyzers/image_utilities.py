@@ -43,55 +43,7 @@ class ImageAnalyzer:
         self.impact_count = 0
 
     
-    def saveImage(self, image, name, num_frames, current_frame):
-        """
-        Save an image in the current working directory.
-        :param: image: the image to save.
-        :type: image: numpy.ndarray.
 
-        :param: name: name of the image to save.
-        :type: frame1: str.
-
-        :return: Returns true if the image is saved correctly.
-        :rtype: Boolean.
-        """
-        path_to_image = ""
-
-        if(self.folder != None):
-            if(self.folder[-1] != "/"):
-                path_to_image = path_to_image + self.folder + "/" + name
-            else:
-                path_to_image = path_to_image + self.folder + name
-        
-        else:
-            path_to_image = path_to_image + name
-        
-        if(self.num_frames != None):
-            init_frame = current_frame - num_frames
-            end_frame = current_frame + num_frames
-
-            video_capturer = cv2.VideoCapture(self.videoName)
-
-            count = init_frame
-            video_capturer.set(cv2.CAP_PROP_POS_FRAMES, init_frame)
-            name_count = 0
-            while count<=end_frame:
-                path_to_image2 = path_to_image
-                path_to_image2 = path_to_image2 + "." + str(name_count)
-                ret,frame = video_capturer.read()
-                count+=1
-                
-                if(name_count != num_frames):
-                    cv2.imwrite(path_to_image2 + ".png", frame)
-                else:
-                    cv2.imwrite(path_to_image2 + "_IMPACT.png", frame)
-                name_count+=1
-                
-        else:
-            cv2.imwrite(path_to_image + ".png" , image)
-
-    def saveSurroundingFrames(self):
-        print("")
 
     def getDifferences(self, frame1, frame2, current_frame):
         """
