@@ -12,6 +12,7 @@ import ntpath
 from pathlib import Path
 import mimetypes
 import os
+import os.path, time
 from .image_utilities import ImageAnalyzer
 
 
@@ -138,8 +139,8 @@ class VideoAnalyzer:
     
     def saveAllImpacts(self):
         for impact in self.impacts:
-            
-            impact.setTime(self.getCurrentTime(impact.frame_number))
+
+            impact.setTime(self.getRealImpactTime(impact.frame_number))
 
             #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoPath) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
             name = os.path.basename(self.videoPath) + "_" + str(impact.impact_number)
@@ -183,6 +184,43 @@ class VideoAnalyzer:
         """
 
         return str(datetime.timedelta(seconds = current_frame*2 / self.fps))
+
+    def getRealImpactTime(self, current_frame):
+        creation_file_time = os.path.getmtime(self.videoPath)
+        #Moment of creation
+        #Format: XX:XX:XX
+        creation_file_time_formated = str(datetime.datetime.fromtimestamp(creation_file_time).strftime('%H:%M:%S'))
+        creation_file_time_formated_H = creation_file_time_formated[0] + creation_file_time_formated[1]
+        creation_file_time_formated_M = creation_file_time_formated[3] + creation_file_time_formated[4]
+        creation_file_time_formated_S = creation_file_time_formated[6] + creation_file_time_formated[7]
+
+        #Moment of impact
+        #Format:X:XX:XX
+        moment_impact = self.getCurrentTime(current_frame)
+
+        moment_impact_H = moment_impact[0]
+        moment_impact_M = moment_impact[2] + moment_impact[3]
+        moment_impact_S = moment_impact[5] + moment_impact[6]
+
+        #Video length
+        #Format:X:XX:XX
+        video_time = str(datetime.timedelta(seconds=self.seconds))
+        video_time_H = video_time[0]
+        video_time_M = video_time[2] + video_time[3]
+        video_time_S = video_time[5] + video_time[6]
+        
+        #Substract the file creation time the duration time to get the initial time when the recording started
+        substract_H = int(creation_file_time_formated_H) - int(video_time_H)
+        substract_M = int(creation_file_time_formated_M) - int(video_time_M)
+        substract_S = int(creation_file_time_formated_S) - int(video_time_S)
+
+        #We have the original time, now add the impact time
+
+        add_H = int(substract_H) + int(moment_impact_H)
+        add_M = int(substract_M) + int(moment_impact_M)
+        add_S = int(substract_S) + int(moment_impact_S)
+
+        return str(add_H) + ":" + str(add_M) + ":" + str(add_S)
 
     def showFrame(self, frame):
         """
