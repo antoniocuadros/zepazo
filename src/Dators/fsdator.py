@@ -8,6 +8,7 @@
 from .dator import Dator
 import os
 from cv2 import cv2
+import json
 
 class FSDator(Dator):
     """
@@ -64,3 +65,9 @@ class FSDator(Dator):
                 cv2.imwrite(path_to_image2 + ".png", frame)
 
             name_count+=1
+    
+    def saveLog(self, impacts):
+        json_args = {
+                
+        }
+        json.dump(json_args, self.path)
