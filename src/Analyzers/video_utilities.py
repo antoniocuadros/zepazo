@@ -138,6 +138,7 @@ class VideoAnalyzer:
     
     def saveAllImpacts(self):
         for impact in self.impacts:
+            print(self.getCurrentTime(impact.frame_number))
             impact.setTime(self.getCurrentTime(impact.frame_number))
             #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoPath) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
             name = os.path.basename(self.videoPath) + "_" + str(impact.impact_number)
