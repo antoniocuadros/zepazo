@@ -48,6 +48,7 @@ class VideoAnalyzer:
 
             if(self.startingFrame != None):
                 self.videoCapture.set(cv2.CAP_PROP_POS_FRAMES, self.startingFrame)
+                self.current_frame = self.startingFrame 
 
             if not (self.videoCapture).isOpened():
                 raise Exception("Video could not be found on this path")
@@ -105,6 +106,9 @@ class VideoAnalyzer:
             num_frames_show = self.frames
 
         while(cap.isOpened() and play):
+            if(self.endingFrame != None and self.endingFrame <= self.current_frame):
+                play = False
+
             num_frames_show = num_frames_show - 1
             ret, frame=cap.read() #read a single frame, ret will be true if frame captured
             ret, frame2=cap.read()
