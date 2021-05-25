@@ -73,8 +73,9 @@ class FSDator(Dator):
         log = {}
 
         imp = []
-        data_element = {}
+        
         for impact in impacts:
+            data_element = {}
             data_element['impact_number'] = impact.impact_number
             data_element['impact_frame_number'] = impact.frame_number
             data_element['impact_time'] = impact.time

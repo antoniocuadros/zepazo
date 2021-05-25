@@ -130,7 +130,7 @@ class VideoAnalyzer:
 
 
         #We save all impacts
-        #self.saveAllImpacts()
+        self.saveAllImpacts()
 
         #Generate logfile
         self.saveLogFile()
@@ -138,12 +138,15 @@ class VideoAnalyzer:
     
     def saveAllImpacts(self):
         for impact in self.impacts:
-            print(self.getCurrentTime(impact.frame_number))
+            
             impact.setTime(self.getCurrentTime(impact.frame_number))
+
             #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoPath) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
             name = os.path.basename(self.videoPath) + "_" + str(impact.impact_number)
             self.dator.saveFrame(name, impact.frame)
-            self.dator.saveSurroundingFrames(self.num_frames_save, impact.frame_number, name, self.videoPath)
+            
+            if(self.num_frames_save != None):
+                self.dator.saveSurroundingFrames(self.num_frames_save, impact.frame_number, name, self.videoPath)
 
     
     def saveLogFile(self):
