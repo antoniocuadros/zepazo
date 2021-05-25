@@ -153,14 +153,16 @@ class VideoAnalyzer:
 
             #self.imageAnalizer.saveImage(impact.frame, os.path.basename(self.videoPath) + "_" + str(impact.impact_number), self.num_frames, impact.frame_number)
             name = os.path.basename(self.videoPath) + "_" + str(impact.impact_number)
-            self.dator.saveFrame(name, impact.frame)
-            
-            if(self.num_frames_save != None):
-                self.dator.saveSurroundingFrames(self.num_frames_save, impact.frame_number, name, self.videoPath)
+            if(self.dator != None):
+                self.dator.saveFrame(name, impact.frame)
+                
+                if(self.num_frames_save != None):
+                    self.dator.saveSurroundingFrames(self.num_frames_save, impact.frame_number, name, self.videoPath)
 
     
     def saveLogFile(self):
-        self.dator.saveLog(self.impacts)
+        if(self.dator != None):
+            self.dator.saveLog(self.impacts)
 
 
     def applyMasks(self, frame, frame2):

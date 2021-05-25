@@ -41,7 +41,7 @@ class ZepazoParams(QMainWindow):
             self.addingMask = False
             self.deletingMask = False
             self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
-            self.videoAnalyzer = VideoAnalyzer(None, self.videoPath[0], False, self.detectionLimit, self.ellipse, None, None, None, self.dilate)
+            self.videoAnalyzer = VideoAnalyzer(None, self.videoPath[0], False, self.detectionLimit, self.ellipse, None, None, None, self.dilate, None, None)
             self.first_frame = self.videoAnalyzer.getInitialFrame()
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
@@ -62,7 +62,7 @@ class ZepazoParams(QMainWindow):
             self.spinBoxDilate.setValue(0)
             self.checkBoxDilate.setChecked(False)
             self.ellipse = None
-            print(self.ellipse)
+            
             #Show Frame
             self.showFrame(self.first_frame)
             
@@ -274,7 +274,7 @@ class ZepazoParams(QMainWindow):
 
             if(len(self.masks) > 0):
                 message = message + " -cm "
-                print(self.masks)
+                
                 for i in range(0,len(self.masks)):
                     message = message + str(self.masks[i][0]) + " " + str(self.masks[i][1]) + " "
 
@@ -348,7 +348,7 @@ class ZepazoParams(QMainWindow):
 
     def showVideoSample(self):
         if(self.videoPath != None):
-            self.videoAnalyzer = VideoAnalyzer(None, self.videoPath[0], True, self.detectionLimit, self.ellipse, self.masks, None, None, self.dilate)
+            self.videoAnalyzer = VideoAnalyzer(None, self.videoPath[0], True, self.detectionLimit, self.ellipse, self.masks, None, None, self.dilate, None, None)
             self.videoAnalyzer.showASample()
         else:
             self.addMessage("First select a video file")
