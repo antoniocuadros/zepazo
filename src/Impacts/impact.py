@@ -13,6 +13,7 @@ class Impact:
         self.frame = frame
         self.impact_number = impact_number
         self.frame_number = frame_number
+        self.time = ""
     
     def setTime(self, time):
         self.time = time

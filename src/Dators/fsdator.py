@@ -67,7 +67,20 @@ class FSDator(Dator):
             name_count+=1
     
     def saveLog(self, impacts):
-        json_args = {
-                
-        }
-        json.dump(json_args, self.path)
+        if(self.path[-1] != "/"):
+            path_to_image =  self.path + "/"
+
+        log = {}
+
+        imp = []
+        data_element = {}
+        for impact in impacts:
+            data_element['impact_number'] = impact.impact_number
+            data_element['impact_frame_number'] = impact.frame_number
+            data_element['impact_time'] = impact.time
+            
+            imp.append(data_element)
+        
+    
+        with open(path_to_image + 'log.json', 'w') as json_file:
+            json.dump(imp, json_file,indent=4, separators=(',', ': '), sort_keys=True)
