@@ -23,7 +23,7 @@ class VideoAnalyzer:
 
     #Constructor
     #Gets the video path
-    def __init__(self, dator, video, show, detectionlimit, circlelimit, masks, folder, num_frames_save, dilate):
+    def __init__(self, dator, video, show, detectionlimit, circlelimit, masks, folder, num_frames_save, dilate, startingFrame, endingFrame):
         """
         Inits VideoAnalyzer with the data of the selected video.
 
@@ -43,6 +43,11 @@ class VideoAnalyzer:
 
             self.impacts = []
             self.dator = dator
+            self.startingFrame = startingFrame
+            self.endingFrame = endingFrame
+
+            if(self.startingFrame != None):
+                self.videoCapture.set(cv2.CAP_PROP_POS_FRAMES, self.startingFrame)
 
             if not (self.videoCapture).isOpened():
                 raise Exception("Video could not be found on this path")
