@@ -170,8 +170,9 @@ class VideoAnalyzer:
         if(len(self.mask_points) > 0):
             if(len(self.mask_points) > 0 and len(self.mask_points) % 2 == 0):
                 for i in range(len(self.mask_points)//2):
-                    cv2.rectangle(frame, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
-                    cv2.rectangle(frame2, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,255), -1)
+                    #IMPORTANT: Masks now in black color due to dilate argument
+                    cv2.rectangle(frame, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,0), -1)
+                    cv2.rectangle(frame2, (self.mask_points[2*i][0],self.mask_points[2*i][1]), (self.mask_points[2*i+1][0],self.mask_points[2*i+1][1]), (0,0,0), -1)
         return frame, frame2
 
     def __getGeneralVideoStats(self, cap):
