@@ -86,6 +86,10 @@ else:
 #  Program
 #
 #################
+folder = folder
+if(folder == None):
+    folder = os.path.dirname(video)
+
 dator = FSDator(folder)
 video_analizer = VideoAnalyzer(dator, video, debug, detectionlimit, circlelimit, mousemask, folder, saveSurroundingFrames, dilate, args.startingFrame, args.endingFrame)
 
