@@ -13,3 +13,10 @@ parser.add_argument( "-lgf2", "--logFile2", type=str, help="Log file from the se
 
 #Getting arguments
 args = parser.parse_args()
+
+
+######################
+#
+# Checking arguments
+#
+######################

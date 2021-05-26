@@ -26,3 +26,6 @@ class Dator:
 
     def videoExists(self, path_to_video):
         raise Exception("The method must be implemented by another class")
+
+    def logFileExists(self, path_to_log):
+        raise Exception("The method must be implemented by another class")

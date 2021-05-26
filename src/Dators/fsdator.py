@@ -103,3 +103,10 @@ class FSDator(Dator):
                 return False
             else:
                 return True
+
+    def logFileExists(self, path_to_log):
+        file = Path(path_to_log)
+        if(file.is_file() == False):
+            return False
+        else:
+            return True
