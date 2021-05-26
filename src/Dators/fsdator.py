@@ -9,6 +9,8 @@ from .dator import Dator
 import os
 from cv2 import cv2
 import json
+from pathlib import Path
+import mimetypes
 
 class FSDator(Dator):
     """
@@ -87,3 +89,17 @@ class FSDator(Dator):
     
         with open(path_to_image + 'log.json', 'w') as json_file:
             json.dump(imp, json_file,indent=4, separators=(',', ': '), sort_keys=True)
+
+
+    def videoExists(self, path_to_video):
+        file = Path(path_to_video)
+        if(file.is_file() == False):
+            return False
+        else:
+            try:
+                if(mimetypes.guess_type(path_to_video)[0].startswith('video') == False):
+                    return False
+            except:
+                return False
+            else:
+                return True
