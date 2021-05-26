@@ -29,3 +29,6 @@ class Dator:
 
     def logFileExists(self, path_to_log):
         raise Exception("The method must be implemented by another class")
+
+    def loadLogFile(self, path_to_log):
+        raise Exception("The method must be implemented by another class")

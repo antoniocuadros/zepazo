@@ -116,3 +116,8 @@ class FSDator(Dator):
                 return False
           
             return True
+
+    def loadLogFile(self, path_to_log):
+        with open(path_to_log, 'r') as json_file:
+            args = json.load(json_file)
+        return args

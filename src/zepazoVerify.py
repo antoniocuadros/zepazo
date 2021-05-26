@@ -44,6 +44,16 @@ if(args.logFile2 == None or dator.logFileExists(args.logFile2) == False):
 
 ######################
 #
-# Checking arguments
+# Verifying impacts
 #
 ######################
+#Load first Json
+impacts_1 = dator.loadLogFile(args.logFile1)
+
+print(impacts_1)
+print("-------------------")
+
+#Load second Json
+impacts_2 = dator.loadLogFile(args.logFile2)
+print(impacts_2)
+print("-------------------")
