@@ -1,6 +1,7 @@
 import  argparse
 from Dators.fsdator import FSDator
 import os
+from datetime import datetime
 
 
 ######################
@@ -50,10 +51,35 @@ if(args.logFile2 == None or dator.logFileExists(args.logFile2) == False):
 #Load first Json
 impacts_1 = dator.loadLogFile(args.logFile1)
 
-print(impacts_1)
-print("-------------------")
-
 #Load second Json
 impacts_2 = dator.loadLogFile(args.logFile2)
-print(impacts_2)
-print("-------------------")
+
+
+for impact_log_1 in impacts_1:
+    time = impact_log_1['impact_time']
+    date = datetime.strptime(time, '%H:%M:%S')
+    
+    for impact_log_2 in impacts_2:
+        time2 = impact_log_2['impact_time']
+
+        date2 = datetime.strptime(time2, '%H:%M:%S')
+
+        if(date > date2):
+            sub = abs((date - date2).seconds)
+
+        else:
+            sub = abs((date2 - date).seconds)
+
+
+
+        if(sub < 10):
+            print("Impact coincidence detected")
+            print("From log 1: ")
+            print(impact_log_1['impact_number'])
+            print("From log 2: ")
+            print(impact_log_2['impact_number'])
+            print("Time difference: ")
+            print(sub)
+        
+
+        

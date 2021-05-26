@@ -32,3 +32,6 @@ class Dator:
 
     def loadLogFile(self, path_to_log):
         raise Exception("The method must be implemented by another class")
+
+    def saveCoincidenceLog(self, path_to_log1, path_to_log2, path_to_save, log_1_impact, log_2_impact, difference):
+        raise Exception("The method must be implemented by another class")
