@@ -69,6 +69,8 @@ class FSDator(Dator):
     def saveLog(self, impacts):
         if(self.path[-1] != "/"):
             path_to_image =  self.path + "/"
+        else:
+            path_to_image = self.path
 
         log = {}
 
