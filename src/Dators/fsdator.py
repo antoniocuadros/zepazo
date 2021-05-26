@@ -11,6 +11,7 @@ from cv2 import cv2
 import json
 from pathlib import Path
 import mimetypes
+import ntpath
 
 class FSDator(Dator):
     """
@@ -137,3 +138,14 @@ class FSDator(Dator):
 
         with open(path_to_save, 'w') as json_file:
             json.dump(log, json_file, indent=4, separators=(',', ': '), sort_keys=True)
+
+    def correctPathToSaveJSON(self, path_to_json):
+        path_without_name = os.path.dirname(path_to_json)
+        
+        check = True
+        if(os.path.isdir(path_without_name) == False):
+            check = False
+
+        if(ntpath.basename(path_to_json).endswith(".json") == False):
+            check = False
+        return check

@@ -44,6 +44,18 @@ else:
 if(args.logFile2 == None or dator.logFileExists(args.logFile2) == False):
     parser.error(("Second log file (-lgf1) must be defined and exists."))
 
+
+#Checks the resulting log file path
+if(args.resultingLogFile == None):
+    parser.error(("Resulting log file (-rlfg) must be defined."))
+else:
+    folder = os.path.dirname(args.resultingLogFile)
+    dator = FSDator(folder)
+
+if(args.resultingLogFile == None or dator.correctPathToSaveJSON(args.resultingLogFile) == False):
+    parser.error(("Resulting log file (-rlfg) must be defined and have .json extension."))
+
+
 ######################
 #
 # Verifying impacts
@@ -77,4 +89,4 @@ for impact_log_1 in impacts_1:
             data.append({'log_1_impact': impact_log_1['impact_number'],'log_2_impact': impact_log_2['impact_number'], 'sub':sub})
             
     
-    dator.saveCoincidenceLog(args.logFile1, args.logFile2, "/home/antculap/Desktop/jj.json", data)        
+    dator.saveCoincidenceLog(args.logFile1, args.logFile2, args.resultingLogFile, data)        
