@@ -11,6 +11,8 @@ pytest = "^6.2.2"
 PyQt5 = "^5.15.4"
 opencv-python = "^4.3.0"
 pyperclip = "^1.8.2"
+moviepy = "^1.0.3"
+imageio-ffmpeg = "^0.4.4"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.6.0"
