@@ -71,15 +71,5 @@ for impact_log_1 in impacts_1:
             sub = abs((date2 - date).seconds)
 
 
-
         if(sub < 10):
-            print("Impact coincidence detected")
-            print("From log 1: ")
-            print(impact_log_1['impact_number'])
-            print("From log 2: ")
-            print(impact_log_2['impact_number'])
-            print("Time difference: ")
-            print(sub)
-        
-
-        
+            dator.saveCoincidenceLog(args.logFile1, args.logFile2, path_to_save, impact_log_1['impact_number'], impact_log_2['impact_number'], sub)        
