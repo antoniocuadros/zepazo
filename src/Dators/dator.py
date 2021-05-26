@@ -35,3 +35,6 @@ class Dator:
 
     def saveCoincidenceLog(self, path_to_log1, path_to_log2, path_to_save, data):
         raise Exception("The method must be implemented by another class")
+
+    def correctPathToSaveJSON(self, path_to_json):
+        raise Exception("The method must be implemented by another class")
