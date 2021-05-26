@@ -109,4 +109,10 @@ class FSDator(Dator):
         if(file.is_file() == False):
             return False
         else:
+            try:
+                with open(path_to_log, 'r') as json_file:
+                    args = json.load(json_file)
+            except:
+                return False
+          
             return True

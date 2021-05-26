@@ -1,5 +1,6 @@
 import  argparse
 from Dators.fsdator import FSDator
+import os
 
 
 ######################
@@ -14,6 +15,32 @@ parser.add_argument( "-lgf2", "--logFile2", type=str, help="Log file from the se
 #Getting arguments
 args = parser.parse_args()
 
+
+######################
+#
+# Checking arguments
+#
+######################
+#Checks the first log file
+if(args.logFile1 == None):
+    parser.error(("First log file (-lgf1) must be defined."))
+else:
+    folder = os.path.dirname(args.logFile1)
+    dator = FSDator(folder)
+
+if(args.logFile1 == None or dator.logFileExists(args.logFile1) == False):
+    parser.error(("First log file (-lgf1) must be defined and exists."))
+
+
+#Checks the second log file
+if(args.logFile2 == None):
+    parser.error(("Second log file (-lgf2) must be defined."))
+else:
+    folder = os.path.dirname(args.logFile2)
+    dator = FSDator(folder)
+
+if(args.logFile2 == None or dator.logFileExists(args.logFile2) == False):
+    parser.error(("Second log file (-lgf1) must be defined and exists."))
 
 ######################
 #
