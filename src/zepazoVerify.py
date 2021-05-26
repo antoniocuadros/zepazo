@@ -12,6 +12,7 @@ from datetime import datetime
 parser = argparse.ArgumentParser(description="ZepazoVerify: From two log files checks if there is an impact taking place in time in the same period")
 parser.add_argument( "-lgf1", "--logFile1", type=str, help="Log file from the first video")
 parser.add_argument( "-lgf2", "--logFile2", type=str, help="Log file from the second video")
+parser.add_argument( "-rlfg", "--resultingLogFile", type=str, help="Log file where to save analysis")
 
 #Getting arguments
 args = parser.parse_args()
@@ -54,10 +55,11 @@ impacts_1 = dator.loadLogFile(args.logFile1)
 #Load second Json
 impacts_2 = dator.loadLogFile(args.logFile2)
 
-
+data = []
 for impact_log_1 in impacts_1:
     time = impact_log_1['impact_time']
     date = datetime.strptime(time, '%H:%M:%S')
+    
     
     for impact_log_2 in impacts_2:
         time2 = impact_log_2['impact_time']
@@ -72,4 +74,7 @@ for impact_log_1 in impacts_1:
 
 
         if(sub < 10):
-            dator.saveCoincidenceLog(args.logFile1, args.logFile2, path_to_save, impact_log_1['impact_number'], impact_log_2['impact_number'], sub)        
+            data.append({'log_1_impact': impact_log_1['impact_number'],'log_2_impact': impact_log_2['impact_number'], 'sub':sub})
+            
+    
+    dator.saveCoincidenceLog(args.logFile1, args.logFile2, "/home/antculap/Desktop/jj.json", data)        

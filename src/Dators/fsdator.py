@@ -122,14 +122,18 @@ class FSDator(Dator):
             args = json.load(json_file)
         return args
 
-    def saveCoincidenceLog(self, path_to_log1, path_to_log2, path_to_save, log_1_impact, log_2_impact, difference):
-        json_args = {
-                'log_1_impact':log_1_impact,
-                'log_2_impact':log_2_impact,
-                'difference':difference,
-                'path_to_log1':path_to_log1,
-                'path_to_log2':path_to_log2
-            }
+    def saveCoincidenceLog(self, path_to_log1, path_to_log2, path_to_save, data):
+        
+        log = []
+        for coincidence in data:
+            json_args = {
+                    'log_1_impact':coincidence['log_1_impact'],
+                    'log_2_impact':coincidence['log_2_impact'],
+                    'difference':coincidence['sub'],
+                    'path_to_log1':path_to_log1,
+                    'path_to_log2':path_to_log2
+                }
+            log.append(json_args)
 
         with open(path_to_save, 'w') as json_file:
-            json.dump(json_args, json_file, indent=4, separators=(',', ': '), sort_keys=True)
+            json.dump(log, json_file, indent=4, separators=(',', ': '), sort_keys=True)
