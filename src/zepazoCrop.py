@@ -2,6 +2,7 @@ from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import  argparse
 from Dators.fsdator import FSDator
 import os
+import moviepy.editor as editor
 
 
 ######################
@@ -51,8 +52,17 @@ else:
         parser.error("Second start (-ss) must be minor than Second end (-se)")
 
 
+######################
+#
+# Cropping video
+#
+######################
 
+#ffmpeg_extract_subclip(args.videoOriginal, args.secondStart, args.secondEnd, targetname=args.videoCropped)
 
-
+cropped = editor.VideoFileClip(args.videoOriginal)
+cropped_video = cropped.subclip(args.secondStart, args.secondEnd)
+cropped_video.write_videofile(args.videoCropped)
+cropped_video.close()
 
 

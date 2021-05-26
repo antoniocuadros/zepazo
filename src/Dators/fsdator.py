@@ -18,7 +18,7 @@ class FSDator(Dator):
     """
     def __init__(self, path):
         #Checks if folder in path exists
-        if(path !=None and os.path.exists(path) == False): #Folder doesn't exists, we create it
+        if(path !=None and os.path.exists(path) == False and os.path.isfile(path)): #Folder doesn't exists, we create it
             os.mkdir(path)
         
         self.path = path
