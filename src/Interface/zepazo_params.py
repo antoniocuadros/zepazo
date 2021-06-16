@@ -220,7 +220,7 @@ class ZepazoParams(QMainWindow):
             self.checkBoxDilate.setChecked(False)
             self.ellipse = None
             frame, value = self.videoAnalyzer.selectAndApplyCircleLimitArgment(self.ellipse, self.first_frame)
-            self.spinboxEllipse.setValue(value)
+            self.spinboxEllipse.setValue(int(value))
             self.checkBoxEllipse.setChecked(True)
             self.spinboxEllipse.setEnabled(False)
             self.detectionLimit = 50
