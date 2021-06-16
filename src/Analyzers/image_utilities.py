@@ -109,7 +109,7 @@ class ImageAnalyzer:
             for c in contours:
                 x, y, w, h = cv2.boundingRect(c)
                 if(ellipse != None):
-                    if(self.inside_moon(ellipse, x, y, frame1)):                                #Possible impact! Inside Moon
+                    if(self.inside_moon(ellipse, x, y)):                                #Possible impact! Inside Moon
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                         if(self.debug != True):
                             #self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count), self.num_frames, current_frame)
@@ -273,7 +273,7 @@ class ImageAnalyzer:
 
                     cv2.imshow("Select top-left corner and bottom-right corner to apply a mask",frame)
 
-    def inside_moon(self, ellipse, point_x,point_y, frame):
+    def inside_moon(self, ellipse, point_x,point_y):
         """
         Checks if a point is inside an rotated ellipse
         :param: ellipse: ellipse object that shapes moon.
@@ -294,21 +294,11 @@ class ImageAnalyzer:
         centerX = ellipse[0][0]
         centerY = ellipse[0][1]
 
-        if(axis1 > axis2):
-            minor_axis = axis2
-            mayor_axis = axis1
-        else:
-            minor_axis = axis1
-            mayor_axis = axis2
-
         angle = math.radians(ellipse[2])
         
         x = (pow((math.cos(angle)*(point_x - centerX) + math.sin(angle)*(point_y - centerY)), 2) / pow(axis1/2,2)) + (pow((math.sin(angle)*(point_x - centerX) - math.cos(angle)*(point_y - centerY)), 2) / pow(axis2/2,2))
 
-        if(x <= 1):
-            return True
-        else:
-            return False
+        return x <= 1
 
 
     def selectCircleLimitArgument(self, circlelimit, first_frame):
