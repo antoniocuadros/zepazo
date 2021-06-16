@@ -79,9 +79,12 @@ class ImageAnalyzer:
         contours, _ = cv2.findContours(threshed_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         
 
-        
-        _, ellipse = self.moonEnclosingCircle(frame1)
-        
+        #If we are debugging we show the ellipse all time, if not, calculate when impact detected
+        if(self.debug):
+            _, ellipse = self.moonEnclosingCircle(frame1)
+        else:
+            ellipse = None
+
         copy_frame = frame1.copy()
         if(self.debug == True and ellipse != None):
             cv2.ellipse(copy_frame, ellipse,(0, 255, 255), 2)
@@ -100,6 +103,9 @@ class ImageAnalyzer:
         #for each contour finded we draw a rectangle and we save the image
         if (len(contours) > 0):
             
+            if(ellipse == None):
+                _, ellipse = self.moonEnclosingCircle(frame1)
+                print("Impact")
             for c in contours:
                 x, y, w, h = cv2.boundingRect(c)
                 if(ellipse != None):
