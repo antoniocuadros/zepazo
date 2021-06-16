@@ -105,7 +105,7 @@ class ImageAnalyzer:
             
             if(ellipse == None):
                 _, ellipse = self.moonEnclosingCircle(frame1)
-                print("Impact")
+                
             for c in contours:
                 x, y, w, h = cv2.boundingRect(c)
                 if(ellipse != None):
