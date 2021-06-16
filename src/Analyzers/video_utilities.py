@@ -120,8 +120,9 @@ class VideoAnalyzer:
             if ret == True:    
                 frame, impact = (self.imageAnalizer).getDifferences(frame, frame2, self.current_frame)
 
-                if(impact) != None:
-                    self.impacts.append(impact)
+                if(impact != None and len(impact) > 0):
+                    for i in impact:
+                        self.impacts.append(i)
 
                 if self.showVideo: 
                     resized_frame = cv2.resize(frame, (1600,900))

@@ -99,7 +99,7 @@ class ImageAnalyzer:
 
 
     def markHits(self, contours, ellipse, frame1, copy_frame, current_frame):
-        impact = None
+        impact = []
         #for each contour finded we draw a rectangle and we save the image
         if (len(contours) > 0):
             
@@ -112,8 +112,7 @@ class ImageAnalyzer:
                     if(self.inside_moon(ellipse, x, y)):                                #Possible impact! Inside Moon
                         cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
                         if(self.debug != True):
-                            #self.saveImage(copy_frame, os.path.basename(self.videoName) + "_" + str(self.impact_count), self.num_frames, current_frame)
-                            impact = Impact(copy_frame, self.impact_count, current_frame)
+                            impact.append(Impact(copy_frame, self.impact_count, current_frame))
                             
                             self.impact_count = self.impact_count + 1
                     else:                                                                     #False positive! Discarded
@@ -121,9 +120,7 @@ class ImageAnalyzer:
                 else:                                                                                   #No ellipse obtained, Possible impact!
                     cv2.rectangle(copy_frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
                     if(self.debug != True):
-                        #self.saveImage(copy_frame, self.videoName + "_" + str(self.impact_count), self.num_frames, current_frame)
-                        impact = Impact(copy_frame, self.impact_count, current_frame)
-
+                        impact.append(Impact(copy_frame, self.impact_count, current_frame))
                         self.impact_count = self.impact_count + 1
         
         return copy_frame, impact
