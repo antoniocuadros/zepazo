@@ -65,7 +65,7 @@ debug = args.debug
 if(args.configFile == None):
     detectionlimit = args.detectionlimit
     circlelimit = args.circlelimit
-    mousemask = args.mousemask
+    mousemask = args.coordinatesmask
     folder = args.folder
     saveSurroundingFrames = args.saveSurroundingFrames
     dilate = args.dilate
@@ -95,14 +95,11 @@ video_analizer = VideoAnalyzer(dator, video, debug, detectionlimit, circlelimit,
 
 #Pre Processing
 # -> Apply a mask
-if(args.mousemask != None):
-    video_analizer.selectAndApplyMask(args.mousemask)
-else:
-    if(args.coordinatesmask != None):
-        if(len(args.coordinatesmask) % 2 != 0):
-            parser.error("Coordinate list must be even")
-        else:
-            video_analizer.selectAndApplyMask(len(args.coordinatesmask), args.coordinatesmask)
+if(args.coordinatesmask != None):
+    if(len(args.coordinatesmask) % 2 != 0):
+        parser.error("Coordinate list must be even")
+    else:
+        video_analizer.selectAndApplyMask(args.coordinatesmask)
 
 
 #Proccessing

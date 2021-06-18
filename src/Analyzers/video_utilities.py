@@ -61,9 +61,12 @@ class VideoAnalyzer:
 
             # -> Mask points
             if(masks != None):
-                self.mask_points = masks
+                self.mask_points = []
+                self.selectAndApplyMask(masks)
+                print(self.mask_points)
             else:
                 self.mask_points = []
+                print(self.mask_points)
 
             #Gets: 
             # -> frames
@@ -270,7 +273,7 @@ class VideoAnalyzer:
         else:
             return False
 
-    def selectAndApplyMask(self, num_masks, points=None):
+    def selectAndApplyMask(self, points):
         """
         Gets points as attribute to use while analyzing
 
@@ -282,13 +285,9 @@ class VideoAnalyzer:
         :type: points: list
         """
 
-        if(points == None): #Came from mousemask
-            self.mask_points = self.imageAnalizer.selectMaskLocation(self.getInitialFrame(), num_masks)
-            
-        else:
-            #We have a list of points
-            for i in range(len(points)//2):
-                self.mask_points.append( [ points[2*i], points[2*i+1] ] )
+        #We have a list of points
+        for i in range(len(points)//2):
+            self.mask_points.append( [ points[2*i], points[2*i+1] ] )
 
     def selectAndApplyCircleLimitArgment(self, circlelimit, first_frame):
         frame = first_frame
