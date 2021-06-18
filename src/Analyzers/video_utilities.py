@@ -135,7 +135,7 @@ class VideoAnalyzer:
             #No more frames, exit loop
             else:
                 play = False
-            self.current_frame = self.current_frame + 1
+            self.current_frame = self.current_frame + 2
         
         cap.release()
         cv2.destroyAllWindows()
@@ -198,7 +198,7 @@ class VideoAnalyzer:
         :param current_frame: current frame to get the time.
         """
 
-        return str(datetime.timedelta(seconds = current_frame*2 / self.fps))
+        return str(datetime.timedelta(seconds = current_frame / self.fps))
 
     def getRealImpactTime(self, current_frame):
         creation_file_time = os.path.getmtime(self.videoPath)
