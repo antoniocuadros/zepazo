@@ -30,7 +30,7 @@ class VideoAnalyzer:
         :param args: arguments given by user.
         """
 
-        if(self.checkVideo(video)):
+        if(dator.videoExists(video)):
             # -> VideoPath: video to analize
             # -> VideoCaputre: cv2 object to analize the video
             self.videoPath = video
