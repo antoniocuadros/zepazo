@@ -63,10 +63,8 @@ class VideoAnalyzer:
             if(masks != None):
                 self.mask_points = []
                 self.selectAndApplyMask(masks)
-                print(self.mask_points)
             else:
                 self.mask_points = []
-                print(self.mask_points)
 
             #Gets: 
             # -> frames
@@ -147,7 +145,8 @@ class VideoAnalyzer:
         self.saveAllImpacts()
 
         #Generate logfile
-        self.saveLogFile()
+        if(self.showVideo == False):
+            self.saveLogFile()
 
     
     def saveAllImpacts(self):
@@ -295,13 +294,7 @@ class VideoAnalyzer:
         return frame_result, limit
 
     
-    def showASample(self):
-        frames = self.frames
-        fps = self.fps
-        if(fps >= 100):
-            fps = 25
-        seconds = 20
-        
+    def showASample(self):        
         frames = self.frames
         fps = self.fps
         if(fps >= 100):

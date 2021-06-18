@@ -11,6 +11,7 @@ from os.path import dirname, join, abspath
 import os, sys
 sys.path.insert(0, abspath(join(dirname(__file__), '..')))
 from Analyzers.video_utilities import VideoAnalyzer
+from Dators.fsdator import FSDator
 sys.path.insert(0, abspath(join(dirname(__file__))))
 
 class ZepazoParams(QMainWindow):
@@ -41,7 +42,7 @@ class ZepazoParams(QMainWindow):
             self.addingMask = False
             self.deletingMask = False
             self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
-            self.videoAnalyzer = VideoAnalyzer(None, self.videoPath[0], False, self.detectionLimit, self.ellipse, None, None, None, self.dilate, None, None)
+            self.videoAnalyzer = VideoAnalyzer(FSDator(self.videoPath[0]), self.videoPath[0], False, self.detectionLimit, self.ellipse, None, None, None, self.dilate, None, None)
             self.first_frame = self.videoAnalyzer.getInitialFrame()
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
@@ -292,11 +293,16 @@ class ZepazoParams(QMainWindow):
             QMessageBox.information(self, "Copied to clipboard", "Copied to clipboard")
 
     def saveParams(self):
+        masks = []
+        for i in self.masks:
+            masks.append(i[0])
+            masks.append(i[1])
+
         if(self.videoPath != None):
             json_args = {
                 'detectionlimit':self.detectionLimit,
                 'dilate':self.dilate,
-                'coordinatesmask':self.masks,
+                'coordinatesmask':masks,
                 'circlelimit':self.ellipse,
                 'folder':self.folder,
                 'saveSurroundingFrames':self.numFrames
@@ -325,14 +331,31 @@ class ZepazoParams(QMainWindow):
 
             self.detectionLimit = args["detectionlimit"]
             self.dilate = args["dilate"]
-            self.masks = args["coordinatesmask"]
+
+            if(self.dilate != None):
+                self.spinBoxDilate.setValue(self.dilate)
+                self.spinBoxDilate.setEnabled(True)
+                self.checkBoxDilate.setChecked(False)
+
+            masks = args["coordinatesmask"]
+
+            for i in range(len(masks)//2):
+                self.masks.append( [ masks[2*i], masks[2*i+1] ] )
+
             self.ellipse = args["circlelimit"]
             self.folder = args["folder"]
             self.numFrames = args["saveSurroundingFrames"]
             
             self.drawMasks(self.frame_masks)
             
-            self.spinboxEllipse.setValue(self.ellipse)
+            if(self.ellipse != None):
+                self.spinboxEllipse.setValue(self.ellipse)
+                self.spinboxEllipse.setEnabled(True)
+                self.checkBoxEllipse.setChecked(False)
+            else:
+                self.spinboxEllipse.setEnabled(False)
+                self.checkBoxEllipse.setChecked(True)
+
             self.spinBoxDetectionLimit.setValue(self.detectionLimit)
             
             if(self.ellipse == None):
@@ -348,7 +371,13 @@ class ZepazoParams(QMainWindow):
 
     def showVideoSample(self):
         if(self.videoPath != None):
-            self.videoAnalyzer = VideoAnalyzer(None, self.videoPath[0], True, self.detectionLimit, self.ellipse, self.masks, None, None, self.dilate, None, None)
+            #Transform masks to videoAnalyzer's format
+            masks = []
+            for mask in self.masks:
+                masks.append(mask[0])
+                masks.append(mask[1])
+
+            self.videoAnalyzer = VideoAnalyzer(FSDator(self.videoPath[0]), self.videoPath[0], True, self.detectionLimit, self.ellipse, masks, None, None, self.dilate, None, None)
             self.videoAnalyzer.showASample()
         else:
             self.addMessage("First select a video file")
