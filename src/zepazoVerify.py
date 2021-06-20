@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(description="ZepazoVerify: From two log files c
 parser.add_argument( "-lgf1", "--logFile1", type=str, help="Log file from the first video")
 parser.add_argument( "-lgf2", "--logFile2", type=str, help="Log file from the second video")
 parser.add_argument( "-rlfg", "--resultingLogFile", type=str, help="Log file where to save analysis")
+parser.add_argument( "-mt", "--marginTime", type=int, help="Margin time to match two impacts")
 
 #Getting arguments
 args = parser.parse_args()
