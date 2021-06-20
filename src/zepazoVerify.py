@@ -57,6 +57,15 @@ if(args.resultingLogFile == None or dator.correctPathToSaveJSON(args.resultingLo
     parser.error(("Resulting log file (-rlfg) must be defined and have .json extension."))
 
 
+#Checks time
+if(args.marginTime == None):
+    parser.error(("Margin Time (-mt) must be defined."))
+else:
+    if(args.marginTime < 0):
+        parser.error(("Margin Time (-mt) must be possitive."))
+    else:
+        mt = args.marginTime
+
 ######################
 #
 # Verifying impacts
@@ -86,7 +95,7 @@ for impact_log_1 in impacts_1:
             sub = abs((date2 - date).seconds)
 
 
-        if(sub < 10):
+        if(sub < mt):
             data.append({'log_1_impact': impact_log_1['impact_number'],'log_2_impact': impact_log_2['impact_number'], 'sub':sub})
             
     
