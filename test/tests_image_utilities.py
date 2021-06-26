@@ -62,10 +62,8 @@ def test_if_difference_image_is_ok():
 #
 ################################################
 def test_if_difference_images_working():
-    #first without dilate value
     dator = FSDator("test/example_video/")
     image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
-    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,None, None,None,None)
 
     frame1 = cv2.imread('test/example_video/dilate1.png')
     frame2 = cv2.imread('test/example_video/dilate2.png')
@@ -74,3 +72,22 @@ def test_if_difference_images_working():
 
     assert len(detected_impact) > 0
 
+
+
+################################################
+# 
+# [US16] Dilate images
+# Checks if dilate method if workig by dilating a
+# problematic frame and substracting with a previous one
+# impact count must be 0
+################################################
+def test_if_dilate_is_working():
+    dator = FSDator("test/example_video/")
+    image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, 8)
+
+    frame1 = cv2.imread('test/example_video/dilate1.png')
+    frame2 = cv2.imread('test/example_video/dilate2.png')
+
+    _, detected_impact = image_analyzer.getDifferences(frame1, frame2, 2)
+
+    assert len(detected_impact) == 0

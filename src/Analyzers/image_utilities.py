@@ -66,7 +66,7 @@ class ImageAnalyzer:
         grayFrame2 = cv2.cvtColor(frame1, cv2.COLOR_BGR2GRAY)
         #If neccessary, dilate the image
         if(self.dilate != None):
-            grayFrame2 = self.dilateImage(grayFrame2)
+            grayFrame1 = self.dilateImage(grayFrame2)
 
         #get the difference between frame1 and frame2
         difference = cv2.subtract(grayFrame2, grayFrame1, difference)
