@@ -174,3 +174,37 @@ def test_if_marking_impacts_is_working():
 
     #checks bit by bit if there are differences between marked and non marked
     assert (np.bitwise_xor(frame,frame2).any())
+
+
+################################################
+# 
+# [US27] Checking if impacts takes place inside moon
+# Checks if an impact is detected inside the moon surface
+#
+################################################
+def test_if_impact_takes_place_inside_moon_is_deected():
+    image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
+    frame1 = cv2.imread('test/example_video/ellipse.png')
+
+    _, ellipse = image_analyzer.moonEnclosingCircle(frame1)
+
+    inside = image_analyzer.inside_moon(ellipse, 100,100)
+    
+    assert inside == True
+
+
+################################################
+# 
+# [US27] Checking if impacts takes place inside moon
+# Checks if an impact is detected outside the moon surface
+#
+################################################
+def test_if_impact_doesnt_place_inside_moon_is_deected():
+    image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
+    frame1 = cv2.imread('test/example_video/ellipse.png')
+
+    _, ellipse = image_analyzer.moonEnclosingCircle(frame1)
+
+    inside = image_analyzer.inside_moon(ellipse, 1600,1600)
+    
+    assert inside == False
