@@ -53,3 +53,24 @@ def test_if_difference_image_is_ok():
     ret, frame = cap.read()
     resulting_frame, impact = image_analyzer.getDifferences(frame, frame, 1)  
     assert np.max(resulting_frame[0][0]) <= 1
+
+################################################
+# 
+# [US7] Getting frame differences
+# Checks if two images with some differences
+# returns possible impacts due to its differences
+#
+################################################
+def test_if_difference_images_working():
+    #first without dilate value
+    dator = FSDator("test/example_video/")
+    image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
+    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,None, None,None,None)
+
+    frame1 = cv2.imread('test/example_video/dilate1.png')
+    frame2 = cv2.imread('test/example_video/dilate2.png')
+
+    _, detected_impact = image_analyzer.getDifferences(frame1, frame2, 2)
+
+    assert len(detected_impact) > 0
+
