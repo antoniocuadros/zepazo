@@ -62,7 +62,6 @@ def test_if_difference_image_is_ok():
 #
 ################################################
 def test_if_difference_images_working():
-    dator = FSDator("test/example_video/")
     image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
 
     frame1 = cv2.imread('test/example_video/dilate1.png')
@@ -80,9 +79,9 @@ def test_if_difference_images_working():
 # Checks if dilate method if workig by dilating a
 # problematic frame and substracting with a previous one
 # impact count must be 0
+#
 ################################################
 def test_if_dilate_is_working():
-    dator = FSDator("test/example_video/")
     image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, 8)
 
     frame1 = cv2.imread('test/example_video/dilate1.png')
@@ -91,3 +90,66 @@ def test_if_dilate_is_working():
     _, detected_impact = image_analyzer.getDifferences(frame1, frame2, 2)
 
     assert len(detected_impact) == 0
+
+################################################
+# 
+# [US26] Moon Enclosing ellipse
+# Checks if in a typical frame we can obtain 
+# the moon outline
+#
+################################################
+
+def test_if_moon_outline_is_obtained():
+    image_analyzer = ImageAnalyzer(50, None, 41, None, "test.mp4",None, None)
+    frame1 = cv2.imread('test/example_video/ellipse.png')
+
+    umb, ellipse = image_analyzer.moonEnclosingCircle(frame1)
+
+    assert ellipse != None
+
+################################################
+# 
+# [US26] Moon Enclosing ellipse
+# Checks if in a non typical frame we can not obtain 
+# the moon outline
+#
+################################################
+
+def test_if_moon_outline_is_not_obtained():
+    image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
+    frame1 = cv2.imread('test/example_video/dilate1.png')
+
+    umb, ellipse = image_analyzer.moonEnclosingCircle(frame1)
+
+    assert ellipse == None
+
+################################################
+# 
+# [US26] Moon Enclosing ellipse
+# Checks if we define an threshold it uses that value
+#
+################################################
+
+def test_if_defined_threshold_is_used():
+    image_analyzer = ImageAnalyzer(50, 41, None, None, "test.mp4",None, None)
+    frame1 = cv2.imread('test/example_video/ellipse.png')
+
+    threshold, ellipse = image_analyzer.moonEnclosingCircle(frame1)
+
+    assert threshold == 41
+
+
+################################################
+# 
+# [US26] Moon Enclosing ellipse
+# Checks if we dont define an threshold it calculate that value
+#
+################################################
+
+def test_if_threshold_is_calculated():
+    image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
+    frame1 = cv2.imread('test/example_video/ellipse.png')
+
+    threshold, ellipse = image_analyzer.moonEnclosingCircle(frame1)
+
+    assert int(threshold) == 34
