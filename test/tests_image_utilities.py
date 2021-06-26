@@ -15,6 +15,7 @@ import  argparse
 from src.Analyzers.image_utilities import ImageAnalyzer
 from src.Analyzers.video_utilities import VideoAnalyzer
 from src.Dators.fsdator import FSDator
+import time
 
 
 ################################################
@@ -153,3 +154,23 @@ def test_if_threshold_is_calculated():
     threshold, ellipse = image_analyzer.moonEnclosingCircle(frame1)
 
     assert int(threshold) == 34
+
+################################################
+# 
+# [US7.1] Marking impacts
+# Checks if when an impact is detected it is marked
+#
+################################################
+def test_if_marking_impacts_is_working():
+    image_analyzer = ImageAnalyzer(50, None, None, None, "test.mp4",None, None)
+
+    frame1 = cv2.imread('test/example_video/dilate1.png')
+    frame2 = cv2.imread('test/example_video/dilate2.png')
+
+    frame, detected_impact = image_analyzer.getDifferences(frame1, frame2, 2)
+
+    #Impact detected so marked
+    assert len(detected_impact) > 0
+
+    #checks bit by bit if there are differences between marked and non marked
+    assert (np.bitwise_xor(frame,frame2).any())
