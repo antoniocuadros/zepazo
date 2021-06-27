@@ -120,9 +120,6 @@ def test_if_image_is_saved():
     assert os.path.isfile('test.mp4_0.png') == True
     os.remove("test.mp4_0.png")
 
-
-
-
 ################################################
 #
 # [US6]
@@ -138,3 +135,20 @@ def test_if_stats_are_ok():
     assert video_analyzer.fps == 23
     assert video_analyzer.seconds == 1
 
+################################################
+#
+# [US9]
+#
+# Checks point list are correctly being transformed
+# Transformed list must be half the size of the original
+#
+################################################
+def test_if_mask_points_ok():
+    dator = FSDator('test/example_video/test.mp4')
+    video_analyzer = VideoAnalyzer(dator,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
+    
+    points = [1,2,3,4]
+    
+    video_analyzer.selectAndApplyMask(points)
+
+    assert len(video_analyzer.mask_points)== len(points) / 2
