@@ -10,8 +10,10 @@ import  argparse
 import numpy as np
 from src.Analyzers.image_utilities import ImageAnalyzer
 from src.Analyzers.video_utilities import VideoAnalyzer
+from src.Impacts.impact import Impact
 from src.Dators.fsdator import FSDator
 from .argument import Argument
+import os
 
 
 ################################################
@@ -93,6 +95,30 @@ def test_if_video_shows():
 
     assert ret == True
     assert type(video_analyzer.showFrame(frame)) is np.ndarray
+
+################################################
+#
+# [US5]
+#
+# Checks if an image is being save in default location
+#
+################################################
+def test_if_image_is_saved():
+
+    image_analyzer = ImageAnalyzer(50, None, None, None,"test.mp4", None, None)
+    dator = FSDator('.')
+    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,None, None,None,None)
+    cap = video_analyzer.videoCapture
+
+    _, frame = cap.read()
+    impact = Impact(frame, 0, 1)
+
+    video_analyzer.impacts.append(impact)
+
+    video_analyzer.saveAllImpacts()
+    
+    assert os.path.isfile('test.mp4_0.png') == True
+    os.remove("test.mp4_0.png")
 
 ################################################
 #
