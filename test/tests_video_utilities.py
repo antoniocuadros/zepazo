@@ -152,3 +152,25 @@ def test_if_mask_points_ok():
     video_analyzer.selectAndApplyMask(points)
 
     assert len(video_analyzer.mask_points)== len(points) / 2
+
+################################################
+#
+# [US9]
+#
+# Checks if the has been placed by checking its
+# color, black.
+#
+################################################
+def test_is_masks_are_being_placed():
+    dator = FSDator('test/example_video/test.mp4')
+    video_analyzer = VideoAnalyzer(dator,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
+    
+    points = [1,2,3,4]
+
+    cap = video_analyzer.videoCapture
+    _, frame = cap.read()
+
+    video_analyzer.selectAndApplyMask(points)
+    video_analyzer.applyMasks(frame, frame)
+
+    assert np.any(frame[3,3] == 0)
