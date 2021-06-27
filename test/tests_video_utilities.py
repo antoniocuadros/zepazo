@@ -120,9 +120,12 @@ def test_if_image_is_saved():
     assert os.path.isfile('test.mp4_0.png') == True
     os.remove("test.mp4_0.png")
 
+
+
+
 ################################################
 #
-# US: 6
+# [US6]
 #
 # Checks if the stats are ok
 #
