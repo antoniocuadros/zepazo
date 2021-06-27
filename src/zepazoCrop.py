@@ -1,10 +1,13 @@
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import  argparse
-from Dators.fsdator import FSDator
+from os.path import dirname, join, abspath
+import os, sys
 import os
 import moviepy.editor as editor
 
-
+sys.path.insert(0, abspath(join(dirname(__file__), '..')))
+from src.Dators.fsdator import FSDator
+sys.path.insert(0, abspath(join(dirname(__file__))))
 ######################
 #
 # Defining arguments
@@ -39,7 +42,7 @@ if( args.videoOriginal == None or dator.videoExists(args.videoOriginal) == False
 
 #Checks path to cropped video
 if(args.videoCropped == None):
-    parser.error(("Cropped video path/name (-vo) must be defined."))
+    parser.error(("Cropped video path/name (-vc) must be defined."))
 else:
     if(dator.videoExists(args.videoCropped) == True):
         parser.error("Cropped video (-vc) error, there is another file with the same name.")
