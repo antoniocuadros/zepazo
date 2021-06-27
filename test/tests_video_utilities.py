@@ -202,3 +202,32 @@ def test_if_pre_post_images_are_saved():
     os.remove("test.mp4_0.0.png")
     os.remove("test.mp4_0.png")
     os.remove("test.mp4_0.2.png")
+
+################################################
+#
+# [US22]
+#
+# Checks if log is being saved in default location
+#
+################################################
+def test_if_log_is_saved():
+    dator = FSDator('.')
+    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None, None, None, None, None, None, None)
+    video_analyzer.saveLogFile()
+    assert os.path.isfile('log.json') == True
+    os.remove("log.json")
+
+
+################################################
+#
+# [US22]
+#
+# Checks if log is being saved
+#
+################################################
+def test_if_log_is_saved():
+    dator = FSDator('test/example_video')
+    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None, None, 'test/example_video/', None, None, None, None)
+    video_analyzer.saveLogFile()
+    assert os.path.isfile('test/example_video/log.json') == True
+    os.remove("test/example_video/log.json")
