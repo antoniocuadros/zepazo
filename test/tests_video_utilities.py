@@ -29,7 +29,7 @@ def test_if_object_is_created_ok():
 
 ################################################
 #
-# US: 1
+# [US1]
 #
 # Checks if the path does not exist fails
 #
@@ -42,6 +42,25 @@ def test_if_object_is_created_with_error():
         video_analiyzer = VideoAnalyzer(dator,'test/example_video/test5.mp4', 'False', None, None, None, None, None, None,None,None)
 
     assert str(e.value) == "Video could not be found on this path or incorrect file type"
+
+################################################
+#
+# [US1]
+#
+# Checks if the videoCap object is working so its returns initial frame
+#
+################################################
+def test_if_video_is_loaded_correctly():
+    
+        
+    dator = FSDator("test5.mp4")
+    video_analiyzer = VideoAnalyzer(dator,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
+
+    ret, frame = video_analiyzer.videoCapture.read()
+
+
+    assert ret == True
+    assert frame.all() != None
 
 ################################################
 #

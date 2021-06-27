@@ -8,14 +8,9 @@ import pytest
 
 import cv2
 import numpy as np
-import os.path
-from .argument import Argument
-import sys
-import  argparse
 from src.Analyzers.image_utilities import ImageAnalyzer
 from src.Analyzers.video_utilities import VideoAnalyzer
 from src.Dators.fsdator import FSDator
-import time
 
 
 ################################################
