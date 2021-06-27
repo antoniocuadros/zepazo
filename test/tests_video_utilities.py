@@ -64,7 +64,7 @@ def test_if_video_is_loaded_correctly():
 
 ################################################
 #
-# US: 2
+# [US2]
 #
 # Checks if the current time method works
 #
@@ -79,7 +79,7 @@ def test_if_current_time_ok():
 
 ################################################
 #
-# US: 3
+# [US3]
 #
 # Checks if the video is displaying
 #
