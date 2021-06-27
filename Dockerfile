@@ -37,6 +37,9 @@ WORKDIR /home/test_user/
 #Install dependencies
 RUN poetry install
 
+#Install a specific opencv version in order to avoid problems
+RUN pip install opencv-python==4.3.0.36
+
 COPY . .
 
 #Dependency files no longer needed
