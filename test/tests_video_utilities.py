@@ -5,14 +5,12 @@
 #
 ##############################
 import pytest
-import sys
-import  argparse
+import cv2
 import numpy as np
 from src.Analyzers.image_utilities import ImageAnalyzer
 from src.Analyzers.video_utilities import VideoAnalyzer
 from src.Impacts.impact import Impact
 from src.Dators.fsdator import FSDator
-from .argument import Argument
 import os
 
 
@@ -231,3 +229,19 @@ def test_if_log_is_saved():
     video_analyzer.saveLogFile()
     assert os.path.isfile('test/example_video/log.json') == True
     os.remove("test/example_video/log.json")
+
+
+################################################
+#
+# [US23]
+#
+# Checks if video is being analyzed from an initial frame to an ending defined
+#
+################################################
+def test_if_initial_frame_is_ok():
+    dator = FSDator('test/example_video')
+    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None, None, 'test/example_video/', None, None, 10, 60)
+
+    assert video_analyzer.startingFrame == 10
+    assert video_analyzer.endingFrame == 60
+    assert video_analyzer.videoCapture.get(cv2.CAP_PROP_POS_FRAMES) == 10
