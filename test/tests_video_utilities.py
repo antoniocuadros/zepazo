@@ -100,7 +100,7 @@ def test_if_video_shows():
 #
 # [US5]
 #
-# Checks if an image is being save in default location
+# Checks if an image is being saved in default location
 #
 ################################################
 def test_if_image_is_saved():
@@ -174,3 +174,31 @@ def test_is_masks_are_being_placed():
     video_analyzer.applyMasks(frame, frame)
 
     assert np.any(frame[3,3] == 0)
+
+################################################
+#
+# [US21]
+#
+# Checks if pre and post frames are being saved in default location
+#
+################################################
+def test_if_pre_post_images_are_saved():
+
+    image_analyzer = ImageAnalyzer(50, None, None, None,"test.mp4", None, None)
+    dator = FSDator('.')
+    video_analyzer = VideoAnalyzer(dator, 'test/example_video/test.mp4', True, None, None,None, None,1, None,None,None)
+    cap = video_analyzer.videoCapture
+
+    _, frame = cap.read()
+    impact = Impact(frame, 0, 1)
+
+    video_analyzer.impacts.append(impact)
+
+    video_analyzer.saveAllImpacts()
+    
+    assert os.path.isfile('test.mp4_0.0.png') == True
+    assert os.path.isfile('test.mp4_0.png') == True
+    assert os.path.isfile('test.mp4_0.2.png') == True
+    os.remove("test.mp4_0.0.png")
+    os.remove("test.mp4_0.png")
+    os.remove("test.mp4_0.2.png")
