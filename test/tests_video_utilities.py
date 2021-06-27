@@ -87,7 +87,7 @@ def test_if_current_time_ok():
 def test_if_real_time_ok():
     dator = FSDator('test/example_video/test.mp4')
     video_analyzer = VideoAnalyzer(dator,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
-    assert video_analyzer.getRealImpactTime(0) == "17:7:44"
+    assert video_analyzer.getRealImpactTime(0) == "17:7:44" or video_analyzer.getRealImpactTime(0) == "16:32:38" 
     
 ################################################
 #

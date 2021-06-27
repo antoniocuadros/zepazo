@@ -8,3 +8,6 @@ import pytest
 import cv2
 import os
 import runpy
+
+def test_if_video_is_cropped():
+    
