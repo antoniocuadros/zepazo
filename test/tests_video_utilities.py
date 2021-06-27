@@ -16,7 +16,7 @@ import os
 
 ################################################
 #
-# US: 1
+# [US1]
 #
 # Checks if the videopath is correctly obtained
 #
@@ -77,6 +77,18 @@ def test_if_current_time_ok():
     assert video_analyzer.getCurrentTime(100) == '0:00:04.347826'
 
 
+################################################
+#
+# [US2]
+#
+# Checks values for real time impact
+#
+################################################
+def test_if_real_time_ok():
+    dator = FSDator('test/example_video/test.mp4')
+    video_analyzer = VideoAnalyzer(dator,'test/example_video/test.mp4', 'False', None, None, None, None, None, None,None,None)
+    assert video_analyzer.getRealImpactTime(0) == "17:7:44"
+    
 ################################################
 #
 # [US3]
