@@ -5,7 +5,7 @@ Zepazo is a project that aims to facilitate the detection of lunar impacts in vi
 
 ## Motivation :star:
 This project originally arises for the completion of a Final Degree Project proposed by [Sergio Alonso Burgos](https://lsi.ugr.es/lsi/zerjioi) and is being carried out by [Antonio Cuadros Lapresta](https://github.com/antoniocuadros) with the help of Sergio with the aim of facilitating the detection of lunar impacts due to our great love for the astronomy. It is intended to carry out the implementation of a novel software due at present we have no record of such software exists and which will facilitate the work of astronomers.
-# Zepazo User's Manual 🇬🇧
+# Zepazo User's Manual (English)
 Zepazo is a set of tools (programs) that aims to provide an automated solution for the detection of impacts through the analysis of recordings of dark areas of the Moon. In order to facilitate this task for the user, four programs are proposed:
 
 - __zepazo__: Main program in charge of the analysis of the recordings.
@@ -168,7 +168,7 @@ python3 src/zepazoCrop.py -vo "/home/user/videos/video1" -vc "/home/user/videos/
 
 We would be cropping the video whose name is video1 from second 120 to 140 and storing the result with the name video1_crop.
 
-## Manual de usuario Zepazo 🇪🇸
+## Manual de usuario Zepazo (Spanish)
 Zepazo es un conjunto de programas que pretende aportar una solución automatizada para la detección de impactos a través del análisis de grabaciones de zonas oscuras de la Luna. Con el objetivo de facilitar dicha tarea al usuario se proponen cuatro programas:
 
 - __zepazo__: Programa principal encargado del análisis de las grabaciones.
