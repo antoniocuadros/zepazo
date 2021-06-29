@@ -295,6 +295,7 @@ class ZepazoParams(QMainWindow):
             pyperclip.copy(message)
 
             QMessageBox.information(self, "Copied to clipboard", "Copied to clipboard")
+            return message
 
     def saveParams(self, debug = False):
         masks = []

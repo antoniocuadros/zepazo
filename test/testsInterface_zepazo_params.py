@@ -205,3 +205,20 @@ def test_if_parameters_loaded(app):
 
     os.remove("t.json")
 
+################################################
+#
+# [US20]
+#
+# Checks if command is getted
+#
+################################################
+def test_if_parameters_loaded(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo()
+
+    app.loadParams(True)
+
+    assert app.ellipse == 33
+
+    os.remove("t.json")
+
