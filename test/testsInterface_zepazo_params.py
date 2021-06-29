@@ -148,4 +148,24 @@ def test_if_parameter_reset_is_ok(app):
     assert app.folder == None
     assert app.numFrames == None
 
+################################################
+#
+# [US14]
+#
+# Checks if video preview is launching
+#
+################################################
+def test_if_video_preview_is_launching(app, qtbot):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo() 
+    app.ellipse = 33
+    qtbot.mouseClick(app.button_play, QtCore.Qt.LeftButton)
 
+    dator = FSDator("test5.mp4")
+    video_analiyzer = VideoAnalyzer(dator,app.videoPath, 'False', None, None, None, None, None, None,None,None)
+
+    ret, frame = video_analiyzer.videoCapture.read()
+
+
+    assert ret == True
+    assert frame.all() != None
