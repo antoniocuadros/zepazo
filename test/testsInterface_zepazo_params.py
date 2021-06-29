@@ -32,7 +32,7 @@ def app(qtbot):
 # Checks if videos loads correctly
 #
 ################################################
-def test_if_load_video_works(app, qtbot):
+def test_if_load_video_works(app):
     
     app.videoPath = "../../test/example_video/test.mp4"
     
@@ -44,14 +44,54 @@ def test_if_load_video_works(app, qtbot):
 
 ################################################
 #
-# Checks if videos loads correctly
+# [US15]
+#
+# Checks if detectionLimit argument correctly set
 #
 ################################################
-def test_if_circleLimitSelection_works(app, qtbot):
+def test_if_detectionLimitSelection_works(app):
     
     app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo() 
     
     app.spinBoxDetectionLimit.setValue(33)
 
     assert app.detectionLimit == 33
     assert app.spinBoxDetectionLimit.value() == 33
+
+################################################
+#
+# [US10]
+#
+# Checks if circleLimit argument correctly set
+#
+################################################
+def test_if_circleLimitSelection_works(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo() 
+
+    app.spinboxEllipse.setValue(33)
+    
+    assert app.ellipse == 33
+    assert app.spinboxEllipse.value() == 33
+    assert app.frame_ellipse.all != None
+    assert app.checkBoxEllipse.isChecked() == False
+
+################################################
+#
+# [US10]
+#
+# Checks if circleLimit argument correctly set when auto is checked
+#
+################################################
+def test_if_circleLimitSelection_works(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo() 
+
+    
+    app.checkBoxEllipse.setChecked(True)
+    
+    assert app.ellipse == None
+    assert app.spinboxEllipse.value() == 1
+    assert app.frame_ellipse.all != None
+    assert app.checkBoxEllipse.isChecked() == True
