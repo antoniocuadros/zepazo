@@ -820,10 +820,11 @@ class ZepazoParams(QMainWindow):
         self.spinBoxFrames.setToolTip(_translate("ZepazoWindows", "Number of sorrounded frames to save additionally"))
 
 def launch_UI():
-    app = QApplication(sys.argv)
-    win = ZepazoParams()
-    win.show()
-    sys.exit(app.exec_())
+    if __name__ == "__main__":
+        app = QApplication(sys.argv)
+        win = ZepazoParams()
+        win.show()
+        sys.exit(app.exec_())
 
 
 launch_UI()
