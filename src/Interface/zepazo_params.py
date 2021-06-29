@@ -327,7 +327,7 @@ class ZepazoParams(QMainWindow):
         else:
             self.addMessage("First select and configure a video file")
 
-    def loadParams(self, debug = False):
+    def loadParams(self, debug = False ):
         if(self.videoPath == None):
             self.addMessage("First select a video file first")
         else:
