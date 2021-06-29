@@ -20,14 +20,38 @@ from src.Impacts.impact import Impact
 from src.Dators.fsdator import FSDator
 from src.Interface.zepazo_params import ZepazoParams
 import os
+import ntpath
 
 @pytest.fixture
 def app(qtbot):
     return ZepazoParams()
     
 
+################################################
+#
+# Checks if videos loads correctly
+#
+################################################
+def test_if_load_video_works(app, qtbot):
+    
+    app.videoPath = "../../test/example_video/test.mp4"
+    
+    app.loadVideo() 
 
-def test_if_load_video_works(app):
-    app.videoPath = "test/example_video/test.mp4"
+    assert ntpath.basename(app.videoPath) == "test.mp4"
+    assert app.first_frame.all != None
+    assert app.centralPanel.pixmap != None
 
-    assert app.videoPath == "test/example_video/test.mp4"
+################################################
+#
+# Checks if videos loads correctly
+#
+################################################
+def test_if_circleLimitSelection_works(app, qtbot):
+    
+    app.videoPath = "../../test/example_video/test.mp4"
+    
+    app.spinBoxDetectionLimit.setValue(33)
+
+    assert app.detectionLimit == 33
+    assert app.spinBoxDetectionLimit.value() == 33

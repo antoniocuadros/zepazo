@@ -41,8 +41,11 @@ class ZepazoParams(QMainWindow):
         try:
             self.addingMask = False
             self.deletingMask = False
-            self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
-            self.videoAnalyzer = VideoAnalyzer(FSDator(self.videoPath[0]), self.videoPath[0], False, self.detectionLimit, self.ellipse, None, None, None, self.dilate, None, None)
+            if(self.videoPath == None):
+                self.videoPath = QFileDialog.getOpenFileName(None, "Select a video", "", "Video files (*.*)")
+                self.videoPath = self.videoPath[0]
+                
+            self.videoAnalyzer = VideoAnalyzer(FSDator(self.videoPath), self.videoPath, False, self.detectionLimit, self.ellipse, None, None, None, self.dilate, None, None)
             self.first_frame = self.videoAnalyzer.getInitialFrame()
             self.frame_ellipse = self.first_frame.copy()
             self.frame_masks = self.first_frame.copy()
@@ -262,7 +265,7 @@ class ZepazoParams(QMainWindow):
             self.addMessage("First select and configure a video file")
         else:
             message = "python3 zepazo.py "
-            message = message + "-v " + self.videoPath[0]
+            message = message + "-v " + self.videoPath
 
             if(self.detectionLimit != None):
                 message = message  + " -l " + str(self.detectionLimit) 
@@ -377,7 +380,7 @@ class ZepazoParams(QMainWindow):
                 masks.append(mask[0])
                 masks.append(mask[1])
 
-            self.videoAnalyzer = VideoAnalyzer(FSDator(self.videoPath[0]), self.videoPath[0], True, self.detectionLimit, self.ellipse, masks, None, None, self.dilate, None, None)
+            self.videoAnalyzer = VideoAnalyzer(FSDator(self.videoPath), self.videoPath, True, self.detectionLimit, self.ellipse, masks, None, None, self.dilate, None, None)
             self.videoAnalyzer.showASample()
         else:
             self.addMessage("First select a video file")
