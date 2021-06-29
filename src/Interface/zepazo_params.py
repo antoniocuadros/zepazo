@@ -261,7 +261,7 @@ class ZepazoParams(QMainWindow):
                         cv2.rectangle(frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
 
 
-    def showCommand(self):
+    def showCommand(self, debug = False):
         if(self.videoPath == None):
             self.addMessage("First select and configure a video file")
         else:
@@ -290,11 +290,10 @@ class ZepazoParams(QMainWindow):
             if(self.numFrames != None):
                 message = message + " -ssf " + str(self.numFrames)
 
-            QMessageBox.about(self,"Command", message)
-
-            pyperclip.copy(message)
-
-            QMessageBox.information(self, "Copied to clipboard", "Copied to clipboard")
+            if(debug == False):
+                QMessageBox.about(self,"Command", message)
+                pyperclip.copy(message)
+                QMessageBox.information(self, "Copied to clipboard", "Copied to clipboard")
             return message
 
     def saveParams(self, debug = False):

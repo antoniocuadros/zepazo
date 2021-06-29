@@ -224,7 +224,7 @@ def test_if_parameters_loaded(app):
 
 ################################################
 #
-# [US20]
+# [US19]
 #
 # Checks if deleting mask variable is correcly defined
 #
@@ -239,3 +239,17 @@ def test_if_mask_deleting(app):
 
     assert app.deletingMask == True
 
+################################################
+#
+# [US20]
+#
+# Checks if command is obtained
+#
+################################################
+def test_if_mask_deleting(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo()
+
+    command = app.showCommand(True)
+
+    assert command == "python3 zepazo.py -v ../../test/example_video/test.mp4 -l 50"
