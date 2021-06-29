@@ -296,7 +296,7 @@ class ZepazoParams(QMainWindow):
 
             QMessageBox.information(self, "Copied to clipboard", "Copied to clipboard")
 
-    def saveParams(self):
+    def saveParams(self, debug = False):
         masks = []
         for i in self.masks:
             masks.append(i[0])
@@ -312,8 +312,11 @@ class ZepazoParams(QMainWindow):
                 'saveSurroundingFrames':self.numFrames
             }
 
-            path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json")
-            
+            if(debug == False):
+                path = QFileDialog.getSaveFileName(None, "Save Parameters Configuration File",".json")
+            else:
+                path = "test.json"
+
             if(path[0].endswith(".json") == False):
                 path_file = path[0] + ".json"
             else:
@@ -324,11 +327,15 @@ class ZepazoParams(QMainWindow):
         else:
             self.addMessage("First select and configure a video file")
 
-    def loadParams(self):
+    def loadParams(self, debug = False):
         if(self.videoPath == None):
             self.addMessage("First select a video file first")
         else:
-            json_path = QFileDialog.getOpenFileName(None, "Select a Configuration File", "", "*.json")
+            if(debug == False):
+                json_path = QFileDialog.getOpenFileName(None, "Select a Configuration File", "", "*.json")
+            else:
+                json_path = []
+                json_path.append("t.json")
 
             with open(json_path[0], 'r') as json_file:
                 args = json.load(json_file)
