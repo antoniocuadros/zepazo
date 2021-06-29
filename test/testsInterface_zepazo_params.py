@@ -222,5 +222,20 @@ def test_if_parameters_loaded(app):
 
     os.remove("t.json")
 
+################################################
+#
+# [US20]
+#
+# Checks if deleting mask variable is correcly defined
+#
+################################################
+def test_if_mask_deleting(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo()
 
+    assert app.deletingMask == False
+
+    app.deleteMask()
+
+    assert app.deletingMask == True
 
