@@ -171,4 +171,37 @@ def test_if_video_preview_is_launching(app, qtbot):
     assert frame.all() != None
 
 
+################################################
+#
+# [US17]
+#
+# Checks if parameters are being saved
+#
+################################################
+def test_if_parameters_saved(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo() 
+    app.ellipse = 33
+    
+    app.saveParams(True)
+
+    assert os.path.isfile("t.json")
+
+
+################################################
+#
+# [US17]
+#
+# Checks if parameters are being loaded
+#
+################################################
+def test_if_parameters_loaded(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo()
+
+    app.loadParams(True)
+
+    assert app.ellipse == 33
+
+    os.remove("t.json")
 
