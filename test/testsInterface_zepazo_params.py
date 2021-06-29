@@ -115,3 +115,37 @@ def test_if_previewAll_works(app):
     frame2 = app.showAllParams()
 
     assert (np.bitwise_xor(frame1, frame2).any())
+
+
+################################################
+#
+# [US13]
+#
+# Checks if parameters are being reset
+#
+################################################
+def test_if_parameter_reset_is_ok(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo() 
+
+    app.detectionLimit = 33
+    app.ellipse = 40
+    app.dilate = 2
+    app.masks = [1,2,3,4]
+    app.addingMask = True
+    app.deletingMask = True
+    app.folder = "/home/folder/"
+    app.numFrames = 2
+
+    app.resetParams()
+
+    assert app.detectionLimit == 50
+    assert app.ellipse == None
+    assert app.dilate == None
+    assert app.masks == []
+    assert app.addingMask == False
+    assert app.deletingMask == False
+    assert app.folder == None
+    assert app.numFrames == None
+
+
