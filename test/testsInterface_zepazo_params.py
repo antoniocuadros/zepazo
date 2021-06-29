@@ -95,3 +95,23 @@ def test_if_circleLimitSelection_works(app):
     assert app.spinboxEllipse.value() == 1
     assert app.frame_ellipse.all != None
     assert app.checkBoxEllipse.isChecked() == True
+
+################################################
+#
+# [US12]
+#
+# Checks if parameters preview is working
+#
+################################################
+def test_if_previewAll_works(app):
+    app.videoPath = "../../test/example_video/test.mp4"
+    app.loadVideo() 
+
+    frame1 = app.first_frame
+
+    app.spinboxEllipse.setValue(33)
+    app.adjustEllipse()
+
+    frame2 = app.showAllParams()
+
+    assert (np.bitwise_xor(frame1, frame2).any())

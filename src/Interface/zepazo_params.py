@@ -253,6 +253,7 @@ class ZepazoParams(QMainWindow):
             for i in range(num_masks//2):
                         cv2.rectangle(all_frame, (self.masks[2*i][0],self.masks[2*i][1]), (self.masks[2*i+1][0],self.masks[2*i+1][1]), (0,0,255), -1)
             self.showFrame(all_frame)
+        return all_frame
 
     def drawMasks(self, frame):
         num_masks = len(self.masks)
